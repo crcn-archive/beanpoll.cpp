@@ -31,7 +31,12 @@ void Beanpole::ConcreteDispatcher::dispatch(Beanpole::Data* data, std::vector<Ro
 	
 	for(int i = listeners->size(); i--;)
 	{                                                          
-		pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)(this->request(data, (*listeners)[i])));
+		// pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)(this->request(data, (*listeners)[i])));
+		Beanpole::Request* request = this->request(data, (*listeners)[i]);
+		
+		request->next();
+		
+		delete request;
 	}
 }        
 

@@ -41,7 +41,15 @@ namespace Beanpole
 		/**
 		 */
 		
-		Data* push(void* data);
+		Data* push(void* data);       
+		
+		/**
+		 */
+		
+		~Data()
+		{                                        
+			delete this->channel;
+		}
 		
 		
 	};

@@ -175,7 +175,7 @@ Beanpole::ChannelExpression* Beanpole::Parser::parseChannel(string channel)
 	Beanpole::ChannelExpression* expr = new Beanpole::ChannelExpression();  
 	                   
 	//we know the number of paths, so we can go ahead and reserve spots 
-	expr->paths.reserve(paths.size());                                 
+	// expr->paths.reserve(paths.size());                                 
 	expr->value = channel;    
 	     
 	
@@ -185,11 +185,11 @@ Beanpole::ChannelExpression* Beanpole::Parser::parseChannel(string channel)
 		std::string path = paths[i];        
 		
 		//parameters have a colon before a word ~ :someParam                
-		bool isParam = ((char)path[0] == ':');                            
+		bool isParam = ((char)path[0] == ':');      
 		
-		expr->paths[i] = new Beanpole::PathExpression(isParam ? path.substr(1) : path, isParam);
+		expr->paths.push_back(new Beanpole::PathExpression(isParam ? path.substr(1) : path, isParam));
 	}  
-	             
+	                                               
 	  
 	return expr;                                
 }

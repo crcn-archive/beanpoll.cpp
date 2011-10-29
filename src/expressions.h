@@ -28,7 +28,9 @@ namespace Beanpole
 	{     
 	public:
 		std::string value;
-		std::vector<PathExpression*> paths;      
+		std::vector<PathExpression*> paths; 
+		
+		~ChannelExpression();     
 	};                 
 	
 	

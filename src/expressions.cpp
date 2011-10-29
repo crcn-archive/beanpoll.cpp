@@ -1,4 +1,11 @@
-#include "expressions.h"  
+#include "expressions.h"       
+#include "utils.h"
+
+Beanpole::ChannelExpression::~ChannelExpression()
+{                                           
+	Beanpole::deleteInVector(&this->paths);     
+	this->paths.clear();
+}
                                                                       
 Beanpole::Tag* Beanpole::RouteExpression::getTag(std::string name)
 {                                               

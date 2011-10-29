@@ -18,15 +18,17 @@ _previousMiddleware(NULL)
 };        
 
 Beanpole::Request::~Request()
-{      
-	
+{           
 	//there's a chance that the previous middleware exists - at the end 
-	if(this->_previousMiddleware) delete this->_previousMiddleware;                                           
+	if(this->_previousMiddleware) delete this->_previousMiddleware;       
+	                                 
+	
+	//data's no longer needed.      
+	delete this->data;                                    
 };                                       
 
 void Beanpole::Request::addMiddleware(Beanpole::ChannelExpression* channel, Beanpole::RouteListener* listener)
-{                                    
-	
+{                                                                   
 	Beanpole::ThruExpression* currentMiddleware = listener->getRoute()->thru;         
 	
 	std::vector<Beanpole::ThruExpression*> thru;  
@@ -49,8 +51,7 @@ void Beanpole::Request::addMiddleware(Beanpole::ChannelExpression* channel, Bean
 		currentMiddleware = thru[i];  
 		
 		std::vector<RouteListener*>* middleware = this->dispatcher->_collection.getRouteListeners(currentMiddleware->channel);
-		
-		
+  
 		for(int j = 0, jn = middleware->size(); j < jn; j++)
 		{
 			this->addMiddleware(currentMiddleware->channel, (*middleware)[j]);
