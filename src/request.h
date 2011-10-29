@@ -3,7 +3,8 @@
   
 #include "data.h"    
 #include "listener.h"        
-#include "expressions.h"
+#include "expressions.h"  
+#include "utils.h"
 #include <iostream>
 #include <vector>
 
@@ -17,11 +18,15 @@ namespace Beanpole
 	public:
 		
 		RouteListener* listener;
-		ChannelExpression* channel;
+		ChannelExpression* channel;           
 		
 		RequestMiddleware(ChannelExpression* channel, RouteListener* listener):
 		channel(channel),
-		listener(listener){ };
+		listener(listener){ };  
+		
+		~RequestMiddleware()
+		{                                          
+		}
 		
 	void onRequest(Request*);	
 	};
@@ -33,15 +38,32 @@ namespace Beanpole
 	{                                                               
 	public:         
 		
-		Data* data;       
-		ConcreteDispatcher* dispatcher;
+		/**
+		 * the data passed in the request
+		 */
+		
+		Data* data;                 
+		
+		/**
+		 * the dispatcher which owns all the routes ~ dispatched *this* request
+		 */
+		
+		ConcreteDispatcher* dispatcher;            
+		
+		/**   
+		 * The previous middleware - deleted on each request
+		 */
+		
+		RequestMiddleware* _previousMiddleware;
 		
 		
 		Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher);   
 		
 		bool next();
 		
-		bool hasNext(); 
+		bool hasNext();      
+		
+		~Request();
 		
 	private:
 		
@@ -61,6 +83,8 @@ namespace Beanpole
 	{
 		
 	};
-};      
+};    
+
+// void Beanpole::deleteInVector(std::vector<Beanpole::RequestMiddleware*>*);  
 
 #endif

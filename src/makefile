@@ -1,5 +1,5 @@
 CC := g++
-OBJS := beanpole.o parser.o collection.o tag.o expressions.o listener.o router.o request.o data.o 
+OBJS :=  beanpole.o  
 
 all: beanpole
 

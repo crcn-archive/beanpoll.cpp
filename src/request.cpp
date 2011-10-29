@@ -1,7 +1,8 @@
      
 #include "listener.h" 
 #include "request.h"
-#include "router.h"             
+#include "router.h"        
+#include "utils.h"     
 
 void Beanpole::RequestMiddleware::onRequest(Beanpole::Request* request)
 {                                                 
@@ -10,17 +11,26 @@ void Beanpole::RequestMiddleware::onRequest(Beanpole::Request* request)
 
 Beanpole::Request::Request(Beanpole::Data* data, Beanpole::RouteListener* listener, Beanpole::ConcreteDispatcher* dispatcher):
 data(data),
-dispatcher(dispatcher)
+dispatcher(dispatcher),
+_previousMiddleware(NULL)
 {                   
 	this->addMiddleware(data->channel, listener);
-};                                               
+};        
+
+Beanpole::Request::~Request()
+{      
+	
+	//there's a chance that the previous middleware exists - at the end 
+	if(this->_previousMiddleware) delete this->_previousMiddleware;                                           
+};                                       
 
 void Beanpole::Request::addMiddleware(Beanpole::ChannelExpression* channel, Beanpole::RouteListener* listener)
 {                                    
 	
 	Beanpole::ThruExpression* currentMiddleware = listener->getRoute()->thru;         
 	
-	std::vector<Beanpole::ThruExpression*> thru;        
+	std::vector<Beanpole::ThruExpression*> thru;  
+	                                     
 	
 	this->_middleware.push_back(new Beanpole::RequestMiddleware(channel, listener));
 	        
@@ -55,13 +65,22 @@ bool Beanpole::Request::hasNext()
 
 bool Beanpole::Request::next()
 {   
+	if(this->_previousMiddleware)
+	{                                 
+		delete this->_previousMiddleware;    
+		this->_previousMiddleware = NULL;
+	}           
+	
 	if(this->_middleware.size())
-	{   
-		RequestMiddleware* middleware = this->_middleware[this->_middleware.size()-1];                            
+	{                                                  
+	    this->_previousMiddleware = this->_middleware.back();                            
+		                             
 		
+		//remove from the current middleware since we've used it.
 		this->_middleware.pop_back();    
-		
-		middleware->onRequest(this);
+		          
+		//notify the listener
+		this->_previousMiddleware->onRequest(this);     
 		
 		return true;
 	}               

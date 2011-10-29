@@ -1,11 +1,19 @@
 
 #include <iostream>
-#include <pthread.h>
-#include "collection.h"    
-#include "parser.h"   
+#include <pthread.h>      
 #include <vector>     
-#include "expressions.h"  
-#include "router.h"
+#include "callbacks.h"
+#include "expressions.cpp"  
+#include "router.cpp"     
+#include "tag.cpp"
+#include "utils.cpp"  
+#include "listener.cpp" 
+#include "collection.cpp"    
+#include "parser.cpp"   
+#include "request.cpp"
+#include "data.cpp"
+
+//parser.o collection.o tag.o expressions.o listener.o request.o  data.o router.o  
 
 int jk = 10;
 

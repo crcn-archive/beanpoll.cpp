@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>     
-#include "utils.cpp"  
+#include "utils.h"  
 #include "expressions.h"
 
 using namespace std;       
