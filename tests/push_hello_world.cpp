@@ -11,8 +11,8 @@ int main()
 	                                 
 	router->on("push hello/world", &sayHelloWorld);
            
-	                   
-	for(int i = 100; i--;)                                         
+	                           
+	for(int i = 1000; i--;)                                    
 	router->request("hello/world")->push((void*)"hello world!");      
 	                               
 	int i;
