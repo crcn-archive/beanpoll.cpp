@@ -4,7 +4,8 @@
 #include "collection.h"    
 #include "parser.h"   
 #include <vector>     
-#include "expressions.h"
+#include "expressions.h"  
+#include "router.h"
 
 int jk = 10;
 
@@ -38,7 +39,12 @@ void test()
 	//col.addRouteListener("push hello/world", helloWorld);
 	//col.getRouteListeners()
 }
+              
 
+void sayHelloWorld(Beanpole::PullRequest* request)
+{
+	
+}
 
 
 int main()
@@ -48,7 +54,25 @@ int main()
 	                                     
     void *ret_join;
 	
-	std::vector<Beanpole::RouteExpression*> exprs;                    
+	std::vector<Beanpole::RouteExpression*> exprs;    
+	      
+	
+	Beanpole::Router* r = new Beanpole::Router();
+	
+	r->on("push hello/world", &sayHelloWorld);
+	
+	/*                                        
+	
+	void onResult(PushRequest* request)
+	{
+	
+	}
+	  
+	r->request("hello/world")->pull(onResult);                
+	
+	
+	
+	*/                
 	                                                                
 	
 	
