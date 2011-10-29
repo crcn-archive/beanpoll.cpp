@@ -41,9 +41,14 @@ void test()
 }
               
 
-void sayHelloWorld(Beanpole::PullRequest* request)
+void sayHelloWorld(Beanpole::PushRequest* request)
 {
-	
+	std::cout << (const char*)request->data->getData() << std::endl;
+}
+
+void sayHelloWorld2(Beanpole::PushRequest* request)
+{
+	std::cout << (const char*)request->data->getData() << std::endl;
 }
 
 
@@ -54,13 +59,13 @@ int main()
 	                                     
     void *ret_join;
 	
-	std::vector<Beanpole::RouteExpression*> exprs;    
-	      
+	std::vector<Beanpole::RouteExpression*> exprs;          
 	
 	Beanpole::Router* r = new Beanpole::Router();
 	
-	r->on("push hello/world", &sayHelloWorld);
+	r->on("push hello/world", &sayHelloWorld);          
 	
+	r->request("hello/world")->push((void*)"hello world"); 
 	/*                                        
 	
 	void onResult(PushRequest* request)

@@ -11,9 +11,10 @@ void Beanpole::Collection::removeRouteListener(Beanpole::RouteListener* listener
  //TODO   
 }                                
 
-std::vector<Beanpole::RouteListener*>& Beanpole::Collection::getRouteListeners(Beanpole::ChannelExpression* listener)
+std::vector<Beanpole::RouteListener*>* Beanpole::Collection::getRouteListeners(Beanpole::ChannelExpression* channel)
 {
-	//TODO
+	//TODO      
+	return &this->getTree(channel)->listeners;
 }        
 
 Beanpole::RouteTree* Beanpole::Collection::getTree(Beanpole::ChannelExpression* channel, bool find)

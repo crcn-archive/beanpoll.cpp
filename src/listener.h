@@ -2,9 +2,12 @@
 #define LISTENER_H_   
 
 #include "expressions.h"
+#include "callbacks.h"
 
 namespace Beanpole
-{                      
+{                        
+	class Request;
+	
 	class RouteListener
 	{   
 	private:
@@ -20,7 +23,7 @@ namespace Beanpole
 		/**
 		 */
 		          
-		void onRequest();    
+		virtual void onRequest(Request* request) = 0;    
 		
 		/**
 		 */
@@ -34,7 +37,24 @@ namespace Beanpole
 	
 	
 	class PullRouteListener: public RouteListener
-	{                             
+	{                      
+	public:
+		PullRouteListener(RouteExpression* route, PullCallback* callback): RouteListener(route), _callback(callback) { }; 
+		
+		
+    private:
+		PullCallback* _callback;
+	};                          
+	
+	class PushRouteListener: public RouteListener
+	{      
+	public:
+		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener(route), _callback(callback) { };  
+		
+		void onRequest(Request* request);        
+
+	private:
+		PushCallback* _callback;
 	};
 };
 

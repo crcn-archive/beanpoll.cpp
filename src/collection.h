@@ -85,7 +85,7 @@ namespace Beanpole
 		/**
 		 */
 		
-		std::vector<RouteListener*>& getRouteListeners(ChannelExpression* channel);     
+		std::vector<RouteListener*>* getRouteListeners(ChannelExpression* channel);     
 		
 	private:
 		

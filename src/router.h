@@ -1,51 +1,87 @@
 #ifndef BEANPOLE_ROUTER_H_
 #define BEANPOLE_ROUTER_H_   
-
-#include "request.h"  
+                   
+#include "callbacks.h"    
 #include "data.h"      
 #include "collection.h"     
-#include 
+#include "listener.h" 
+#include "parser.h"       
+#include "request.h"  
 
 namespace Beanpole
-{   
+{                     
+	
 	class ConcreteDispatcher
 	{
 	public:
-		ConcreteDispatcher();
+		ConcreteDispatcher(){};
 		
 		void dispatch(Data* data); 
-		void dispatch(Data* data, std::vector<RouteListener*> listeners);
+		void dispatch(Data* data, std::vector<RouteListener*>* listeners);   
+		void addRouteListener(RouteListener* listener);   
+		friend class Request; 
 		
 	private:
-		Collection _collection;	
+		Collection _collection;	       
+		
+	protected:             
+		Request* request(Data* data, RouteListener* listener);  
+		
+		                
 	};  
 	               
 	
-	class PullDispatcher 
-	{
+	class PullDispatcher : public ConcreteDispatcher 
+	{                         
 	public:
-		
+		PullDispatcher(): ConcreteDispatcher(){};                            
 	};
 	
-	class PushDispatcher 
-	{
-		
+	class PushDispatcher: public ConcreteDispatcher 
+	{                   
+	public:
+		PushDispatcher(): ConcreteDispatcher(){};
 	};
 	
 	class Router 
-	{
+	{   
+		
+	private:
+		
+		PushDispatcher* _pusher;
+		PullDispatcher* _puller;
 		   
-	public:
+	public:        
+		
+		/**
+		 */
+		
+		Router(): _pusher(new PushDispatcher()), _puller(new PullDispatcher()) { };
+		
+		/**
+		 */
+		
+		Data* request(const char* route);   
+		
+		/**
+		 */
+		
+		void push(Data* data);
+		
+		/**
+		 */
+		
+		void pull(Data* data);
 		                                                         
 		/**
 		 */
 		
-		void on(const char* route, void (*callback)(Beanpole::PullRequest*));     
+		void on(std::string route, PullCallback* callback);     
 		
 		/**
 		 */
 		
-		void on(const char* route, void (*callback)(Beanpole::PushRequest*));
+		void on(std::string route, PushCallback* callback);
 	};
 };
 
