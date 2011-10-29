@@ -6,26 +6,16 @@
 
 namespace Beanpole
 {   
-	class ThreadPool;   
-	
-	class Worker
-	{
-	public:
-		Worker(Thread*);  
-		
-		void* run(ThreadTask* task);  
-		
-	private:
-		Thread* _thread;
-	};                  
-	
+	class ThreadPool;    
 	
 	class Thread
 	{
 	public:  
-		Thread(ThreadPool* pool);
-                                         
+		Thread(ThreadPool* pool, int index);        
 		void run(ThreadTask* task);
+		int index;     
+		pthread_cond_t _hasTask;
+		
 		
 		friend class ThreadTask;    
 
@@ -33,11 +23,13 @@ namespace Beanpole
     	
 		ThreadPool* _pool;
 		ThreadTask* _currentTask;   
-		pthread_t thread;
+		pthread_t thread;          
+		bool _waiting;        
 		           
 		
 		static void* execute(void*);   
-		void done(void*); 
+		void done(void*);   
+		void waiting(); 
 		
 	};
 };     

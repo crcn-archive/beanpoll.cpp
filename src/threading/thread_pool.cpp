@@ -7,8 +7,8 @@ namespace Beanpole
                             
 	ThreadTask* ThreadPool::createTask(void* data,  ThreadCallback* callback )
 	{
-		ThreadTask* task = new ThreadTask(data, callback);      
-		
+		ThreadTask* task = new ThreadTask(data, callback);  
+		                  
 		this->run(task);
 		
 		return task;
@@ -17,63 +17,68 @@ namespace Beanpole
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
-		Thread* worker = NULL;    
-		                                    
-		          
+		Thread* worker = NULL;        
+		                                                                                
 		
-		//any waiting threads?
-		if(this->_waitingWorkers.size())
-		{          
-			worker = this->_waitingWorkers.back();
-			this->_waitingWorkers.pop_back();           
-		}                                
-		                          
+		pthread_mutex_lock(&this->_pthreadMutex);   
 		
-		//can we still add threads?
-		else
-		if(this->_busyWorkers.size() < this->maxThreads)
-		{                          
-			worker = new Thread(this);                
-		}                                
+		this->_waitingTasks.push_back(task);
+                                                                                     
+
+		//any waiting threads? use 'em
+		if(this->_waitingThreads.size())
+		{                             
+			//the last thread to finish will be the first to begin. Over time if there's less 
+			//work to be done, we want threads to timeout - this does it. 
+			Thread* thread = this->_waitingThreads.back();               
+			
+			//remove the thread because it's being used.
+			this->_waitingThreads.pop_back();      
+			                                            
+			
+			//signal the *target* thread.  
+			pthread_cond_signal(&thread->_hasTask);        
+		}                                                 
+	    else 
+		if(this->_threads.size() < this->maxThreads)
+		{                                      
+			worker = new Thread(this, this->_threads.size());    
+			this->_threads.push_back(worker);            
+		}        
 		
-		if(worker)
-		{
-			this->_busyWorkers.push_back(worker);
-			worker->run(task);
-		}                                
-		else
-		{
-			this->_waitingTasks.push_back(task);
-		}
-		
-		
+		pthread_mutex_unlock(&this->_pthreadMutex);
+
+	}      
+	
+	void ThreadPool::waiting(Thread* thread)
+	{                              	        
+		this->_waitingThreads.push_back(thread);
 	} 
 	
-	void ThreadPool::done(Thread* thread)
-	{                       
-		
-		//once a thread is done, pop the next task off
-		ThreadTask* task = this->popTask();
-		                                              
-		//*if* there's a thread, then it's still busy - run it.
-		if(task)
-		{          
-			thread->run(task);
-			return;
-		}         
-		            
-		                                      
-		//otherwise we need to wait
-		this->_waitingWorkers.push_back(thread);
-	}   
+	bool ThreadPool::canRemoveThread() 
+	{
+		return this->_threads.size() > this->minThreads;
+	}         
 	
-	ThreadTask* ThreadPool::popTask()
+	void ThreadPool::removeThread(Thread* thread)
+	{                                      
+		this->_threads.remove(thread);    
+		delete thread;                                                  
+	}
+	   
+	
+	ThreadTask* ThreadPool::nextTask()
 	{   
-		if(!this->_waitingTasks.size()) return NULL;                                
+		if(!this->hasTask()) return NULL;                                
 		
 		ThreadTask* task = this->_waitingTasks.back(); 
 		this->_waitingTasks.pop_back();
 		return task;
+	}             
+	
+	bool ThreadPool::hasTask()
+	{                
+		return !!this->_waitingTasks.size();
 	}
 }
 
