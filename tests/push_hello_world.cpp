@@ -1,20 +1,27 @@
-#include "beanpole.h"           
+#include "beanpole.h"              
+
+int steps = 100 * 100;
                                                    
 void sayHelloWorld(Beanpole::PushRequest* request)
 {                                   
-	std::cout << (const char*)request->data->getData() << std::endl;
+	// std::cout << (const char*)request->data->getData() << std::endl;    
+	if(!(--steps)) std::cout << "DONE" << std::endl;      
+	
+	std::cout << steps << std::endl;
+	
+	usleep(25*1000);
 }
 
 int main()
 {       
 	Beanpole::Router* router = new Beanpole::Router();
 	                                 
-	router->on("push hello/world", &sayHelloWorld);
-           
-	                           
-	for(int i = 1000; i--;)                                    
+	router->on("push -async hello/world", &sayHelloWorld);
+                                                             
+
+	for(int i = steps; i--;)                                    
 	router->request("hello/world")->push((void*)"hello world!");      
-	                               
+	                                                
 	int i;
 	
 	std::cin >> i;

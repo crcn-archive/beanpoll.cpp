@@ -22,21 +22,35 @@ void* dispatch_threaded_request(void* request)
 	((Beanpole::Request*)request)->next(); 
 	delete (Beanpole::Request*)request;                        
 	return NULL;
-}
+}                     
 
 
 void Beanpole::ConcreteDispatcher::dispatch(Beanpole::Data* data, std::vector<RouteListener*>* listeners)
-{                           
+{                         
+	             
 	pthread_t thread;
-	
 	for(int i = listeners->size(); i--;)
-	{                                                          
-		pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)(this->request(data, (*listeners)[i])));
-		// Beanpole::Request* request = this->request(data, (*listeners)[i]);
+	{                                
 		
-		// request->next();
+		void* val;
 		
-		// delete request;
+		//TODO: check if request is threaded.
+		RouteListener* listener = (*listeners)[i];
+		
+		Beanpole::Request* request = this->request(data, listener);
+		
+		                                  
+		if(listener->getRoute()->hasTag("async"))
+		{                                                          
+			pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
+			
+			pthread_join(thread, &val);
+		}                        
+		else
+		{
+			request->next();
+			delete request;
+		}
 	}
 }        
 
