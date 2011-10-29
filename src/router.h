@@ -6,7 +6,8 @@
 #include "collection.h"     
 #include "listener.h" 
 #include "parser.h"       
-#include "request.h"  
+#include "request.h"      
+#include "threading/thread_pool.h"
 
 namespace Beanpole
 {                     

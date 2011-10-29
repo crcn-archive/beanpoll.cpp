@@ -1,12 +1,12 @@
 CC := g++
-OBJS :=  push_hello_world  
+OBJS :=  push_hello_world threads  
 
 all: beanpole
 
 %: %.cpp 
 	@echo "Building $@"   
 	$(CC) -I../src -c  $<
-	$(CC) ../src/beanpole.o $@.o -o $@
+	$(CC)  $@.o -o $@
 	chmod 755 $@  
 
 beanpole: $(OBJS)

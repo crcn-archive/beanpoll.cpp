@@ -1,6 +1,6 @@
-#include "beanpole.h"              
+#include "beanpole.cpp"              
 
-int steps = 100 * 100;
+int steps = 10;
                                                    
 void sayHelloWorld(Beanpole::PushRequest* request)
 {                                   
@@ -19,7 +19,7 @@ int main()
 	router->on("push -async hello/world", &sayHelloWorld);
                                                              
 
-	for(int i = steps; i--;)                                    
+	// for(int i = steps; i--;)                                    
 	router->request("hello/world")->push((void*)"hello world!");      
 	                                                
 	int i;

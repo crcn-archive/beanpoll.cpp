@@ -11,6 +11,8 @@
 #include "collection.cpp"    
 #include "parser.cpp"   
 #include "request.cpp"
-#include "data.cpp"
-
+#include "data.cpp"                   
+#include "threading/thread_task.cpp"
+#include "threading/thread.cpp"  
+#include "threading/thread_pool.cpp" 
 
