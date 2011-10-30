@@ -2,7 +2,14 @@
                   
 
 namespace Beanpole
-{
+{        
+	ThreadPool::ThreadPool(int maxWorkers, int minWorkers): 
+	maxWorkers(maxWorkers), 
+	minWorkers(minWorkers),
+	_waitingWorkers(0)
+	{                                                
+		pthread_mutex_init(&this->_pthreadMutex, NULL);         
+	};
 	        
                             
 	ThreadTask* ThreadPool::createTask(void* data,  ThreadCallback* callback )
@@ -17,67 +24,74 @@ namespace Beanpole
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
-		Thread* thread = NULL;        
+		ThreadWorker* thread = NULL;        
 		                                                                                
 		
-		pthread_mutex_lock(&this->_pthreadMutex);   
+		pthread_mutex_lock(&this->_pthreadMutex);
+		                                     
 		
 		this->_waitingTasks.push_back(task);    
 		    
 		                  
 		//clean up any threads that might have been disposed of
-		for(int i = this->_closingThreads.size(); i--;)
+		for(int i = this->_closingWorkers.size(); i--;)
 		{          
-			thread = this->_closingThreads[i];    
+			thread = this->_closingWorkers[i];   
 			delete thread;
 			
 		}   
-		this->_closingThreads.clear();
+		this->_closingWorkers.clear();
                                                                                      
 
 		//any waiting threads? use 'em
-		if(this->_waitingThreads.size())
+		if(this->_waitingWorkers.size())
 		{                             
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
-			thread = this->_waitingThreads.back();               
+			thread = this->_waitingWorkers.back();               
 			
 			//remove the thread because it's being used.
-			this->_waitingThreads.pop_back();      
+			this->_waitingWorkers.pop_back();      
 			                                            
 			
 			//signal the *target* thread.  
 			pthread_cond_signal(&thread->_hasTask);        
 		}                                                 
 	    else 
-		if(this->_threads.size() < this->maxThreads)
+		if(this->_workers.size() < this->maxWorkers)
 		{                                      
-			thread = new Thread(this, this->_threads.size());    
-			this->_threads.push_back(thread);            
+			thread = new ThreadWorker(this, this->_workers.size());    
+			this->_workers.push_back(thread);            
 		}        
 		
 		pthread_mutex_unlock(&this->_pthreadMutex);
 
 	}      
 	
-	void ThreadPool::waiting(Thread* thread)
+	void ThreadPool::waiting(ThreadWorker* thread)
 	{                              	        
-		this->_waitingThreads.push_back(thread);
+		this->_waitingWorkers.push_back(thread);
 	} 
 	
-	bool ThreadPool::canRemoveThread() 
+	bool ThreadPool::canRemoveWorker() 
 	{
-		return this->_threads.size() > this->minThreads;
+		return this->_workers.size() > this->minWorkers;
 	}         
 	
-	void ThreadPool::removeThread(Thread* thread)
-	{                    
+	void ThreadPool::removeWorker(ThreadWorker* thread)
+	{                        	
+		pthread_mutex_lock(&this->_pthreadMutex);
 		
 		//remove from the running threads                  
-		this->_threads.remove(thread);   
+		this->_workers.remove(thread);       
+		
+		//it should also be a waiting thread - need to remove it.    
+		this->_waitingWorkers.remove(thread);
 		
 		//add for later cleanup. Needs to get to the main thread.
-		this->_closingThreads.push_back(thread);                        
+		this->_closingWorkers.push_back(thread); 
+		
+		pthread_mutex_unlock(&this->_pthreadMutex);                       
 	}
 	   
 	

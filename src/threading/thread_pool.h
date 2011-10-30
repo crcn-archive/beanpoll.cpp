@@ -1,8 +1,9 @@
 #ifndef THREAD_POOL_H_
 #define THREAD_POOL_H_       
                         
-#include "thread.h"      
+#include "thread_worker.h"      
 #include "thread_task.h"  
+#include "thread_wrapper.h"
 #include <iostream>
 #include <list>  
 #include <pthread.h>
@@ -14,36 +15,113 @@ namespace Beanpole
 	{
 		
 	public:   
+		                                  
+		/**
+		 * workers = threads
+		 */
 		
-		int maxThreads;
-		int minThreads;
+		int maxWorkers;     
 		
-		ThreadPool(int maxThreads = 20, int minThreads = 2): 
-		maxThreads(maxThreads), 
-		minThreads(minThreads),
-		_waitingThreads(0)
-		{                                                
-			pthread_mutex_init(&this->_pthreadMutex, NULL);         
-		}; 
+		/**
+		 * workers to keep allocated even if there are no tasks to be handled
+		 */                                                                  
 		
-		ThreadTask* createTask(void* data,  ThreadCallback* callback );   
+		int minWorkers;
 		
-		bool canRemoveThread();
-		
-		friend class Thread;   
+		/**
+		 */
 		
 		
-	private:
-		std::list<Thread*> _threads;            
-		std::list<Thread*> _waitingThreads;
-		std::vector<Thread*> _closingThreads;
-		std::vector<ThreadTask*> _waitingTasks;
-		pthread_mutex_t _pthreadMutex;                   
-		void removeThread(Thread*);
+		ThreadPool(int maxWorkers = 20, int minWorkers = 2);                                            
 		
-		void run(ThreadTask*);   
-		void waiting(Thread*);
-		ThreadTask* nextTask();    
+		/**
+		 * creates a new task / job to run
+		 */
+		
+		ThreadTask* createTask(void* data,  ThreadCallback* callback );                               
+		
+		
+		/**
+		 * returns TRUE if a worker can be removed. This runs up against minWorkers, and idling workers.
+		 */
+		
+		
+		bool canRemoveWorker();    
+		
+		
+		/**
+		 * the thread worker needs access to some private methods in the thread pool, such as nextTask
+		 */
+		
+		friend class ThreadWorker;   
+		
+		
+	private:                 
+		
+	    /**
+	     * All the workers registered in the pool including busy & waiting
+	 	 */
+	
+		std::list<ThreadWorker*> _workers;                                
+		
+		/**
+		 * workers waiting for tasks to come in. This will fill up if there's a delay between
+		 * when tasks are added, and workers finish.
+		 */
+		
+		std::list<ThreadWorker*> _waitingWorkers;   
+		
+		/**
+		 * workers who've been sitting around for too long, and aren't needed anymore.
+		 */
+		
+		std::vector<ThreadWorker*> _closingWorkers;                                   
+		
+		/**
+		 * Queued up tasks waiting to be handled by workers. This gets filled if there are more
+		 * jobs than there are workers to handle them
+		 */
+		
+		std::vector<ThreadTask*> _waitingTasks;      
+		           
+		
+		/**
+		 * the locker which makes sure shared mem is accessed once between workers
+		 */
+		
+		ThreadMutex _pthreadMutex;                                                
+		
+		/**
+		 * removes a given worker once it's been sitting around for too long
+		 */
+		
+		void removeWorker(ThreadWorker*);                                   
+		
+		
+		/**
+		 * runs the given task, or throws the task in a queue if the workers
+		 * are currently busy
+		 */
+		
+		void run(ThreadTask*);
+		
+		/**
+		 * notifies the pool that a worker is waiting for new tasks - this happens
+		 * if there isn't stuff in the queue. 
+		 */
+		   
+		void waiting(ThreadWorker*);          
+		
+		/**
+		 * pops a task of the _waitingTasks queue, and returns it. This is called by the thread worker.
+		 */
+		
+		ThreadTask* nextTask();   
+		
+		/**   
+		 * returns TRUE if there are tasks in the tasks queue
+		 */
+		 
 		bool hasTask();
 		                      
 		

@@ -8,19 +8,16 @@ namespace Beanpole
 {   
 	class ThreadPool;    
 	
-	class Thread
+	class ThreadWorker
 	{
 	public:  
-		Thread(ThreadPool* pool, int index);        
+		ThreadWorker(ThreadPool* pool, int index);        
 		void run(ThreadTask* task);
 		int index;     
 		pthread_cond_t _hasTask;
 		void start(); 
 		
-		~Thread();
-		
-		
-		friend class ThreadTask;    
+		~ThreadWorker();                
 
 	private:
     	

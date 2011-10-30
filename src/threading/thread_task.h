@@ -10,9 +10,7 @@ namespace Beanpole
 	class ThreadTask
 	{
 	public:         
-		
-		Thread* thread;
-		
+		                        
 		ThreadTask(void* data, ThreadCallback* callback): _data(data), _callback(callback){};    
 		
 		void* run();    

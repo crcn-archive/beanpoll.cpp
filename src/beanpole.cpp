@@ -1,3 +1,4 @@
+//yeah, ugly as shit, but fixes an issue with g++ where templates aren't found...
 
 #include <iostream>
 #include <pthread.h>      
@@ -13,6 +14,7 @@
 #include "request.cpp"
 #include "data.cpp"                   
 #include "threading/thread_task.cpp"
-#include "threading/thread.cpp"  
-#include "threading/thread_pool.cpp" 
+#include "threading/thread_worker.cpp"       
+#include "threading/thread_pool.cpp"
+#include "threading/thread_wrapper.cpp"
 

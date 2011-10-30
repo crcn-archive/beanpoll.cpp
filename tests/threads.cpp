@@ -8,7 +8,7 @@ pthread_cond_t cond;
                                                    
 void* sayHelloWorld(void* request)
 {                                   
-	std::cout << (const char*)request << " " << --steps << std::endl;     
+	// std::cout << (const char*)request << " " << --steps << std::endl;     
 	usleep(300 * 1000);
 	
 	 
@@ -36,11 +36,15 @@ int main()
 		pool->createTask((void*)"hello world", &sayHelloWorld);  
 		
 		// std::cout << sin(inc) * 500 << std::endl;  
-		                                                  
-		int timeout = abs(sin(inc) * 500) * 1000; 
+		                                               
+		
+		//simulate lots of activity, then little activity.    
+		int timeout = round(abs(sin(inc) * 50)) * 1000; 
 		                                         
 		
-		inc += 0.01;
+		inc += 0.01;                    
+		
+		std::cout << "timeout:" << (timeout/1000) << std::endl;
 		                                          
 		usleep(timeout);
 	}    

@@ -40,17 +40,19 @@ void Beanpole::ConcreteDispatcher::dispatch(Beanpole::Data* data, std::vector<Ro
 		Beanpole::Request* request = this->request(data, listener);
 		
 		                                  
-		if(listener->getRoute()->hasTag("async"))
+		/*if(listener->getRoute()->hasTag("async"))
 		{                                                          
-			pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
+			// pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
 			
-			pthread_join(thread, &val);
+			// pthread_join(thread, &val);
 		}                        
 		else
 		{
 			request->next();
 			delete request;
-		}
+		}*/
+		
+		this->_threadPool->createTask((void*)request, &dispatch_threaded_request);
 	}
 }        
 
