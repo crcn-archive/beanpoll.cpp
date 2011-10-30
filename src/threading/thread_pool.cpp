@@ -5,8 +5,7 @@ namespace Beanpole
 {        
 	ThreadPool::ThreadPool(int maxWorkers, int minWorkers): 
 	maxWorkers(maxWorkers), 
-	minWorkers(minWorkers),
-	_waitingWorkers(0)
+	minWorkers(minWorkers)
 	{                                                            
 	};
 	        
