@@ -1,7 +1,7 @@
 #include "beanpole.cpp"   
 #include <pthread.h>           
 
-int steps = 100 * 100;    
+int steps = 100 * 100 * 100 ;    
 pthread_t thread; 
 pthread_mutex_t mutex;
 pthread_cond_t cond;
@@ -9,7 +9,7 @@ pthread_cond_t cond;
 void* sayHelloWorld(void* request)
 {                                   
 	std::cout << (const char*)request << " " << --steps << std::endl;     
-	usleep(25 * 1000);
+	usleep(300 * 1000);
 	
 	 
 }     
@@ -23,15 +23,24 @@ int main()
 	// pthread_create(&thread, NULL, &sayHelloWorld, (void*)"hello world!");
 	// pthread_create(&thread, NULL, &sayHelloWorld, (void*)"hello world!");
 	
-	Beanpole::ThreadPool* pool = new Beanpole::ThreadPool(8, 2);  
+	Beanpole::ThreadPool* pool = new Beanpole::ThreadPool(100, 2);  
 	
-	int acc = 1;
+	int acc = 1;        
+	
+	double inc = 0;
+	                                
 	                
-	for(int i = steps; i--;)     
-	{          
-		pool->createTask((void*)"hello world", &sayHelloWorld);    
+	// for(int i = steps; i--;)
+	while(1)    
+	{                                   
+		pool->createTask((void*)"hello world", &sayHelloWorld);  
 		
-		int timeout = (acc++ * 5) * 1000; 
+		// std::cout << sin(inc) * 500 << std::endl;  
+		                                                  
+		int timeout = abs(sin(inc) * 500) * 1000; 
+		                                         
+		
+		inc += 0.01;
 		                                          
 		usleep(timeout);
 	}    

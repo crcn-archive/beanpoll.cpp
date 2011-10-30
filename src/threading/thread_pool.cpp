@@ -17,12 +17,22 @@ namespace Beanpole
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
-		Thread* worker = NULL;        
+		Thread* thread = NULL;        
 		                                                                                
 		
 		pthread_mutex_lock(&this->_pthreadMutex);   
 		
-		this->_waitingTasks.push_back(task);
+		this->_waitingTasks.push_back(task);    
+		    
+		                  
+		//clean up any threads that might have been disposed of
+		for(int i = this->_closingThreads.size(); i--;)
+		{          
+			thread = this->_closingThreads[i];    
+			delete thread;
+			
+		}   
+		this->_closingThreads.clear();
                                                                                      
 
 		//any waiting threads? use 'em
@@ -30,7 +40,7 @@ namespace Beanpole
 		{                             
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
-			Thread* thread = this->_waitingThreads.back();               
+			thread = this->_waitingThreads.back();               
 			
 			//remove the thread because it's being used.
 			this->_waitingThreads.pop_back();      
@@ -42,8 +52,8 @@ namespace Beanpole
 	    else 
 		if(this->_threads.size() < this->maxThreads)
 		{                                      
-			worker = new Thread(this, this->_threads.size());    
-			this->_threads.push_back(worker);            
+			thread = new Thread(this, this->_threads.size());    
+			this->_threads.push_back(thread);            
 		}        
 		
 		pthread_mutex_unlock(&this->_pthreadMutex);
@@ -61,9 +71,13 @@ namespace Beanpole
 	}         
 	
 	void ThreadPool::removeThread(Thread* thread)
-	{                                      
-		this->_threads.remove(thread);    
-		delete thread;                                                  
+	{                    
+		
+		//remove from the running threads                  
+		this->_threads.remove(thread);   
+		
+		//add for later cleanup. Needs to get to the main thread.
+		this->_closingThreads.push_back(thread);                        
 	}
 	   
 	

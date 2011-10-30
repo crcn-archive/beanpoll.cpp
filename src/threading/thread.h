@@ -15,6 +15,9 @@ namespace Beanpole
 		void run(ThreadTask* task);
 		int index;     
 		pthread_cond_t _hasTask;
+		void start(); 
+		
+		~Thread();
 		
 		
 		friend class ThreadTask;    

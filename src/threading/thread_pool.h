@@ -35,7 +35,8 @@ namespace Beanpole
 		
 	private:
 		std::list<Thread*> _threads;            
-		std::list<Thread*> _waitingThreads; 
+		std::list<Thread*> _waitingThreads;
+		std::vector<Thread*> _closingThreads;
 		std::vector<ThreadTask*> _waitingTasks;
 		pthread_mutex_t _pthreadMutex;                   
 		void removeThread(Thread*);

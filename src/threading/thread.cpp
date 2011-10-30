@@ -9,11 +9,16 @@ namespace Beanpole
 	_pool(pool),
 	index(index)
 	{                                    
-		pthread_cond_init(&this->_hasTask, NULL);             
+		pthread_cond_init(&this->_hasTask, NULL);  
 		
+		this->start();                         
+	}            
+	
+	void Thread::start()
+	{   
 		//startup the thread                     
 		pthread_create(&this->thread, NULL, &Thread::execute, (void*)this);
-	}          
+	}
 	 
 	
 	void Thread::waiting()
@@ -90,9 +95,7 @@ namespace Beanpole
 			         
 			//does a task exist? means the condition was met - run it.
 			if(nextTask)
-			{                    
-				std::cout << thread->index << std::endl;
-				
+			{                             
 				//run it.
 				nextTask->run();
 				delete nextTask;
@@ -105,7 +108,12 @@ namespace Beanpole
 			}              
 		}  
 		
-		thread->_pool->removeThread(thread);          
+		thread->_pool->removeThread(thread);   
+	}  
+	           
+	Thread::~Thread()
+	{                                        
+		pthread_detach(this->thread);
 	}
 	
    
