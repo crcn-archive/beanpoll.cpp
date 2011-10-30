@@ -7,96 +7,100 @@
 #include <iostream>                
 #include <vector>   
 #include <pthread.h>   
+                  
 
-
-void Beanpole::ConcreteDispatcher::dispatch(Beanpole::Data* data)
+namespace Beanpole
 {
-	std::vector<Beanpole::RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
-	
-	Beanpole::ConcreteDispatcher::dispatch(data, listeners);
-}                                 
+	void ConcreteDispatcher::dispatch(Data* data)
+	{
+		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
 
-        
-void* dispatch_threaded_request(void* request)
-{                                                      
-	((Beanpole::Request*)request)->next(); 
-	delete (Beanpole::Request*)request;                        
-	return NULL;
-}                     
-
-
-void Beanpole::ConcreteDispatcher::dispatch(Beanpole::Data* data, std::vector<RouteListener*>* listeners)
-{                         
-	             
-	pthread_t thread;
-	for(int i = listeners->size(); i--;)
-	{                                
-		
-		void* val;
-		
-		//TODO: check if request is threaded.
-		RouteListener* listener = (*listeners)[i];
-		
-		Beanpole::Request* request = this->request(data, listener);
-		
-		                                  
-		/*if(listener->getRoute()->hasTag("async"))
-		{                                                          
-			// pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
-			
-			// pthread_join(thread, &val);
-		}                        
-		else
-		{
-			request->next();
-			delete request;
-		}*/
-		
-		this->_threadPool->createTask((void*)request, &dispatch_threaded_request);
-	}
-}        
-
-Beanpole::Request* Beanpole::ConcreteDispatcher::request(Beanpole::Data* data, Beanpole::RouteListener* listener)
-{                                     
-	return new Beanpole::Request(data, listener, this);
-}
-
-void Beanpole::ConcreteDispatcher::addRouteListener(RouteListener* listener)
-{                    
-	this->_collection.addRouteListener(listener);
-}          
-
-Beanpole::Data* Beanpole::Router::request(const char* channel)
-{          
-	return new Beanpole::Data(Beanpole::Parser::parseChannel(channel), this);
-}
-
-
-void Beanpole::Router::on(std::string route, PullCallback* callback)
-{                
-	std::cout << "PULL" << std::endl;
-}
-
-void Beanpole::Router::on(std::string route, PushCallback* callback)
-{                                                                   
-	std::vector<RouteExpression*> expressions;
-
-	Beanpole::Parser::parseRoute(route, expressions);
-
-
-	for(int i = expressions.size(); i--;)
-	{                                       
-		this->_pusher->addRouteListener(new Beanpole::PushRouteListener(expressions[i], callback));
+		ConcreteDispatcher::dispatch(data, listeners);
 	}                                 
 
-};     
 
-void Beanpole::Router::push(Data* data)
-{
-	this->_pusher->dispatch(data);  
-}   
+	void* dispatch_threaded_request(void* request)
+	{                                                      
+		((Request*)request)->next(); 
+		delete (Request*)request;                        
+		return NULL;
+	}                     
 
-void Beanpole::Router::pull(Data* data)
-{
-	this->_puller->dispatch(data);
-}
+
+	void ConcreteDispatcher::dispatch(Data* data, std::vector<RouteListener*>* listeners)
+	{                         
+
+		pthread_t thread;
+		for(int i = listeners->size(); i--;)
+		{                                
+
+			void* val;
+
+			//TODO: check if request is threaded.
+			RouteListener* listener = (*listeners)[i];
+
+			Request* request = this->request(data, listener);
+
+
+			/*if(listener->getRoute()->hasTag("async"))
+			{                                                          
+				// pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
+
+				// pthread_join(thread, &val);
+			}                        
+			else
+			{
+				request->next();
+				delete request;
+			}*/
+
+			this->_threadPool->createTask((void*)request, &dispatch_threaded_request);
+		}
+	}        
+
+	Request* ConcreteDispatcher::request(Data* data, RouteListener* listener)
+	{                                     
+		return new Request(data, listener, this);
+	}
+
+	void ConcreteDispatcher::addRouteListener(RouteListener* listener)
+	{                    
+		this->_collection.addRouteListener(listener);
+	}          
+
+	Data* Router::request(const char* channel)
+	{          
+		return new Data(Parser::parseChannel(channel), this);
+	}
+
+
+	void Router::on(std::string route, PullCallback* callback)
+	{                
+		std::cout << "PULL" << std::endl;
+	}
+
+	void Router::on(std::string route, PushCallback* callback)
+	{                                                                   
+		std::vector<RouteExpression*> expressions;
+
+		Parser::parseRoute(route, expressions);
+
+
+		for(int i = expressions.size(); i--;)
+		{                                       
+			this->_pusher->addRouteListener(new PushRouteListener(expressions[i], callback));
+		}                                 
+
+	};     
+
+	void Router::push(Data* data)
+	{
+		this->_pusher->dispatch(data);  
+	}   
+
+	void Router::pull(Data* data)
+	{
+		this->_puller->dispatch(data);
+	}
+};
+

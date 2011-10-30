@@ -1,16 +1,20 @@
-#include "tag.h"
+#include "tag.h"          
 
-void* Beanpole::StringTag::value()
+namespace Beanpole
 {
-	return (void*) &this->_value;
-}                                            
+	void* StringTag::value()
+	{
+		return (void*) &this->_value;
+	}                                            
 
-void* Beanpole::NumberTag::value()
-{
-	return (void*)0;
-}
+	void* NumberTag::value()
+	{
+		return (void*)0;
+	}
 
-void* Beanpole::BooleanTag::value()
-{
-	return (void*) &this->_value;
-}
+	void* BooleanTag::value()
+	{
+		return (void*) &this->_value;
+	}
+};
+
