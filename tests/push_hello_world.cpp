@@ -17,7 +17,7 @@ int main()
 {       
 	Beanpole::Router* router = new Beanpole::Router();
 	                                 
-	router->on("push -async hello/world", &sayHelloWorld);
+	router->on("push hello/world", &sayHelloWorld);
             
 
                                                  
