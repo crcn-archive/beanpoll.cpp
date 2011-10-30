@@ -24,7 +24,8 @@ namespace Beanpole
 	void Thread::detach()
 	{
 		pthread_detach(this->_thread);
-	}                                  
+	}    
+	                               
 	
 	Thread::~Thread()
 	{
@@ -72,6 +73,16 @@ namespace Beanpole
 	    _ts.tv_sec += ttl;         
 		
 		pthread_cond_timedwait(&this->_condition, &mutex._mutex, &_ts);
+	}    
+	
+	void ThreadCondition::signal()
+	{
+		pthread_cond_signal(&this->_condition);
+	}          
+	
+	void ThreadCondition::broadcast()
+	{
+		pthread_cond_broadcast(&this->_condition);
 	}
 	
 	       

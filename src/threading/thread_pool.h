@@ -89,7 +89,7 @@ namespace Beanpole
 		 * the locker which makes sure shared mem is accessed once between workers
 		 */
 		
-		ThreadMutex _pthreadMutex;                                                
+		ThreadMutex _threadMutex;                                                
 		
 		/**
 		 * removes a given worker once it's been sitting around for too long

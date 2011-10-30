@@ -2,6 +2,7 @@
 #define THREAD_H_        
 
 #include "thread_task.h"   
+#include "thread_wrapper.h"
 #include <pthread.h>
 
 namespace Beanpole
@@ -10,26 +11,61 @@ namespace Beanpole
 	
 	class ThreadWorker
 	{
-	public:  
+	public:         
+		
+		/**       
+		 * the worker index in the pool. Helpful in debugging.
+		 */    
+		
+		int index;      
+		
+		/**
+		 */
+		
+		ThreadCondition hasTask;
+		
+		/**
+		 */
+		
 		ThreadWorker(ThreadPool* pool, int index);        
-		void run(ThreadTask* task);
-		int index;     
-		pthread_cond_t _hasTask;
-		void start(); 
+		
+		/**
+		 */
 		
 		~ThreadWorker();                
 
-	private:
-    	
-		ThreadPool* _pool;
-		ThreadTask* _currentTask;   
-		pthread_t thread;          
+	private:        
+		
+		/**
+		 * the pool which owns this worker
+		 */
+		
+		ThreadPool* _pool;    
+		
+		/**             
+		 */            
+		                             
+		Thread* _thread;
+		
+		
+		/**
+		 * TRUE if the worker is waiting for more jobs/tasks
+		 */
+		          
 		bool _waiting;        
 		           
+		                    
+		/**
+		 * threaded method 
+		 */
 		
-		static void* execute(void*);   
-		void done(void*);   
-		void waiting(); 
+		static void* execute(void*);     
+		
+		/**
+		 * notifies the pool that the worker is waiting
+		 */
+		
+		void waiting();                                
 		
 	};
 };     

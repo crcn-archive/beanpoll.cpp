@@ -1,24 +1,17 @@
 #include "thread_worker.h" 
-#include "thread_pool.h"  
-#include <sys/time.h>     
+#include "thread_pool.h"    
 
 
 namespace Beanpole
 {                    
 	ThreadWorker::ThreadWorker(ThreadPool* pool, int index):
 	_pool(pool),
-	index(index)
-	{                                    
-		pthread_cond_init(&this->_hasTask, NULL);  
+	index(index)   
+	{                     
+		this->_thread = new Thread(&ThreadWorker::execute);
 		
-		this->start();                         
-	}            
-	
-	void ThreadWorker::start()
-	{   
-		//startup the thread                     
-		pthread_create(&this->thread, NULL, &ThreadWorker::execute, (void*)this);
-	}
+		this->_thread->run((void*)this);                        
+	}         
 	 
 	
 	void ThreadWorker::waiting()
@@ -31,10 +24,7 @@ namespace Beanpole
 	{                                            
 		ThreadWorker* thread = (ThreadWorker*)t;  
 		ThreadTask* nextTask = NULL;
-		                                     
-		                
-		struct timespec ts; 
-	  	struct timeval  tp;   
+		                          
 	         
 		//lovely magic numbers. TODO: put in constructor
 		int tries = 0,
@@ -50,8 +40,8 @@ namespace Beanpole
 			tries = 0;    
 			nextTask = NULL;
 			          	  	                        
-			
-			pthread_mutex_lock(&thread->_pool->_pthreadMutex);       	                               
+			       
+			thread->_pool->_threadMutex.lock();                        	                               
                                                     
                                     
           
@@ -61,23 +51,17 @@ namespace Beanpole
 			{               
 				                 
 				//notify the thread pool that a thread is waiting             
-				thread->waiting(); 
-				
-				gettimeofday(&tp, NULL);    
-				                     
-				
-				ts.tv_sec  = tp.tv_sec;
-				ts.tv_nsec = tp.tv_usec * 1000;
-			    ts.tv_sec += waitTimeout;           
-			                                       
+				thread->waiting();                   
 				             
 				//either the thread pool signals *this* thread that there's a job, or it's killed. (Throttling N workers if idling)                                                              
-				if(pthread_cond_timedwait(&thread->_hasTask, &thread->_pool->_pthreadMutex, &ts))
+				/*if(pthread_cond_timedwait(&thread->_hasTask, &thread->_pool->_pthreadMutex, &ts))
 				{                                           
 					//TODO - timeout here? need to enforce the timeout...
 					// std::cout << "TIMEOUT" << std::endl;     
 					// usleep()
-				}                     
+				}*/
+				
+				 thread->hasTask.wait(thread->_pool->_threadMutex, waitTimeout);                     
 				                        
 				
 				if(!thread->_pool->canRemoveWorker()) tries = 0;          
@@ -91,8 +75,8 @@ namespace Beanpole
 			nextTask = killWait ? NULL : thread->_pool->nextTask();                                           
                                                      
                                                        
-
-			pthread_mutex_unlock(&thread->_pool->_pthreadMutex);  
+                                                                  
+		    thread->_pool->_threadMutex.unlock();
 			         
 			//does a task exist? means the condition was met - run it.
 			if(nextTask)
@@ -113,28 +97,9 @@ namespace Beanpole
 	}  
 	           
 	ThreadWorker::~ThreadWorker()
-	{                                        
-		pthread_detach(this->thread);
+	{                                 
+		delete this->_thread;
 	}
 	
-   
-	
-	/*void Thread::run(ThreadTask* task)
-	{                        
-		this->_currentTask = task;                                                   
-		                 
-		std::cout << "G" << std::endl;    
-		                                                                    
-	}*/  
-	
-	/*void Thread::done(void* response)
-	{                           
-		delete this->_currentTask;          
-		this->_pool->done(this);  
-		                          
-		void* value;
-		
-		// pthread_join(this->thread,&value);    
-		
-	}*/
+          
 }

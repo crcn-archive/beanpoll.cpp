@@ -7,8 +7,7 @@ namespace Beanpole
 	maxWorkers(maxWorkers), 
 	minWorkers(minWorkers),
 	_waitingWorkers(0)
-	{                                                
-		pthread_mutex_init(&this->_pthreadMutex, NULL);         
+	{                                                            
 	};
 	        
                             
@@ -25,23 +24,23 @@ namespace Beanpole
 	void ThreadPool::run(ThreadTask* task)
 	{   
 		ThreadWorker* thread = NULL;        
-		                                                                                
-		
-		pthread_mutex_lock(&this->_pthreadMutex);
-		                                     
-		
+
+
+		this->_threadMutex.lock();                        
+
+
 		this->_waitingTasks.push_back(task);    
-		    
-		                  
+
+
 		//clean up any threads that might have been disposed of
 		for(int i = this->_closingWorkers.size(); i--;)
 		{          
 			thread = this->_closingWorkers[i];   
 			delete thread;
-			
+
 		}   
 		this->_closingWorkers.clear();
-                                                                                     
+
 
 		//any waiting threads? use 'em
 		if(this->_waitingWorkers.size())
@@ -49,22 +48,21 @@ namespace Beanpole
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
 			thread = this->_waitingWorkers.back();               
-			
+
 			//remove the thread because it's being used.
 			this->_waitingWorkers.pop_back();      
-			                                            
+                                                         
 			
-			//signal the *target* thread.  
-			pthread_cond_signal(&thread->_hasTask);        
+			thread->hasTask.signal();      
 		}                                                 
-	    else 
+		else 
 		if(this->_workers.size() < this->maxWorkers)
 		{                                      
 			thread = new ThreadWorker(this, this->_workers.size());    
 			this->_workers.push_back(thread);            
 		}        
-		
-		pthread_mutex_unlock(&this->_pthreadMutex);
+
+		this->_threadMutex.unlock();
 
 	}      
 	
@@ -79,8 +77,8 @@ namespace Beanpole
 	}         
 	
 	void ThreadPool::removeWorker(ThreadWorker* thread)
-	{                        	
-		pthread_mutex_lock(&this->_pthreadMutex);
+	{                        	                   
+		this->_threadMutex.lock();
 		
 		//remove from the running threads                  
 		this->_workers.remove(thread);       
@@ -90,8 +88,8 @@ namespace Beanpole
 		
 		//add for later cleanup. Needs to get to the main thread.
 		this->_closingWorkers.push_back(thread); 
-		
-		pthread_mutex_unlock(&this->_pthreadMutex);                       
+		                                            
+	    this->_threadMutex.unlock();                      
 	}
 	   
 	
