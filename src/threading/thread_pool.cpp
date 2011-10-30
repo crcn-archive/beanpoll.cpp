@@ -34,7 +34,7 @@ namespace Beanpole
 
 		//clean up any threads that might have been disposed of
 		for(int i = this->_closingWorkers.size(); i--;)
-		{          
+		{                                       
 			thread = this->_closingWorkers[i];   
 			delete thread;
 
