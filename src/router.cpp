@@ -29,32 +29,19 @@ namespace Beanpole
 
 	void ConcreteDispatcher::dispatch(Data* data, std::vector<RouteListener*>* listeners)
 	{                         
-
-		pthread_t thread;
+                            
 		for(int i = listeners->size(); i--;)
-		{                                
-
+		{               
 			void* val;
 
 			//TODO: check if request is threaded.
 			RouteListener* listener = (*listeners)[i];
 
-			Request* request = this->request(data, listener);
+			Request* request = this->request(data, listener);            
+                                                                 
 
-
-			/*if(listener->getRoute()->hasTag("async"))
-			{                                                          
-				// pthread_create(&thread, NULL, &dispatch_threaded_request, (void*)request);   
-
-				// pthread_join(thread, &val);
-			}                        
-			else
-			{
-				request->next();
-				delete request;
-			}*/
-
-			this->_threadPool->createTask((void*)request, &dispatch_threaded_request);
+			//async call per listener. Typically one except push requests
+			this->_threadPool.createTask((void*)request, &dispatch_threaded_request);
 		}
 	}        
 

@@ -15,7 +15,7 @@ namespace Beanpole
 	class ConcreteDispatcher
 	{
 	public:
-		ConcreteDispatcher(): _threadPool(new ThreadPool()){};
+		ConcreteDispatcher(){};
 		
 		void dispatch(Data* data); 
 		void dispatch(Data* data, std::vector<RouteListener*>* listeners);   
@@ -24,7 +24,7 @@ namespace Beanpole
 		
 	private:
 		Collection _collection;	  
-		ThreadPool* _threadPool;     
+		ThreadPool _threadPool;     
 		
 	protected:             
 		Request* request(Data* data, RouteListener* listener);  
@@ -51,7 +51,7 @@ namespace Beanpole
 	private:
 		
 		PushDispatcher* _pusher;
-		PullDispatcher* _puller;
+		PullDispatcher* _puller;    
 		   
 	public:        
 		
