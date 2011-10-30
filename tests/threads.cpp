@@ -38,7 +38,8 @@ int main()
 		//simulate variable activity. Testing creation & destruction of threads   
 		int timeout = round(abs(sin(inc) * 50)) * 1000; 
 		                                                      
-		
+		 
+		//controls speed of sin func
 		inc += 0.01;                    
 		                                                                
 		usleep(timeout);
