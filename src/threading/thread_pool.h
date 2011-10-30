@@ -32,7 +32,7 @@ namespace Beanpole
 		 */
 		
 		
-		ThreadPool(int maxWorkers = 20, int minWorkers = 2);                                            
+		ThreadPool(int maxWorkers = 100, int minWorkers = 2);                                            
 		
 		/**
 		 * creates a new task / job to run
