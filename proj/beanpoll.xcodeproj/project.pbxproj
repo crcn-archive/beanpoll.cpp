@@ -7,14 +7,56 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		C6859E8B029090EE04C91782 /* beanpoll.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = beanpoll.1; sourceTree = "<group>"; };
+		5D12CF0E145F673B00548EFF /* utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = utils.hpp; path = ../src/utils.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF0F145F673B00548EFF /* utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = utils.cpp; path = ../src/utils.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF11145F673B00548EFF /* thread_callback.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_callback.hpp; sourceTree = "<group>"; };
+		5D12CF12145F673B00548EFF /* thread_pool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_pool.cpp; sourceTree = "<group>"; };
+		5D12CF13145F673B00548EFF /* thread_pool.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_pool.hpp; sourceTree = "<group>"; };
+		5D12CF14145F673B00548EFF /* thread_task.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_task.cpp; sourceTree = "<group>"; };
+		5D12CF15145F673B00548EFF /* thread_task.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_task.hpp; sourceTree = "<group>"; };
+		5D12CF16145F673B00548EFF /* thread_worker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_worker.cpp; sourceTree = "<group>"; };
+		5D12CF17145F673B00548EFF /* thread_worker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_worker.hpp; sourceTree = "<group>"; };
+		5D12CF18145F673B00548EFF /* thread_wrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_wrapper.cpp; sourceTree = "<group>"; };
+		5D12CF19145F673B00548EFF /* thread_wrapper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_wrapper.hpp; sourceTree = "<group>"; };
+		5D12CF1A145F673B00548EFF /* tag.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = tag.hpp; path = ../src/tag.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF1B145F673B00548EFF /* tag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tag.cpp; path = ../src/tag.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF1C145F673B00548EFF /* stream.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = stream.hpp; path = ../src/stream.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF1D145F673B00548EFF /* stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stream.cpp; path = ../src/stream.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF1E145F673B00548EFF /* router.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = router.hpp; path = ../src/router.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF1F145F673B00548EFF /* router.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = router.cpp; path = ../src/router.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF20145F673B00548EFF /* request.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = request.hpp; path = ../src/request.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF21145F673B00548EFF /* request.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = request.cpp; path = ../src/request.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF22145F673B00548EFF /* plugin.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = plugin.hpp; path = ../src/plugin.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF23145F673B00548EFF /* plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = plugin.cpp; path = ../src/plugin.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF24145F673B00548EFF /* parser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = parser.hpp; path = ../src/parser.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF25145F673B00548EFF /* parser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = parser.cpp; path = ../src/parser.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF26145F673B00548EFF /* middleware.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = middleware.hpp; path = ../src/middleware.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF27145F673B00548EFF /* middleware.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = middleware.cpp; path = ../src/middleware.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF28145F673B00548EFF /* message.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = message.hpp; path = ../src/message.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF29145F673B00548EFF /* message.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = message.cpp; path = ../src/message.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2A145F673B00548EFF /* listener.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = listener.hpp; path = ../src/listener.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2B145F673B00548EFF /* listener.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = listener.cpp; path = ../src/listener.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2C145F673B00548EFF /* linked_list.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linked_list.hpp; path = ../src/linked_list.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2D145F673B00548EFF /* linked_list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = linked_list.cpp; path = ../src/linked_list.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2E145F673B00548EFF /* expressions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = expressions.hpp; path = ../src/expressions.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF2F145F673B00548EFF /* expressions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = expressions.cpp; path = ../src/expressions.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF30145F673B00548EFF /* collection.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = collection.hpp; path = ../src/collection.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF31145F673B00548EFF /* collection.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = collection.cpp; path = ../src/collection.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF32145F673B00548EFF /* callbacks.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = callbacks.hpp; path = ../src/callbacks.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF33145F673B00548EFF /* beanpoll.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = beanpoll.hpp; path = ../src/beanpoll.hpp; sourceTree = SOURCE_ROOT; };
+		5D12CF34145F673B00548EFF /* beanpoll.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = beanpoll.cpp; path = ../src/beanpoll.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF39145F676600548EFF /* plugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = plugin.cpp; path = ../tests/plugin.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF3A145F676600548EFF /* pull_hello_world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pull_hello_world.cpp; path = ../tests/pull_hello_world.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF3B145F676600548EFF /* push_hello_world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_hello_world.cpp; path = ../tests/push_hello_world.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF3C145F676600548EFF /* threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads.cpp; path = ../tests/threads.cpp; sourceTree = SOURCE_ROOT; };
+		5D12CF3D145F676600548EFF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../tests/timer.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* beanpoll */ = {
 			isa = PBXGroup;
 			children = (
+				5D12CF35145F675800548EFF /* Tests */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -25,7 +67,36 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				5D12CF0E145F673B00548EFF /* utils.hpp */,
+				5D12CF0F145F673B00548EFF /* utils.cpp */,
+				5D12CF10145F673B00548EFF /* threading */,
+				5D12CF1A145F673B00548EFF /* tag.hpp */,
+				5D12CF1B145F673B00548EFF /* tag.cpp */,
+				5D12CF1C145F673B00548EFF /* stream.hpp */,
+				5D12CF1D145F673B00548EFF /* stream.cpp */,
+				5D12CF1E145F673B00548EFF /* router.hpp */,
+				5D12CF1F145F673B00548EFF /* router.cpp */,
+				5D12CF20145F673B00548EFF /* request.hpp */,
+				5D12CF21145F673B00548EFF /* request.cpp */,
+				5D12CF22145F673B00548EFF /* plugin.hpp */,
+				5D12CF23145F673B00548EFF /* plugin.cpp */,
+				5D12CF24145F673B00548EFF /* parser.hpp */,
+				5D12CF25145F673B00548EFF /* parser.cpp */,
+				5D12CF26145F673B00548EFF /* middleware.hpp */,
+				5D12CF27145F673B00548EFF /* middleware.cpp */,
+				5D12CF28145F673B00548EFF /* message.hpp */,
+				5D12CF29145F673B00548EFF /* message.cpp */,
+				5D12CF2A145F673B00548EFF /* listener.hpp */,
+				5D12CF2B145F673B00548EFF /* listener.cpp */,
+				5D12CF2C145F673B00548EFF /* linked_list.hpp */,
+				5D12CF2D145F673B00548EFF /* linked_list.cpp */,
+				5D12CF2E145F673B00548EFF /* expressions.hpp */,
+				5D12CF2F145F673B00548EFF /* expressions.cpp */,
+				5D12CF30145F673B00548EFF /* collection.hpp */,
+				5D12CF31145F673B00548EFF /* collection.cpp */,
+				5D12CF32145F673B00548EFF /* callbacks.hpp */,
+				5D12CF33145F673B00548EFF /* beanpoll.hpp */,
+				5D12CF34145F673B00548EFF /* beanpoll.cpp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -37,10 +108,38 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		5D12CF10145F673B00548EFF /* threading */ = {
+			isa = PBXGroup;
+			children = (
+				5D12CF11145F673B00548EFF /* thread_callback.hpp */,
+				5D12CF12145F673B00548EFF /* thread_pool.cpp */,
+				5D12CF13145F673B00548EFF /* thread_pool.hpp */,
+				5D12CF14145F673B00548EFF /* thread_task.cpp */,
+				5D12CF15145F673B00548EFF /* thread_task.hpp */,
+				5D12CF16145F673B00548EFF /* thread_worker.cpp */,
+				5D12CF17145F673B00548EFF /* thread_worker.hpp */,
+				5D12CF18145F673B00548EFF /* thread_wrapper.cpp */,
+				5D12CF19145F673B00548EFF /* thread_wrapper.hpp */,
+			);
+			name = threading;
+			path = ../src/threading;
+			sourceTree = SOURCE_ROOT;
+		};
+		5D12CF35145F675800548EFF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5D12CF39145F676600548EFF /* plugin.cpp */,
+				5D12CF3A145F676600548EFF /* pull_hello_world.cpp */,
+				5D12CF3B145F676600548EFF /* push_hello_world.cpp */,
+				5D12CF3C145F676600548EFF /* threads.cpp */,
+				5D12CF3D145F676600548EFF /* timer.cpp */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				C6859E8B029090EE04C91782 /* beanpoll.1 */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";

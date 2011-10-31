@@ -3,7 +3,7 @@
 namespace Beanpoll
 {
 	void* StringTag::value()
-	{
+	{ 
 		return (void*) &this->_value;
 	}                                            
 

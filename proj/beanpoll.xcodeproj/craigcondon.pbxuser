@@ -2,8 +2,18 @@
 {
 	08FB7793FE84155DC02AAC07 /* Project object */ = {
 		activeBuildConfigurationName = Debug;
+		activeExecutable = 5D12CF08145F66EF00548EFF /* pull_hello_world */;
 		activeTarget = 5D12CEEB145F5DF100548EFF /* beanpoll */;
+		addToTargets = (
+			5D12CEEB145F5DF100548EFF /* beanpoll */,
+		);
 		codeSenseManager = 5D12CEE3145F5D8500548EFF /* Code sense */;
+		executables = (
+			5D12CEF4145F669B00548EFF /* threads */,
+			5D12CF02145F66C000548EFF /* push_hello_world */,
+			5D12CF08145F66EF00548EFF /* pull_hello_world */,
+			5D12CF0A145F670300548EFF /* plugin */,
+		);
 		perUserDictionary = {
 			PBXConfiguration.PBXFileTableDataSource3.PBXExecutablesDataSource = {
 				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
@@ -24,7 +34,7 @@
 				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
 				PBXFileTableDataSourceColumnWidthsKey = (
 					20,
-					341,
+					989,
 					20,
 					48,
 					43,
@@ -49,7 +59,7 @@
 					705,
 					60,
 					20,
-					48.16259765625,
+					48,
 					43,
 					43,
 				);
@@ -69,6 +79,11 @@
 		perUserProjectItems = {
 			5D12CEEE145F5DF900548EFF /* PBXTargetBookmark */ = 5D12CEEE145F5DF900548EFF /* PBXTargetBookmark */;
 			5D12CEEF145F5DF900548EFF /* PBXTargetBookmark */ = 5D12CEEF145F5DF900548EFF /* PBXTargetBookmark */;
+			5D12CF05145F66C200548EFF /* PBXTargetBookmark */ = 5D12CF05145F66C200548EFF /* PBXTargetBookmark */;
+			5D12CF36145F675C00548EFF /* PBXTargetBookmark */ = 5D12CF36145F675C00548EFF /* PBXTargetBookmark */;
+			5D12CF37145F675C00548EFF /* PBXTextBookmark */ = 5D12CF37145F675C00548EFF /* PBXTextBookmark */;
+			5D12CF38145F675C00548EFF /* PBXTextBookmark */ = 5D12CF38145F675C00548EFF /* PBXTextBookmark */;
+			5D12CF40145F677500548EFF /* PBXTextBookmark */ = 5D12CF40145F677500548EFF /* PBXTextBookmark */;
 		};
 		sourceControlManager = 5D12CEE2145F5D8500548EFF /* Source Control */;
 		userBuildSettings = {
@@ -108,5 +123,282 @@
 				"com.apple.target-editor-pane.settings",
 			);
 		};
+	};
+	5D12CEF4145F669B00548EFF /* threads */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+			"PBXLSLaunchAction-0" = {
+				PBXLSLaunchAction = 0;
+				PBXLSLaunchStartAction = 1;
+				PBXLSLaunchStdioStyle = 2;
+				PBXLSLaunchStyle = 0;
+				class = PBXLSRunLaunchConfig;
+				commandLineArgs = (
+				);
+				displayName = "Executable Runner";
+				environment = {
+				};
+				identifier = com.apple.Xcode.launch.runConfig;
+				remoteHostInfo = "";
+				startActionInfo = "";
+			};
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = 5D12CEF5145F669B00548EFF /* threads */;
+		libgmallocEnabled = 0;
+		name = threads;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		startupPath = "<<ProjectDirectory>>";
+	};
+	5D12CEF5145F669B00548EFF /* threads */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = "compiled.mach-o.executable";
+		name = threads;
+		path = /Users/craigcondon/Developer/Public/beanpoll/build/threads;
+		sourceTree = "<absolute>";
+	};
+	5D12CF02145F66C000548EFF /* push_hello_world */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+			"PBXLSLaunchAction-0" = {
+				PBXLSLaunchAction = 0;
+				PBXLSLaunchStartAction = 1;
+				PBXLSLaunchStdioStyle = 2;
+				PBXLSLaunchStyle = 0;
+				class = PBXLSRunLaunchConfig;
+				commandLineArgs = (
+				);
+				displayName = "Executable Runner";
+				environment = {
+				};
+				identifier = com.apple.Xcode.launch.runConfig;
+				remoteHostInfo = "";
+				startActionInfo = "";
+			};
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = 5D12CF03145F66C000548EFF /* push_hello_world */;
+		libgmallocEnabled = 0;
+		name = push_hello_world;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		startupPath = "<<ProjectDirectory>>";
+	};
+	5D12CF03145F66C000548EFF /* push_hello_world */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = "compiled.mach-o.executable";
+		name = push_hello_world;
+		path = /Users/craigcondon/Developer/Public/beanpoll/build/push_hello_world;
+		sourceTree = "<absolute>";
+	};
+	5D12CF05145F66C200548EFF /* PBXTargetBookmark */ = {
+		isa = PBXTargetBookmark;
+		trg = 5D12CEEB145F5DF100548EFF /* beanpoll */;
+		uiCtxt = {
+			TOCViewDetailVisibleRect = "{{0, 51}, {674, 433}}";
+			TOCViewExpandedItems = (
+				"com.apple.target-editor-pane.settings",
+			);
+			TOCViewMasterVisibleRect = "{{0, 0}, {269, 433}}";
+			TOCViewSelectedItems = (
+				"com.apple.target-editor-pane.settings",
+			);
+		};
+	};
+	5D12CF08145F66EF00548EFF /* pull_hello_world */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+			"PBXLSLaunchAction-0" = {
+				PBXLSLaunchAction = 0;
+				PBXLSLaunchStartAction = 1;
+				PBXLSLaunchStdioStyle = 2;
+				PBXLSLaunchStyle = 0;
+				class = PBXLSRunLaunchConfig;
+				commandLineArgs = (
+				);
+				displayName = "Executable Runner";
+				environment = {
+				};
+				identifier = com.apple.Xcode.launch.runConfig;
+				remoteHostInfo = "";
+				startActionInfo = "";
+			};
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = 5D12CF09145F66EF00548EFF /* pull_hello_world */;
+		libgmallocEnabled = 0;
+		name = pull_hello_world;
+		savedGlobals = {
+		};
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		startupPath = "<<ProjectDirectory>>";
+	};
+	5D12CF09145F66EF00548EFF /* pull_hello_world */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = "compiled.mach-o.executable";
+		name = pull_hello_world;
+		path = /Users/craigcondon/Developer/Public/beanpoll/build/pull_hello_world;
+		sourceTree = "<absolute>";
+	};
+	5D12CF0A145F670300548EFF /* plugin */ = {
+		isa = PBXExecutable;
+		activeArgIndices = (
+		);
+		argumentStrings = (
+		);
+		autoAttachOnCrash = 1;
+		breakpointsEnabled = 0;
+		configStateDict = {
+			"PBXLSLaunchAction-0" = {
+				PBXLSLaunchAction = 0;
+				PBXLSLaunchStartAction = 1;
+				PBXLSLaunchStdioStyle = 2;
+				PBXLSLaunchStyle = 0;
+				class = PBXLSRunLaunchConfig;
+				commandLineArgs = (
+				);
+				displayName = "Executable Runner";
+				environment = {
+				};
+				identifier = com.apple.Xcode.launch.runConfig;
+				remoteHostInfo = "";
+				startActionInfo = "";
+			};
+		};
+		customDataFormattersEnabled = 1;
+		dataTipCustomDataFormattersEnabled = 1;
+		dataTipShowTypeColumn = 1;
+		dataTipSortType = 0;
+		debuggerPlugin = GDBDebugging;
+		disassemblyDisplayState = 0;
+		dylibVariantSuffix = "";
+		enableDebugStr = 1;
+		environmentEntries = (
+		);
+		executableSystemSymbolLevel = 0;
+		executableUserSymbolLevel = 0;
+		launchableReference = 5D12CF0B145F670300548EFF /* plugin */;
+		libgmallocEnabled = 0;
+		name = plugin;
+		showTypeColumn = 0;
+		sourceDirectories = (
+		);
+		startupPath = "<<ProjectDirectory>>";
+	};
+	5D12CF0B145F670300548EFF /* plugin */ = {
+		isa = PBXFileReference;
+		lastKnownFileType = "compiled.mach-o.executable";
+		name = plugin;
+		path = /Users/craigcondon/Developer/Public/beanpoll/build/plugin;
+		sourceTree = "<absolute>";
+	};
+	5D12CF1B145F673B00548EFF /* tag.cpp */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1167, 727}}";
+			sepNavSelRange = "{80, 0}";
+			sepNavVisRange = "{0, 282}";
+		};
+	};
+	5D12CF36145F675C00548EFF /* PBXTargetBookmark */ = {
+		isa = PBXTargetBookmark;
+		trg = 5D12CEEB145F5DF100548EFF /* beanpoll */;
+		uiCtxt = {
+			TOCViewDetailVisibleRect = "{{0, 0}, {847, 260}}";
+			TOCViewExpandedItems = (
+				"com.apple.target-editor-pane.settings",
+			);
+			TOCViewMasterVisibleRect = "{{0, 0}, {340, 260}}";
+			TOCViewSelectedItems = (
+				"com.apple.target-editor-pane.settings",
+			);
+		};
+	};
+	5D12CF37145F675C00548EFF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5D12CF1B145F673B00548EFF /* tag.cpp */;
+		name = "tag.cpp: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 211;
+		vrLoc = 0;
+	};
+	5D12CF38145F675C00548EFF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5D12CF1B145F673B00548EFF /* tag.cpp */;
+		name = "tag.cpp: 9";
+		rLen = 0;
+		rLoc = 160;
+		rType = 0;
+		vrLen = 281;
+		vrLoc = 0;
+	};
+	5D12CF40145F677500548EFF /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 5D12CF1B145F673B00548EFF /* tag.cpp */;
+		name = "tag.cpp: 6";
+		rLen = 0;
+		rLoc = 80;
+		rType = 0;
+		vrLen = 282;
+		vrLoc = 0;
 	};
 }
