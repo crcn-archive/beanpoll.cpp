@@ -32,13 +32,13 @@ namespace Beanpole
 
 
 		//clean up any threads that might have been disposed of
-		for(int i = this->_closingWorkers.size(); i--;)
+		/*for(int i = this->_closingWorkers.size(); i--;)
 		{                                       
 			thread = this->_closingWorkers[i];   
-			delete thread;
+			// delete thread;
 
 		}   
-		this->_closingWorkers.clear();
+		this->_closingWorkers.clear(); */
 
 
 		//any waiting threads? use 'em
@@ -86,7 +86,9 @@ namespace Beanpole
 		this->_waitingWorkers.remove(thread);
 		
 		//add for later cleanup. Needs to get to the main thread.
-		this->_closingWorkers.push_back(thread); 
+		// this->_closingWorkers.push_back(thread); 
+		
+		delete thread;
 		                                            
 	    this->_threadMutex.unlock();                      
 	}

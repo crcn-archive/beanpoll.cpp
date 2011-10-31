@@ -74,7 +74,7 @@ namespace Beanpole
 		 * workers who've been sitting around for too long, and aren't needed anymore.
 		 */
 		
-		std::vector<ThreadWorker*> _closingWorkers;                                   
+		// std::vector<ThreadWorker*> _closingWorkers;                                   
 		
 		/**
 		 * Queued up tasks waiting to be handled by workers. This gets filled if there are more
