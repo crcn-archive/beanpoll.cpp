@@ -2,7 +2,14 @@
 #include "router.h"  
 
 namespace Beanpole
-{
+{   
+	Message::~Message()
+	{
+		delete this->channel;
+		if(this->_stream) delete this->_stream;
+	}                     
+	
+	
 	Message* Message::setData(void* data)
 	{
 		this->_stream = new RequestStream(data);     
@@ -78,7 +85,7 @@ namespace Beanpole
 		return (new Message(this->channel->clone(), this->router))->   
 		
 		//TODO - use copied stream 
-		setData(this->getStream())->
+		setData(this->getStream()->read())->
 		setCallback(this->getCallback());
 	}
 }
