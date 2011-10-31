@@ -10,38 +10,39 @@
 #include "threading/thread_pool.h"
 
 namespace Beanpole
-{                             
-	template<class ListenerClass, class RequestClass>
+{                     
+	
 	class ConcreteDispatcher
 	{
 	public:
 		ConcreteDispatcher(){};
 		
 		void dispatch(Data* data); 
-		void dispatch(Data* data, std::vector<ListenerClass*>* listeners);   
-		void addRouteListener(ListenerClass* listener);  
-			Collection<ListenerClass> _collection; 
+		void dispatch(Data* data, std::vector<RouteListener*>* listeners);   
+		void addRouteListener(RouteListener* listener);   
+		friend class Request; 
 		
-	private:                                      
+	private:
+		Collection _collection;	  
 		ThreadPool _threadPool;     
 		
 	protected:             
-		RequestClass* request(Data* data, ListenerClass* listener);  
+		Request* request(Data* data, RouteListener* listener);  
 		
 		                
 	};  
 	               
 	
-	class PullDispatcher : public ConcreteDispatcher<PullRouteListener, PullRequest> 
+	class PullDispatcher : public ConcreteDispatcher 
 	{                         
 	public:
-		PullDispatcher(): ConcreteDispatcher<PullRouteListener, PullRequest>(){};                            
+		PullDispatcher(): ConcreteDispatcher(){};                            
 	};
 	
-	class PushDispatcher: public ConcreteDispatcher< PushRouteListener, PushRequest> 
+	class PushDispatcher: public ConcreteDispatcher 
 	{                   
 	public:
-		PushDispatcher(): ConcreteDispatcher<PushRouteListener, PushRequest>(){};
+		PushDispatcher(): ConcreteDispatcher(){};
 	};
 	
 	class Router 
@@ -82,7 +83,8 @@ namespace Beanpole
 		/**
 		 */
 		
-		void on(std::string route, PushCallback* callback);  
+		void on(std::string route, PushCallback* callback); 
+		
 		
 		/**
 		 */

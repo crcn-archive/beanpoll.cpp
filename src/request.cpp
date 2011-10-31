@@ -5,25 +5,21 @@
 #include "utils.h"                        
 
 namespace Beanpole
-{                  
-	template<class ListenerClass, class RequestClass>
-	void RequestMiddleware<ListenerClass, RequestClass>::onRequest(RequestClass* request)
+{
+	void RequestMiddleware::onRequest(Request* request)
 	{                                                 
 		this->listener->onRequest(request);  
 	}
-                                                             
-	template<class ListenerClass, class RequestClass>
-	Request<ListenerClass, RequestClass>::Request(Data* data, ListenerClass* listener, ConcreteDispatcher< ListenerClass, RequestClass >* dispatcher):
+
+	Request::Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher):
 	data(data),
 	dispatcher(dispatcher),
 	_previousMiddleware(NULL)
 	{                   
 		this->addMiddleware(data->channel, listener);
 	};        
-     
-	
-	template<class ListenerClass, class RequestClass>
-	Request<ListenerClass, RequestClass>::~Request()
+
+	Request::~Request()
 	{           
 		//there's a chance that the previous middleware exists - at the end 
 		if(this->_previousMiddleware) delete this->_previousMiddleware;       
@@ -32,16 +28,15 @@ namespace Beanpole
 		//data's no longer needed.      
 		delete this->data;                                    
 	};                                       
-    
-	template<class ListenerClass, class RequestClass>
-	void Request<ListenerClass, RequestClass>::addMiddleware(ChannelExpression* channel, ListenerClass* listener)
+
+	void Request::addMiddleware(ChannelExpression* channel, RouteListener* listener)
 	{                                                                   
 		ThruExpression* currentMiddleware = listener->getRoute()->thru;         
 
 		std::vector<ThruExpression*> thru;  
 
 
-		this->_middleware.push_back(new RequestMiddleware<ListenerClass, RequestClass>(channel, listener));
+		this->_middleware.push_back(new RequestMiddleware(channel, listener));
 
 
 		//reverse
@@ -57,7 +52,7 @@ namespace Beanpole
 		{
 			currentMiddleware = thru[i];  
 
-			std::vector<ListenerClass *>* middleware = this->dispatcher->_collection.getRouteListeners(currentMiddleware->channel);
+			std::vector<RouteListener*>* middleware = this->dispatcher->_collection.getRouteListeners(currentMiddleware->channel);
 
 			for(int j = 0, jn = middleware->size(); j < jn; j++)
 			{
@@ -65,15 +60,13 @@ namespace Beanpole
 			}
 		}
 	}
-     
-	template<class ListenerClass, class RequestClass>
-	bool Request<ListenerClass, RequestClass>::hasNext()
+
+	bool Request::hasNext()
 	{
 		return !!this->_middleware.size();
 	}
-                   
-	template<class ListenerClass, class RequestClass>
-	bool Request<ListenerClass, RequestClass>::next()
+
+	bool Request::next()
 	{   
 		if(this->_previousMiddleware)
 		{                                 
@@ -90,7 +83,7 @@ namespace Beanpole
 			this->_middleware.pop_back();    
 
 			//notify the listener
-			this->_previousMiddleware->onRequest((RequestClass*) this);     
+			this->_previousMiddleware->onRequest(this);     
 
 			return true;
 		}               

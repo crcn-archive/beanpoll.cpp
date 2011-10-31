@@ -5,32 +5,25 @@
 #include "callbacks.h"
 
 namespace Beanpole
-{                                                 
-	class PullRequest;
-	class PushRequest;          
-	     
+{                        
+	class Request;
 	
-	
-	            
-	template<class RequestClass, class CallbackType>
 	class RouteListener
 	{   
 	private:
-		RouteExpression* _route;  
-		CallbackType* _callback;
+		RouteExpression* _route;
 		
 	public:                                               
 		
 		/**
 		 */
 		
-		RouteListener(RouteExpression* route, CallbackType* callback): _route(route), _callback(callback) { };       
+		RouteListener(RouteExpression* route): _route(route) { };       
 		
 		/**
 		 */
-		                                
-		
-		void onRequest(RequestClass* request);    
+		          
+		virtual void onRequest(Request* request) = 0;    
 		
 		/**
 		 */
@@ -41,20 +34,29 @@ namespace Beanpole
 		}
 		
 	}; 
-	                 
-	    
 	
-	class PullRouteListener: public RouteListener<PullRequest, PullCallback>
-	{         
-	public:        
-		PullRouteListener(RouteExpression* route, PullCallback* callback): RouteListener<PullRequest, PullCallback>(route, callback){};  
+	
+	class PullRouteListener: public RouteListener
+	{                      
+	public:
+		PullRouteListener(RouteExpression* route, PullCallback* callback): RouteListener(route), _callback(callback) { };  
+		void onRequest(Request* request);
+		
+		
+    private:
+		PullCallback* _callback;
 	};                          
 	
-	class PushRouteListener: public RouteListener<PushRequest, PushCallback>
-	{                                                            
-	public:        
-		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener<PushRequest, PushCallback>(route, callback){};   
-	}; 
+	class PushRouteListener: public RouteListener
+	{      
+	public:
+		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener(route), _callback(callback) { };  
+		
+		void onRequest(Request* request);        
+
+	private:
+		PushCallback* _callback;
+	};
 };
 
 #endif

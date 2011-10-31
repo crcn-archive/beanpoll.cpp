@@ -10,26 +10,24 @@
                   
 
 namespace Beanpole
-{               
-	template<class ListenerClass, class RequestClass>
-	void ConcreteDispatcher<ListenerClass, RequestClass>::dispatch(Data* data)
+{
+	void ConcreteDispatcher::dispatch(Data* data)
 	{
-		std::vector<ListenerClass*>* listeners = this->_collection.getRouteListeners(data->channel);    
+		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
 
-		ConcreteDispatcher<ListenerClass, RequestClass>::dispatch(data, listeners);
+		ConcreteDispatcher::dispatch(data, listeners);
 	}                                 
 
 
 	void* dispatch_threaded_request(void* request)
 	{                                                      
-		((AbstractRequest*)request)->next(); 
-		delete (AbstractRequest*)request;                        
+		((Request*)request)->next(); 
+		delete (Request*)request;                        
 		return NULL;
 	}                     
 
-               
-	template<class ListenerClass, class RequestClass>
-	void ConcreteDispatcher<ListenerClass, RequestClass>::dispatch(Data* data, std::vector<ListenerClass*>* listeners)
+
+	void ConcreteDispatcher::dispatch(Data* data, std::vector<RouteListener*>* listeners)
 	{                         
                             
 		for(int i = listeners->size(); i--;)
@@ -37,24 +35,22 @@ namespace Beanpole
 			void* val;
 
 			//TODO: check if request is threaded.
-			ListenerClass* listener = (*listeners)[i];
+			RouteListener* listener = (*listeners)[i];
 
-			AbstractRequest* request = this->request(data, listener);            
+			Request* request = this->request(data, listener);            
                                                                  
 
 			//async call per listener. Typically one except push requests
 			this->_threadPool.createTask((void*)request, &dispatch_threaded_request);
 		}
 	}        
-         
-	template<class ListenerClass, class RequestClass>
-	RequestClass* ConcreteDispatcher<ListenerClass, RequestClass>::request(Data* data, ListenerClass* listener)
+
+	Request* ConcreteDispatcher::request(Data* data, RouteListener* listener)
 	{                                     
-		return new RequestClass(data, listener, this);
+		return new Request(data, listener, this);
 	}
-              
-	template<class ListenerClass, class RequestClass>
-	void ConcreteDispatcher<ListenerClass, RequestClass>::addRouteListener(ListenerClass* listener)
+
+	void ConcreteDispatcher::addRouteListener(RouteListener* listener)
 	{                    
 		this->_collection.addRouteListener(listener);
 	}          
@@ -66,28 +62,32 @@ namespace Beanpole
 
 
 	void Router::on(std::string route, PullCallback* callback)
-	{                                           
-		this->on<PullCallback, PullRouteListener, PullDispatcher >(route, callback, this->_puller);
+	{                                          
+		this->on<PullCallback, PullRouteListener, PullDispatcher>(route, callback, this->_puller);
 	}
 
 	void Router::on(std::string route, PushCallback* callback)
-	{                                           
-	    this->on<PushCallback, PushRouteListener, PushDispatcher >(route, callback, this->_pusher);  
-	};       
+	{                                                                   
+		this->on<PushCallback, PushRouteListener, PushDispatcher>(route, callback, this->_pusher);                                 
+
+	};            
 	
-	template<class T, class U, class V>
+	/**
+	 */
+	                  
+    template<class T, class U, class V>
 	void Router::on(std::string route, T* callback, V* dispatcher)
 	{
 		std::vector<RouteExpression*> expressions;
 
 		Parser::parseRoute(route, expressions);
 
-         
+
 		for(int i = expressions.size(); i--;)
 		{                                       
 			dispatcher->addRouteListener(new U(expressions[i], callback));
 		}
-	}
+	}   
 
 	void Router::push(Data* data)
 	{
