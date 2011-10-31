@@ -10,19 +10,14 @@ namespace Beanpole
 		
 		LinkedList():_nextSibling(NULL), _prevSibling(NULL) {};
 
-		T* getNextSibling();
-		void setNextSibling(T* sibling);  
+		T* getNextSibling();                  
 		void addNextSibling(T* sibling);
 
-		T* getPrevSibling();
-		void setPrevSibling(T* sibling);
+		T* getPrevSibling();                
 		void addPrevSibling(T* sibling);
 
-		T* getLastSibling();
-		void setLastSibling(T* sibling);
-
-		T* getFirstSibling();
-		void setFirstSibling(T* sibling); 
+		T* getLastSibling();  
+		T* getFirstSibling();                 
 		
 		T* remove(); 
 		T* replace(T* list);
