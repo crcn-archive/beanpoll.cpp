@@ -44,8 +44,8 @@ namespace Beanpole
 		ThruExpression* thru;
 		ChannelExpression* channel;          
 		
-		ThruExpression(ChannelExpression* channel): channel(channel){ };
-		ThruExpression(): channel(NULL){ };
+		ThruExpression(ChannelExpression* channel): channel(channel), thru(NULL) { };
+		ThruExpression(): channel(NULL), thru(NULL) { };
 		
 		
 	};                     
