@@ -15,7 +15,8 @@ namespace Beanpole
 	
 	/**
 	 */
-	
+	          
+	template<class ListenerClass>
 	class RouteTree 
 	{        
 	
@@ -29,7 +30,7 @@ namespace Beanpole
 		/**
 		 */
 		
-		std::vector<RouteListener*> listeners;
+		std::vector<ListenerClass*> listeners;
 		
 		
 		/**
@@ -55,13 +56,14 @@ namespace Beanpole
 	private:
 		                   
 		
-		std::map<std::string, RouteTree*> _children;
+		std::map<std::string, RouteTree<ListenerClass>*> _children;
 		
 	};
 	
 	/**
 	 */
-	
+	                    
+	template<class ListenerClass>
 	class Collection
 	{
 		
@@ -70,29 +72,29 @@ namespace Beanpole
 		/**
 		 */
 		
-		Collection(): _tree(new RouteTree("/")) { };
+		Collection(): _tree(new RouteTree<ListenerClass>("/")) { };
 		
 		/**
 		 */
 		
-		void addRouteListener(RouteListener* listener);       
+		void addRouteListener(ListenerClass* listener);       
 		
 		/**
 		 */
 		
-		void removeRouteListener(RouteListener* listener);
+		void removeRouteListener(ListenerClass* listener);
 		
 		/**
 		 */
 		
-		std::vector<RouteListener*>* getRouteListeners(ChannelExpression* channel);     
+		std::vector<ListenerClass*>* getRouteListeners(ChannelExpression* channel);     
 		
 	private:
 		
-		RouteTree* _tree;    
+		RouteTree<ListenerClass>* _tree;    
 		                         
-		RouteTree* getTree(ChannelExpression* channel, bool find);
-	    RouteTree* getTree(ChannelExpression* channel)
+		RouteTree<ListenerClass>* getTree(ChannelExpression* channel, bool find);
+	    RouteTree<ListenerClass>* getTree(ChannelExpression* channel)
 		{
 			return this->getTree(channel, false);
 		}; 

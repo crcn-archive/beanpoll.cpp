@@ -10,17 +10,18 @@
 
 namespace Beanpole
 {   
-	class ConcreteDispatcher; 
-	class Request;     
+	template<class T, class R> class ConcreteDispatcher;        
+	      
 	
+	template<class ListenerClass, class RequestClass>
 	class RequestMiddleware
 	{
 	public:
 		
-		RouteListener* listener;
+	    ListenerClass* listener;
 		ChannelExpression* channel;           
 		
-		RequestMiddleware(ChannelExpression* channel, RouteListener* listener):
+		RequestMiddleware(ChannelExpression* channel, ListenerClass* listener):
 		channel(channel),
 		listener(listener){ };  
 		
@@ -28,13 +29,35 @@ namespace Beanpole
 		{                                          
 		}
 		
-	void onRequest(Request*);	
+		void onRequest(RequestClass*);	
+	};                        
+	
+	class AbstractRequest
+	{
+		public:         
+
+			/**
+			 * the data passed in the request
+			 */
+
+			Data* data;                                                     
+                                                                                                                              
+			/**
+			 */
+
+			virtual bool next() = 0;
+
+			/**
+			 */
+
+			virtual bool hasNext() = 0;                                                                   
 	};
 	
 	
 	
-	
-	class Request
+	         
+	template<class ListenerClass, class RequestClass>
+	class Request : public AbstractRequest
 	{                                                               
 	public:         
 		
@@ -48,40 +71,62 @@ namespace Beanpole
 		 * the dispatcher which owns all the routes ~ dispatched *this* request
 		 */
 		
-		ConcreteDispatcher* dispatcher;            
+		ConcreteDispatcher<ListenerClass, RequestClass >* dispatcher;            
 		
 		/**   
 		 * The previous middleware - deleted on each request
 		 */
 		
-		RequestMiddleware* _previousMiddleware;
+		RequestMiddleware<ListenerClass, RequestClass>* _previousMiddleware;
 		
+		            
+		/**
+		 */
 		
-		Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher);   
+		Request(Data* data, ListenerClass* listener, ConcreteDispatcher< ListenerClass, RequestClass >* dispatcher);   
+		
+		/**
+		 */
 		
 		bool next();
 		
+		/**
+		 */
+		
 		bool hasNext();      
+		
+		/**
+		 */
 		
 		~Request();
 		
 	private:
 		
-		std::vector<RequestMiddleware*> _middleware;
+		/**
+		 */
 		
-		void addMiddleware(ChannelExpression* channel, RouteListener* listener);
+		std::vector<RequestMiddleware< ListenerClass, RequestClass >*> _middleware;
+		
+		/**
+		 */
+		
+		void addMiddleware(ChannelExpression* channel, ListenerClass* listener);
 		
 	};
 	
-	class PushRequest: public Request
-	{
-		
+	class PushRequest: public Request<PushRouteListener, PushRequest >
+	{     	          
+	public:
+		PushRequest(Data* data, PushRouteListener* listener, ConcreteDispatcher< PushRouteListener, PushRequest >* dispatcher):
+		Request<PushRouteListener, PushRequest >(data, listener, dispatcher){}; 
 	};
 	
 	
-	class PullRequest: public Request
-	{
-		
+	class PullRequest: public Request< PullRouteListener, PullRequest >
+	{    
+	public:
+		PullRequest(Data* data, PullRouteListener* listener, ConcreteDispatcher< PullRouteListener, PullRequest >* dispatcher):
+		Request<PullRouteListener, PullRequest >(data, listener, dispatcher){};
 	};
 };    
 

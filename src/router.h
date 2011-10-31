@@ -11,38 +11,38 @@
 
 namespace Beanpole
 {                     
-	
+	                          
+	template<class ListenerClass, class RequestClass>
 	class ConcreteDispatcher
 	{
 	public:
 		ConcreteDispatcher(){};
 		
 		void dispatch(Data* data); 
-		void dispatch(Data* data, std::vector<RouteListener*>* listeners);   
-		void addRouteListener(RouteListener* listener);   
-		friend class Request; 
+		void dispatch(Data* data, std::vector<ListenerClass*>* listeners);   
+		void addRouteListener(ListenerClass* listener);  
+			Collection<ListenerClass> _collection; 
 		
-	private:
-		Collection _collection;	  
+	private:                                      
 		ThreadPool _threadPool;     
 		
 	protected:             
-		Request* request(Data* data, RouteListener* listener);  
+		RequestClass* request(Data* data, ListenerClass* listener);  
 		
 		                
 	};  
 	               
 	
-	class PullDispatcher : public ConcreteDispatcher 
+	class PullDispatcher : public ConcreteDispatcher<PullRouteListener, PullRequest> 
 	{                         
 	public:
-		PullDispatcher(): ConcreteDispatcher(){};                            
+		PullDispatcher(): ConcreteDispatcher<PullRouteListener, PullRequest>(){};                            
 	};
 	
-	class PushDispatcher: public ConcreteDispatcher 
+	class PushDispatcher: public ConcreteDispatcher< PushRouteListener, PushRequest> 
 	{                   
 	public:
-		PushDispatcher(): ConcreteDispatcher(){};
+		PushDispatcher(): ConcreteDispatcher<PushRouteListener, PushRequest>(){};
 	};
 	
 	class Router 
@@ -83,7 +83,13 @@ namespace Beanpole
 		/**
 		 */
 		
-		void on(std::string route, PushCallback* callback);
+		void on(std::string route, PushCallback* callback);  
+		
+		/**
+		 */
+		                  
+	    template<class T, class U>
+		void on(std::string route, T* callback);
 	};
 };
 

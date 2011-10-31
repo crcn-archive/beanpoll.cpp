@@ -1,7 +1,16 @@
 #include "listener.h"          
-#include "request.h"
+#include "request.h"                
 
-void Beanpole::PushRouteListener::onRequest(Beanpole::Request* request)
-{          
-	this->_callback((Beanpole::PushRequest*)request);
-}
+
+                                            
+namespace Beanpole
+{       
+	
+	        
+	template<class RequestClass, class CallbackType>
+	void RouteListener<RequestClass, CallbackType>::onRequest(RequestClass* request)
+	{          
+		this->_callback(request);
+	}
+};
+

@@ -11,7 +11,7 @@ namespace Beanpole
 	class Data
 	{      
 	private:
-		void* _data;  
+		void* _data;                     
 		PushCallback* _pullCallback;
 		
 	public:
@@ -36,7 +36,12 @@ namespace Beanpole
 		/**
 		 */
 		
-		Data* pull(PushCallback* callback);
+		Data* pull(PushCallback* callback); 
+		
+		/**
+		 */
+		
+		Data* pull(void* data, PushCallback* callback);
 		
 		/**
 		 */

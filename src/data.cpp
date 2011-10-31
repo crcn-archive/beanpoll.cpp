@@ -18,13 +18,23 @@ namespace Beanpole
 	{
 		this->setData(data);
 
-		this->router->push(this);
+		this->router->push(this);      
+		
+		return this;
 	}                            
 
 
 	Data* Data::pull(PushCallback* callback)
 	{                      
-		this->_pullCallback = callback;
+		this->_pullCallback = callback;      
+		this->router->pull(this);
+		return this;
+	}  
+	
+	Data* Data::pull(void* data, PushCallback* callback)
+	{              
+		this->setData(data);                           
+		return this->pull(callback);
 	}
 }
 

@@ -1,27 +1,31 @@
 #include "collection.h"             
 
 namespace Beanpole
-{
-	void Collection::addRouteListener(RouteListener* listener)
+{                     
+	template<class ListenerClass>
+	void Collection<ListenerClass>::addRouteListener(ListenerClass* listener)
 	{
 		this->getTree(listener->getRoute()->channel)->listeners.push_back(listener);
 
 	}
-
-	void Collection::removeRouteListener(RouteListener* listener)
+             
+	template<class ListenerClass>
+	void Collection<ListenerClass>::removeRouteListener(ListenerClass* listener)
 	{
 	 //TODO   
 	}                                
-
-	std::vector<RouteListener*>* Collection::getRouteListeners(ChannelExpression* channel)
+                             
+	template<class ListenerClass>
+	std::vector<ListenerClass*>* Collection<ListenerClass>::getRouteListeners(ChannelExpression* channel)
 	{
 		//TODO      
 		return &this->getTree(channel)->listeners;
 	}        
-
-	RouteTree* Collection::getTree(ChannelExpression* channel, bool find)
+                                                 
+	template<class ListenerClass>
+	RouteTree<ListenerClass>* Collection<ListenerClass>::getTree(ChannelExpression* channel, bool find)
 	{
-		RouteTree* currentTree = this->_tree;
+		RouteTree<ListenerClass>* currentTree = this->_tree;
 
 		for(int i = 0, n = channel->paths.size(); i < n; i++)
 		{

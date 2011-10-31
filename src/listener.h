@@ -5,25 +5,32 @@
 #include "callbacks.h"
 
 namespace Beanpole
-{                        
-	class Request;
+{                                                 
+	class PullRequest;
+	class PushRequest;          
+	     
 	
+	
+	            
+	template<class RequestClass, class CallbackType>
 	class RouteListener
 	{   
 	private:
-		RouteExpression* _route;
+		RouteExpression* _route;  
+		CallbackType* _callback;
 		
 	public:                                               
 		
 		/**
 		 */
 		
-		RouteListener(RouteExpression* route): _route(route) { };       
+		RouteListener(RouteExpression* route, CallbackType* callback): _route(route), _callback(callback) { };       
 		
 		/**
 		 */
-		          
-		virtual void onRequest(Request* request) = 0;    
+		                                
+		
+		void onRequest(RequestClass* request);    
 		
 		/**
 		 */
@@ -34,28 +41,20 @@ namespace Beanpole
 		}
 		
 	}; 
+	                 
+	    
 	
-	
-	class PullRouteListener: public RouteListener
-	{                      
-	public:
-		PullRouteListener(RouteExpression* route, PullCallback* callback): RouteListener(route), _callback(callback) { }; 
-		
-		
-    private:
-		PullCallback* _callback;
+	class PullRouteListener: public RouteListener<PullRequest, PullCallback>
+	{         
+	public:        
+		PullRouteListener(RouteExpression* route, PullCallback* callback): RouteListener<PullRequest, PullCallback>(route, callback){};  
 	};                          
 	
-	class PushRouteListener: public RouteListener
-	{      
-	public:
-		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener(route), _callback(callback) { };  
-		
-		void onRequest(Request* request);        
-
-	private:
-		PushCallback* _callback;
-	};
+	class PushRouteListener: public RouteListener<PushRequest, PushCallback>
+	{                                                            
+	public:        
+		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener<PushRequest, PushCallback>(route, callback){};   
+	}; 
 };
 
 #endif
