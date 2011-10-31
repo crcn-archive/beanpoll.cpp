@@ -8,7 +8,7 @@ void sayHelloWorld(Beanpole::PushRequest* request)
 {                                                      
 	// std::cout << (const char*)request->data->getData() << " " << steps++ << std::endl;    
 	
-	printf("%s %d\n", (const char*)request->data->getData(), steps++);
+	printf("%s %d\n", (const char*)request->read(), steps++);
 	
 	usleep(25*1000);
 }

@@ -11,7 +11,7 @@
 
 namespace Beanpole
 {
-	void ConcreteDispatcher::dispatch(Data* data)
+	void ConcreteDispatcher::dispatch(Message* data)
 	{
 		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
 
@@ -27,7 +27,7 @@ namespace Beanpole
 	}                     
 
 
-	void ConcreteDispatcher::dispatch(Data* data, std::vector<RouteListener*>* listeners)
+	void ConcreteDispatcher::dispatch(Message* data, std::vector<RouteListener*>* listeners)
 	{                         
                             
 		for(int i = listeners->size(); i--;)
@@ -48,7 +48,7 @@ namespace Beanpole
 		delete data;
 	}        
 
-	Request* ConcreteDispatcher::request(Data* data, RouteListener* listener)
+	Request* ConcreteDispatcher::request(Message* data, RouteListener* listener)
 	{                                     
 		return new Request(data, listener, this);
 	}
@@ -58,10 +58,10 @@ namespace Beanpole
 		this->_collection.addRouteListener(listener);
 	}          
 
-	Data* Router::request(const char* channel)
+	Message* Router::request(const char* channel)
 	{                                           
 		
-		return new Data(Parser::parseChannel(channel), this);
+		return new Message(Parser::parseChannel(channel), this);
 	}
 
 
@@ -93,12 +93,12 @@ namespace Beanpole
 		}
 	}   
 
-	void Router::push(Data* data)
+	void Router::push(Message* data)
 	{
 		this->_pusher->dispatch(data);  
 	}   
 
-	void Router::pull(Data* data)
+	void Router::pull(Message* data)
 	{
 		this->_puller->dispatch(data);
 	}

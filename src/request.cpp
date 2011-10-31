@@ -11,12 +11,12 @@ namespace Beanpole
 		this->listener->onRequest(request);  
 	}
 
-	Request::Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher):
-	data(data),
+	Request::Request(Message* message, RouteListener* listener, ConcreteDispatcher* dispatcher):
+	message(message),
 	dispatcher(dispatcher),
 	_previousMiddleware(NULL)
 	{                   
-		this->addMiddleware(data->channel, listener);
+		this->addMiddleware(message->channel, listener);
 	};        
 
 	Request::~Request()
@@ -26,7 +26,7 @@ namespace Beanpole
 
 
 		//data's no longer needed.      
-		delete this->data;                                    
+		delete this->message;                                    
 	};                                       
 
 	void Request::addMiddleware(ChannelExpression* channel, RouteListener* listener)
@@ -91,26 +91,13 @@ namespace Beanpole
 		return false; 
 	}   
 	
-	    
-	
-	ConcreteRequestStream::ConcreteRequestStream(void*(*reader)(void*), void* data)
-	{   
-		this->_reader = reader;
-		this->_data = data;   
-	}         
-	
-	void* ConcreteRequestStream::read()
-	{
-		return this->_reader(this->_data);
-	}
-	
-	
+	 
 	
 	void StreamedRequest::end(RequestStream* stream)
 	{                
-		this->data->getCallback()(stream); 
+		this->message->getCallback()(stream); 
 		
-		delete stream;
+		// delete stream;
 	}                        
 	
 	           
@@ -123,6 +110,11 @@ namespace Beanpole
 	void StreamedRequest::end()
 	{                        
 		this->end(new RequestStream());
+	}            
+	
+	void* StreamedRequest::read()
+	{                
+		return this->message->getStream()->read();
 	}
 };
 

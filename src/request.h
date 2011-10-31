@@ -1,9 +1,10 @@
 #ifndef REQUEST_H_
 #define REQUEST_H_   
   
-#include "data.h"    
+#include "message.h"    
 #include "listener.h"        
 #include "expressions.h"  
+#include "stream.h"
 #include "utils.h"
 #include <iostream>
 #include <vector>        
@@ -42,7 +43,7 @@ namespace Beanpole
 		 * the data passed in the request
 		 */
 		
-		Data* data;                 
+		Message* message;                 
 		
 		/**
 		 * the dispatcher which owns all the routes ~ dispatched *this* request
@@ -57,7 +58,7 @@ namespace Beanpole
 		RequestMiddleware* _previousMiddleware;
 		
 		
-		Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher);
+		Request(Message* data, RouteListener* listener, ConcreteDispatcher* dispatcher);
 		bool next();        
 		bool hasNext();     
 		~Request();
@@ -70,37 +71,7 @@ namespace Beanpole
 		
 	};                  
 	
-	class ConcreteRequestStream
-	{   
-	public:  
-		ConcreteRequestStream(void*(*reader)(void*), void* data);    
-		                        
-		void* read();          
-	
-	private:
-		void*(*_reader)(void*);   
-		void* _data;
-	};
-	
-	class RequestStream : public ConcreteRequestStream
-	{         
-	public:                                          
-		   
-		RequestStream():ConcreteRequestStream(&RequestStream::readData, NULL) {};
-		RequestStream(void* data):ConcreteRequestStream(&RequestStream::readData, data) {};    
-		
-	private:  
-		
-		
-		
-		/**
-		 */
-		
-		static void* readData(void* data)
-		{
-			return data;
-		}
-	};     
+	     
 	
 	
 	             
@@ -110,7 +81,10 @@ namespace Beanpole
 	public:                             
 		void end();           
 		void end(void* chunk);  
-		void end(RequestStream* stream);
+		void end(RequestStream* stream);     
+		
+		void* read();
+		// void end(void*(callback*)(void*), void* data);
 	};
 	
 	

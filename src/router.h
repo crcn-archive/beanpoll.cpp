@@ -2,7 +2,7 @@
 #define BEANPOLE_ROUTER_H_   
                    
 #include "callbacks.h"    
-#include "data.h"      
+#include "message.h"      
 #include "collection.h"     
 #include "listener.h" 
 #include "parser.h"       
@@ -17,8 +17,8 @@ namespace Beanpole
 	public:
 		ConcreteDispatcher(){};
 		
-		void dispatch(Data* data); 
-		void dispatch(Data* data, std::vector<RouteListener*>* listeners);   
+		void dispatch(Message* data); 
+		void dispatch(Message* data, std::vector<RouteListener*>* listeners);   
 		void addRouteListener(RouteListener* listener);   
 		friend class Request; 
 		
@@ -27,7 +27,7 @@ namespace Beanpole
 		ThreadPool _threadPool;     
 		
 	protected:             
-		Request* request(Data* data, RouteListener* listener);  
+		Request* request(Message* data, RouteListener* listener);  
 		
 		                
 	};  
@@ -63,17 +63,17 @@ namespace Beanpole
 		/**
 		 */
 		
-		Data* request(const char* route);   
+		Message* request(const char* route);   
 		
 		/**
 		 */
 		
-		void push(Data* data);
+		void push(Message* data);
 		
 		/**
 		 */
 		
-		void pull(Data* data);
+		void pull(Message* data);
 		                                                         
 		/**
 		 */

@@ -6,7 +6,7 @@
                                 
 void onSayHello(Beanpole::PullRequest* request)
 {   
-	printf("request: %s\n", (const char*)request->data->getData()); 
+	printf("request: %s\n", (const char*)request->read()); 
 	                                                                  
 	request->end((void*)"hello world!");     
 }   
