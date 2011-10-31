@@ -97,7 +97,7 @@ namespace Beanpole
 	{                
 		this->message->getCallback()(stream); 
 		
-		// delete stream;
+		delete stream;
 	}                        
 	
 	           
