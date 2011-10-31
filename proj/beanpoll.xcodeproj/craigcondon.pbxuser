@@ -77,13 +77,9 @@
 			PBXWorkspaceStateSaveDate = 341794192;
 		};
 		perUserProjectItems = {
-			5D12CEEE145F5DF900548EFF /* PBXTargetBookmark */ = 5D12CEEE145F5DF900548EFF /* PBXTargetBookmark */;
-			5D12CEEF145F5DF900548EFF /* PBXTargetBookmark */ = 5D12CEEF145F5DF900548EFF /* PBXTargetBookmark */;
-			5D12CF05145F66C200548EFF /* PBXTargetBookmark */ = 5D12CF05145F66C200548EFF /* PBXTargetBookmark */;
 			5D12CF36145F675C00548EFF /* PBXTargetBookmark */ = 5D12CF36145F675C00548EFF /* PBXTargetBookmark */;
 			5D12CF37145F675C00548EFF /* PBXTextBookmark */ = 5D12CF37145F675C00548EFF /* PBXTextBookmark */;
-			5D12CF38145F675C00548EFF /* PBXTextBookmark */ = 5D12CF38145F675C00548EFF /* PBXTextBookmark */;
-			5D12CF40145F677500548EFF /* PBXTextBookmark */ = 5D12CF40145F677500548EFF /* PBXTextBookmark */;
+			5D12CF41145F678F00548EFF /* PBXTextBookmark */ = 5D12CF41145F678F00548EFF /* PBXTextBookmark */;
 		};
 		sourceControlManager = 5D12CEE2145F5D8500548EFF /* Source Control */;
 		userBuildSettings = {
@@ -105,24 +101,6 @@
 	};
 	5D12CEEB145F5DF100548EFF /* beanpoll */ = {
 		activeExec = 0;
-	};
-	5D12CEEE145F5DF900548EFF /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 5D12CEEB145F5DF100548EFF /* beanpoll */;
-	};
-	5D12CEEF145F5DF900548EFF /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 5D12CEEB145F5DF100548EFF /* beanpoll */;
-		uiCtxt = {
-			TOCViewDetailVisibleRect = "{{0, 0}, {674, 433}}";
-			TOCViewExpandedItems = (
-				"com.apple.target-editor-pane.settings",
-			);
-			TOCViewMasterVisibleRect = "{{0, 0}, {269, 433}}";
-			TOCViewSelectedItems = (
-				"com.apple.target-editor-pane.settings",
-			);
-		};
 	};
 	5D12CEF4145F669B00548EFF /* threads */ = {
 		isa = PBXExecutable;
@@ -229,20 +207,6 @@
 		name = push_hello_world;
 		path = /Users/craigcondon/Developer/Public/beanpoll/build/push_hello_world;
 		sourceTree = "<absolute>";
-	};
-	5D12CF05145F66C200548EFF /* PBXTargetBookmark */ = {
-		isa = PBXTargetBookmark;
-		trg = 5D12CEEB145F5DF100548EFF /* beanpoll */;
-		uiCtxt = {
-			TOCViewDetailVisibleRect = "{{0, 51}, {674, 433}}";
-			TOCViewExpandedItems = (
-				"com.apple.target-editor-pane.settings",
-			);
-			TOCViewMasterVisibleRect = "{{0, 0}, {269, 433}}";
-			TOCViewSelectedItems = (
-				"com.apple.target-editor-pane.settings",
-			);
-		};
 	};
 	5D12CF08145F66EF00548EFF /* pull_hello_world */ = {
 		isa = PBXExecutable;
@@ -381,17 +345,7 @@
 		vrLen = 211;
 		vrLoc = 0;
 	};
-	5D12CF38145F675C00548EFF /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
-		fRef = 5D12CF1B145F673B00548EFF /* tag.cpp */;
-		name = "tag.cpp: 9";
-		rLen = 0;
-		rLoc = 160;
-		rType = 0;
-		vrLen = 281;
-		vrLoc = 0;
-	};
-	5D12CF40145F677500548EFF /* PBXTextBookmark */ = {
+	5D12CF41145F678F00548EFF /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = 5D12CF1B145F673B00548EFF /* tag.cpp */;
 		name = "tag.cpp: 6";
