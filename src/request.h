@@ -128,8 +128,6 @@ namespace Beanpole
 		PullRequest(Data* data, PullRouteListener* listener, ConcreteDispatcher< PullRouteListener, PullRequest >* dispatcher):
 		Request<PullRouteListener, PullRequest >(data, listener, dispatcher){};
 	};
-};    
-
-// void Beanpole::deleteInVector(std::vector<Beanpole::RequestMiddleware*>*);  
+};                                                                                 
 
 #endif

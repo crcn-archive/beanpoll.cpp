@@ -90,7 +90,7 @@ namespace Beanpole
 			this->_middleware.pop_back();    
 
 			//notify the listener
-			this->_previousMiddleware->onRequest((RequestClass*)this);     
+			this->_previousMiddleware->onRequest((RequestClass*) this);     
 
 			return true;
 		}               

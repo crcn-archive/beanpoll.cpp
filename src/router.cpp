@@ -67,16 +67,16 @@ namespace Beanpole
 
 	void Router::on(std::string route, PullCallback* callback)
 	{                                           
-		// this->on<PullCallback, RouteListener<PullRequest> >(route, callback);
+		this->on<PullCallback, PullRouteListener, PullDispatcher >(route, callback, this->_puller);
 	}
 
 	void Router::on(std::string route, PushCallback* callback)
 	{                                           
-	    // this->on<PushCallback, RouteListener<PushRequest> >(route, callback);  
+	    this->on<PushCallback, PushRouteListener, PushDispatcher >(route, callback, this->_pusher);  
 	};       
 	
-	template<class T, class U>
-	void Router::on(std::string route, T* callback)
+	template<class T, class U, class V>
+	void Router::on(std::string route, T* callback, V* dispatcher)
 	{
 		std::vector<RouteExpression*> expressions;
 
@@ -85,7 +85,7 @@ namespace Beanpole
          
 		for(int i = expressions.size(); i--;)
 		{                                       
-			this->_pusher->addRouteListener(new U(expressions[i], callback));
+			dispatcher->addRouteListener(new U(expressions[i], callback));
 		}
 	}
 

@@ -10,8 +10,7 @@
 #include "threading/thread_pool.h"
 
 namespace Beanpole
-{                     
-	                          
+{                             
 	template<class ListenerClass, class RequestClass>
 	class ConcreteDispatcher
 	{
@@ -88,8 +87,8 @@ namespace Beanpole
 		/**
 		 */
 		                  
-	    template<class T, class U>
-		void on(std::string route, T* callback);
+	    template<class T, class U, class V>
+		void on(std::string route, T* callback, V* dispatcher);
 	};
 };
 
