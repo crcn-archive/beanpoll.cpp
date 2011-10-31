@@ -55,6 +55,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = /Users/craigcondon/Developer/Public/beanpoll;
 			dependencies = (
 			);
 			name = beanpoll;
