@@ -6,30 +6,29 @@
 
 namespace Beanpole
 {
-	void RequestMiddleware::onRequest(Request* request)
+	/*void RequestMiddleware::onRequest(Request* request)
 	{                                                 
 		this->listener->onRequest(request);  
-	}
+	}*/
 
 	Request::Request(Message* message, RouteListener* listener, ConcreteDispatcher* dispatcher):
 	message(message),
-	dispatcher(dispatcher),
-	_previousMiddleware(NULL)
+	dispatcher(dispatcher)
 	{                   
-		this->addMiddleware(message->channel, listener);
+		// this->addMiddleware(message->channel, listener);
 	};        
 
 	Request::~Request()
 	{           
 		//there's a chance that the previous middleware exists - at the end 
-		if(this->_previousMiddleware) delete this->_previousMiddleware;       
+		// if(this->_previousMiddleware) delete this->_previousMiddleware;       
 
 
 		//data's no longer needed.      
 		delete this->message;                                    
 	};                                       
 
-	void Request::addMiddleware(ChannelExpression* channel, RouteListener* listener)
+	/*void Request::addMiddleware(ChannelExpression* channel, RouteListener* listener)
 	{                                                                   
 		ThruExpression* currentMiddleware = listener->getRoute()->thru;         
 
@@ -59,24 +58,24 @@ namespace Beanpole
 				this->addMiddleware(currentMiddleware->channel, (*middleware)[j]);
 			}
 		}
-	}
+	}*/
 
 	bool Request::hasNext()
 	{
-		return !!this->_middleware.size();
+		return false;//!!this->_middleware.size();
 	}
 
 	bool Request::next()
 	{   
-		if(this->_previousMiddleware)
+		/*if(this->_previousMiddleware)
 		{                                 
 			delete this->_previousMiddleware;    
 			this->_previousMiddleware = NULL;
-		}           
+		}*/           
 
-		if(this->_middleware.size())
+		/*if(this->_middleware.size())
 		{                                                  
-		    this->_previousMiddleware = this->_middleware.back();                            
+		    // this->_previousMiddleware = this->_middleware.back();                            
 
 
 			//remove from the current middleware since we've used it.
@@ -86,7 +85,7 @@ namespace Beanpole
 			this->_previousMiddleware->onRequest(this);     
 
 			return true;
-		}               
+		}*/               
 
 		return false; 
 	}   
