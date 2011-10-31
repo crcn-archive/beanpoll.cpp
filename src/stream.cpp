@@ -1,6 +1,6 @@
-#include "stream.h"
+#include "stream.hpp"
 
-namespace Beanpole
+namespace Beanpoll
 {
 	   
 	

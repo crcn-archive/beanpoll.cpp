@@ -1,4 +1,4 @@
-#include "beanpole.cpp"   
+#include "Beanpoll.cpp"   
 #include <pthread.h>           
 
 int steps;    
@@ -21,7 +21,7 @@ int main()
 {                                   
 	                                                                            
 	
-	Beanpole::ThreadPool* pool = new Beanpole::ThreadPool(100, 2);  
+	Beanpoll::ThreadPool* pool = new Beanpoll::ThreadPool(100, 2);  
 	
 	int acc = 1;        
 	

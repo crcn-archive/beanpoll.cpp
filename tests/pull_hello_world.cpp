@@ -1,10 +1,10 @@
-#include "beanpole.cpp"   
+#include "Beanpoll.cpp"   
 #include <sched.h>  
 
 
   
                                 
-void onSayHello(Beanpole::PullRequest* request)
+void onSayHello(Beanpoll::PullRequest* request)
 {   
 	printf("request: %s\n", (const char*)request->read());  
 	
@@ -13,7 +13,7 @@ void onSayHello(Beanpole::PullRequest* request)
 	request->end((void*)"hello world!");     
 }        
 
-void onAuth2(Beanpole::PullRequest* request)
+void onAuth2(Beanpoll::PullRequest* request)
 {
 	std::cout << "trefdsfa" << std::endl;
 	                   
@@ -22,7 +22,7 @@ void onAuth2(Beanpole::PullRequest* request)
 	                    
 }  
 
-void onAuth(Beanpole::PullRequest* request)
+void onAuth(Beanpoll::PullRequest* request)
 {
 	std::cout << "authenticating..." << std::endl;                
 	                       
@@ -37,14 +37,14 @@ void onAuth(Beanpole::PullRequest* request)
 
 
 
-void sayHello(Beanpole::RequestStream* stream)
+void sayHello(Beanpoll::RequestStream* stream)
 {                                   
 	printf("response: %s\n", (const char*)stream->read());       
 }
 
 int main()
 {       
-	Beanpole::Router* router = new Beanpole::Router();
+	Beanpoll::Router* router = new Beanpoll::Router();
 	
 	router->on("pull auth2", &onAuth2);
 	router->on("pull auth", &onAuth);                                 

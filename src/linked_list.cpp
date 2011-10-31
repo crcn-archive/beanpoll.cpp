@@ -1,6 +1,6 @@
-#include "linked_list.h"    
+#include "linked_list.hpp"    
 
-namespace Beanpole
+namespace Beanpoll
 {                          
 	
 	template<class T>

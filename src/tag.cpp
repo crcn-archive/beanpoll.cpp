@@ -1,6 +1,6 @@
-#include "tag.h"          
+#include "tag.hpp"          
 
-namespace Beanpole
+namespace Beanpoll
 {
 	void* StringTag::value()
 	{

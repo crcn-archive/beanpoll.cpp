@@ -1,7 +1,7 @@
-#include "thread_task.h"
+#include "thread_task.hpp"
 
 
-void* Beanpole::ThreadTask::run()
+void* Beanpoll::ThreadTask::run()
 {               
 	return this->_callback(this->_data);
 }               

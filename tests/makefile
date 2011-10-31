@@ -1,7 +1,7 @@
 CC := g++
 OBJS :=  push_hello_world pull_hello_world plugin threads  
 
-all: beanpole
+all: Beanpoll
 
 %: %.cpp 
 	@echo "Building $@"   
@@ -9,9 +9,9 @@ all: beanpole
 	$(CC)  $@.o -o $@
 	chmod 755 $@  
 
-beanpole: $(OBJS)
-	@#echo "Building beanpole"
-	@#@$(CC) $(OBJS) -o beanpole	
+Beanpoll: $(OBJS)
+	@#echo "Building Beanpoll"
+	@#@$(CC) $(OBJS) -o Beanpoll	
 
 clean:
 	@echo "Removing objects"

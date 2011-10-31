@@ -1,7 +1,7 @@
-#include "message.h"     
-#include "router.h"  
+#include "message.hpp"     
+#include "router.hpp"  
 
-namespace Beanpole
+namespace Beanpoll
 {   
 	Message::~Message()
 	{

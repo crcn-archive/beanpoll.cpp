@@ -1,4 +1,4 @@
-#include "parser.h"
+#include "parser.hpp"
 
 #include <iostream>
 #include <string>
@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>     
-#include "utils.h"  
-#include "expressions.h"
+#include "utils.hpp"  
+#include "expressions.hpp"
 
 using namespace std;       
 
@@ -16,7 +16,7 @@ using namespace std;
  * pull -method=GET OR -method=POST hello/world OR hello/earth would produce 4 different routes.
  */    
 
-namespace Beanpole
+namespace Beanpoll
 {
 	void parser_splitOr(vector<string> tokens, vector<string> route, vector<vector<string> >& routes, int start = 0)
 	{             

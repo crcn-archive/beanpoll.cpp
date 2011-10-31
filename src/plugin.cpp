@@ -1,7 +1,7 @@
-#include "plugin.h"
+#include "plugin.hpp"
     
 
-namespace Beanpole
+namespace Beanpoll
 {
 	void plugin(Bean* bean)
 	{

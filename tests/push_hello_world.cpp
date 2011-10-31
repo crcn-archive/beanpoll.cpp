@@ -1,10 +1,10 @@
-#include "beanpole.cpp"  
+#include "Beanpoll.cpp"  
 // #include "timer.cpp"    
 
 int steps = 0;     
 // Timer tm;
                                                    
-void sayHelloWorld(Beanpole::PushRequest* request)
+void sayHelloWorld(Beanpoll::PushRequest* request)
 {                                                      
 	// std::cout << (const char*)request->data->getData() << " " << steps++ << std::endl;    
 	
@@ -15,7 +15,7 @@ void sayHelloWorld(Beanpole::PushRequest* request)
 
 int main()
 {       
-	Beanpole::Router* router = new Beanpole::Router();
+	Beanpoll::Router* router = new Beanpoll::Router();
 	                                               
 	// for(int i = 2; i--;)
 	router->on("push hello/world", &sayHelloWorld);

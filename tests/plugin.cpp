@@ -1,23 +1,23 @@
-#include "beanpole.cpp"   
+#include "Beanpoll.cpp"   
 #include <sched.h>  
 
              
-void onHelloTest(Beanpole::PushRequest* request)
+void onHelloTest(Beanpoll::PushRequest* request)
 {
 	std::cout << "HELLO!" << std::endl;
 }
   
                                 
-void testPlugin(Beanpole::Router* router)
+void testPlugin(Beanpoll::Router* router)
 {                                       
 	router->on("push hello/test", &onHelloTest);
 }
 
 int main()
 {       
-	Beanpole::Router* router = new Beanpole::Router();                                                                
-	Beanpole::plugin(&testPlugin);      
-	router->require(Beanpole::beans);   
+	Beanpoll::Router* router = new Beanpoll::Router();                                                                
+	Beanpoll::plugin(&testPlugin);      
+	router->require(Beanpoll::beans);   
 	
 	
 	router->request("hello/test")->push((void*)"hello/test");

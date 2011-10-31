@@ -1,6 +1,6 @@
-#include "middleware.h"
+#include "middleware.hpp"
 
-namespace Beanpole
+namespace Beanpoll
 {                           
 	
 	RequestMiddleware* RequestMiddleware::expand(ChannelExpression* channel, RouteListener* listener, ConcreteDispatcher* dispatcher)

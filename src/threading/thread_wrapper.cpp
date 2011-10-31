@@ -1,11 +1,11 @@
-#include "thread_wrapper.h"    
+#include "thread_wrapper.hpp"    
 #include <sys/time.h>   
 #include <unistd.h>
                   
 
 
 
-namespace Beanpole
+namespace Beanpoll
 {   
 	void Thread::run(void* data)
 	{

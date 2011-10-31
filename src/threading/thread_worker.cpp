@@ -1,8 +1,8 @@
-#include "thread_worker.h" 
-#include "thread_pool.h"    
+#include "thread_worker.hpp" 
+#include "thread_pool.hpp"    
 
 
-namespace Beanpole
+namespace Beanpoll
 {                    
 	ThreadWorker::ThreadWorker(ThreadPool* pool, int index):
 	_pool(pool),

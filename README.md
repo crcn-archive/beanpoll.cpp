@@ -1,8 +1,8 @@
-C++ version of beanpole
+C++ version of Beanpoll
 
 ### Goals
 
-- async request via multithreading. Similar to [beanpole.js](https://github.com/spiceapps/beanpole)  
+- async request via multithreading. Similar to [Beanpoll.js](https://github.com/spiceapps/Beanpoll)  
 -                                                                                              
 
 
@@ -12,10 +12,10 @@ C++ version of beanpole
 
 ````c++     
 
-#include "beanpole.h"
+#include "Beanpoll.hpp"
                             
                                                    
-void sayHelloWorld(Beanpole::PushRequest* request)
+void sayHelloWorld(Beanpoll::PushRequest* request)
 {                                   
 	std::cout << (const char*)request->data->getData() << std::endl;          
 	                                  
@@ -24,7 +24,7 @@ void sayHelloWorld(Beanpole::PushRequest* request)
 
 int main()
 {       
-	Beanpole::Router* router = new Beanpole::Router();
+	Beanpoll::Router* router = new Beanpoll::Router();
 	               
 	
 	//async = multithreaded                  

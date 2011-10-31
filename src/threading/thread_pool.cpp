@@ -1,7 +1,7 @@
-#include "thread_pool.h"
+#include "thread_pool.hpp"
                   
 
-namespace Beanpole
+namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(int maxWorkers, int minWorkers): 
 	maxWorkers(maxWorkers), 

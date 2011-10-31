@@ -1,7 +1,7 @@
-#include "expressions.h"       
-#include "utils.h"      
+#include "expressions.hpp"       
+#include "utils.hpp"      
 
-namespace Beanpole
+namespace Beanpoll
 {
 	ChannelExpression::~ChannelExpression()
 	{                                           

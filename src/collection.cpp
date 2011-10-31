@@ -1,6 +1,6 @@
-#include "collection.h"             
+#include "collection.hpp"             
 
-namespace Beanpole
+namespace Beanpoll
 {
 	void Collection::addRouteListener(RouteListener* listener)
 	{

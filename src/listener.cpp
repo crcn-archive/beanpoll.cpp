@@ -1,17 +1,17 @@
-#include "listener.h"          
-#include "request.h"
+#include "listener.hpp"          
+#include "request.hpp"
               
-namespace Beanpole
+namespace Beanpoll
 {
-	void PushRouteListener::onRequest(Beanpole::Request* request)
+	void PushRouteListener::onRequest(Beanpoll::Request* request)
 	{          
 		this->_callback((PushRequest*)request);
 	}
 };
 
-namespace Beanpole
+namespace Beanpoll
 {
-	void PullRouteListener::onRequest(Beanpole::Request* request)
+	void PullRouteListener::onRequest(Beanpoll::Request* request)
 	{          
 		this->_callback((PullRequest*)request);
 	}
