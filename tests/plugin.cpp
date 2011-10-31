@@ -17,7 +17,7 @@ int main()
 {       
 	Beanpole::Router* router = new Beanpole::Router();                                                                
 	Beanpole::plugin(&testPlugin);      
-	router->on(Beanpole::beans);   
+	router->require(Beanpole::beans);   
 	
 	
 	router->request("hello/test")->push((void*)"hello/test");

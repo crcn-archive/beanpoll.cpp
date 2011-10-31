@@ -77,13 +77,18 @@ namespace Beanpole
 		this->on<PushCallback, PushRouteListener, PushDispatcher>(route, callback, this->_pusher);                                 
 	};     
 	
-	void Router::on(std::vector<Bean*>& beans)
+	void Router::require(std::vector<Bean*>& beans)
 	{
 		for(int i = beans.size(); i--;)
 		{
 			beans[i](this);
 		}
-	}       
+	}                   
+	
+	void Router::require(Bean* bean)
+	{
+		bean(this);
+	}
 	
 	/**
 	 */

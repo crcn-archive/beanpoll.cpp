@@ -89,7 +89,12 @@ namespace Beanpole
 		/**
 		 */
 		
-		void on(std::vector<Bean*>& beans);
+		void require(std::vector<Bean*>& beans);    
+		
+		/**
+		 */
+		
+		void require(Bean* bean);
 		
 		
 		/**
