@@ -182,12 +182,13 @@ namespace Beanpole
 
 
 		//NOW add the paths to the channel expression
-		for(int i = paths.size(); i--;)
+		for(int i = 0, n = paths.size(); i < n; i++)
 		{        
 			std::string path = paths[i];        
 
 			//parameters have a colon before a word ~ :someParam                
-			bool isParam = ((char)path[0] == ':');      
+			bool isParam = ((char)path[0] == ':');     
+			                                                 
 
 			expr->paths.push_back(new PathExpression(isParam ? path.substr(1) : path, isParam));
 		}  
