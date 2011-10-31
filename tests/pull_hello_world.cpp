@@ -16,7 +16,11 @@ void onAuth(Beanpole::PullRequest* request)
 	std::cout << "authenticating..." << std::endl;                
 	                 
 	//hit the database
-	usleep(200*1000);
+	usleep(200*1000);  
+	              
+	request->end((void*)"unauthorized.");       
+	
+	return;
 	
 	if(request->next())
 	{
@@ -39,7 +43,7 @@ int main()
 	router->on("pull auth -> hello/:name", &onSayHello);    
 	                                     
                    
-	for(int i = 100; i--;) 
+	// for(int i = 100; i--;) 
 	{    
 		router->request("hello/craig")->pull((void*)"hello world", &sayHello);  
 		// usleep(25*1000);
