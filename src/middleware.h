@@ -31,19 +31,7 @@ namespace Beanpole
 		 * channel expression tied to the given listener e.g: /hello/:name, and /hello/world
 		 */
 		
-		ChannelExpression* channel;
-		              
-		
-		/**
-		 * moves to the next middleware item
-		 */
-		bool next();                        
-		
-		/**
-		 * TRUE if there's sibling middleware
-		 */
-		
-		bool hasNext();    
+		ChannelExpression* channel;                  
 		
 		
 		/**
