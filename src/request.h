@@ -14,7 +14,7 @@ namespace Beanpole
 	class ConcreteDispatcher; 
 	class Request;     
 	
-	class RequestMiddleware
+	/*class RequestMiddleware
 	{
 	public:
 		
@@ -30,7 +30,7 @@ namespace Beanpole
 		}
 		
 	void onRequest(Request*);	
-	};
+	};*/
 	
 	
 	
@@ -55,7 +55,7 @@ namespace Beanpole
 		 * The previous middleware - deleted on each request
 		 */
 		
-		RequestMiddleware* _previousMiddleware;
+		// RequestMiddleware* _previousMiddleware;
 		
 		
 		Request(Message* data, RouteListener* listener, ConcreteDispatcher* dispatcher);
@@ -65,9 +65,9 @@ namespace Beanpole
 		
 	private:
 		
-		std::vector<RequestMiddleware*> _middleware;
+		// std::vector<RequestMiddleware*> _middleware;
 		
-		void addMiddleware(ChannelExpression* channel, RouteListener* listener);
+		// void addMiddleware(ChannelExpression* channel, RouteListener* listener);
 		
 	};                  
 	
