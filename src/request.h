@@ -2,7 +2,8 @@
 #define REQUEST_H_   
   
 #include "message.h"    
-#include "listener.h"        
+#include "listener.h"
+#include "middleware.h"     
 #include "expressions.h"  
 #include "stream.h"
 #include "utils.h"
@@ -49,7 +50,7 @@ namespace Beanpole
 		 * the dispatcher which owns all the routes ~ dispatched *this* request
 		 */
 		
-		ConcreteDispatcher* dispatcher;            
+		// ConcreteDispatcher* dispatcher;            
 		
 		/**   
 		 * The previous middleware - deleted on each request
@@ -58,16 +59,14 @@ namespace Beanpole
 		// RequestMiddleware* _previousMiddleware;
 		
 		
-		Request(Message* data, RouteListener* listener, ConcreteDispatcher* dispatcher);
+		Request(Message* data, RequestMiddleware* middleware);
 		bool next();        
 		bool hasNext();     
 		~Request();
 		
 	private:
 		
-		// std::vector<RequestMiddleware*> _middleware;
-		
-		// void addMiddleware(ChannelExpression* channel, RouteListener* listener);
+		RequestMiddleware* _currentMiddleware;                                                
 		
 	};                  
 	
