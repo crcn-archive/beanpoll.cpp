@@ -8,15 +8,15 @@ namespace Beanpole
 	{     
 	public:      
 		
-		LinkedList():_nextSibling(NULL), _previousSibling(NULL) {};
+		LinkedList():_nextSibling(NULL), _prevSibling(NULL) {};
 
 		T* getNextSibling();
 		void setNextSibling(T* sibling);  
 		void addNextSibling(T* sibling);
 
-		T* getPreviousSibling();
-		void setPreviousSibling(T* sibling);
-		void addPreviousSibling(T* sibling);
+		T* getPrevSibling();
+		void setPrevSibling(T* sibling);
+		void addPrevSibling(T* sibling);
 
 		T* getLastSibling();
 		void setLastSibling(T* sibling);
@@ -31,7 +31,7 @@ namespace Beanpole
 	private:
 
 		T* _nextSibling;
-		T* _previousSibling;
+		T* _prevSibling;
 	};
 };
               

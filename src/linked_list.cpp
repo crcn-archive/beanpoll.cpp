@@ -6,8 +6,8 @@ namespace Beanpole
 	template<class T>
 	T* LinkedList<T>::remove()
 	{
-		if(this->_previousSibling) this->_previousSibling->_nextSibling = this->_nextSibling;
-		if(this->_nextSibling) this->_nextSibling->_previousSibling = this->_previousSibling;
+		if(this->_prevSibling) this->_prevSibling->_nextSibling = this->_nextSibling;
+		if(this->_nextSibling) this->_nextSibling->_prevSibling = this->_prevSibling;
 		       
 		//delete after remove...
 		return (T*)this;
@@ -16,13 +16,13 @@ namespace Beanpole
 	template<class T>
 	T* LinkedList<T>::replace(T* list)
 	{                                         
-		list->_previousSibling = this->_prevousSibling;
+		list->_prevSibling = this->_prevSibling;
 		list->_nextSibling = this->_nextSibling;   
 		                                         
-		if(this->_previousSibling) this->_previousSibling->_nextSibling = list;
-		if(this->_nextSibling) this->_nextSibling->_previousSibling = list;
+		if(this->_prevSibling) this->_prevSibling->_nextSibling = list;
+		if(this->_nextSibling) this->_nextSibling->_prevSibling = list;
 		
-		return this;
+		return (T*)this;
 	}   
 	
 	template<class T>
@@ -40,27 +40,27 @@ namespace Beanpole
 	template<class T> 
 	void LinkedList<T>::addNextSibling(T* sibling)
 	{
-		if(this->_nextSibling) this->_nextSibling->_previousSibling = sibling;
+		if(this->_nextSibling) this->_nextSibling->_prevSibling = sibling;
 		this->_nextSibling = sibling;
 	}
                        
 	template<class T> 
-	T* LinkedList<T>::getPreviousSibling()
+	T* LinkedList<T>::getPrevSibling()
 	{                                                      
-		return this->_previousSibling;
+		return this->_prevSibling;
 	} 
 	
 	template<class T> 
-	void LinkedList<T>::setPreviousSibling(T* sibling)
+	void LinkedList<T>::setPrevSibling(T* sibling)
 	{
-		if(this->_previousSibling) delete this->_previousSibling->replace(sibling);
+		if(this->_prevSibling) delete this->_prevSibling->replace(sibling);
 	}
 	
 	template<class T> 
-	void LinkedList<T>::addPreviousSibling(T* sibling)
+	void LinkedList<T>::addPrevSibling(T* sibling)
 	{
-		if(this->_previousSibling) this->_previousSibling->_nextSibling = sibling;
-		this->_previousSibling = sibling;
+		if(this->_prevSibling) this->_prevSibling->_nextSibling = sibling;
+		this->_prevSibling = sibling;
 	}
                       
 	template<class T> 
@@ -90,9 +90,9 @@ namespace Beanpole
 	{
 		T* first = (T*)this;
 		
-		while(first->_previousSibling)
+		while(first->_prevSibling)
 		{
-			first = first->_previousSibling;
+			first = first->_prevSibling;
 		}                                   
 		
 		return first;
