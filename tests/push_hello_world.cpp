@@ -16,7 +16,8 @@ void sayHelloWorld(Beanpole::PushRequest* request)
 int main()
 {       
 	Beanpole::Router* router = new Beanpole::Router();
-	                                 
+	                                               
+	// for(int i = 2; i--;)
 	router->on("push hello/world", &sayHelloWorld);
             
 

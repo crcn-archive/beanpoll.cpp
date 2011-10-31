@@ -7,6 +7,21 @@ namespace Beanpole
 	{                                           
 		deleteInVector(&this->paths);     
 		this->paths.clear();
+	}               
+	
+	ChannelExpression* ChannelExpression::clone()
+	{   
+		ChannelExpression* clone = new ChannelExpression();    
+		clone->value = this->value;             
+		
+		cloneVector(&this->paths, &clone->paths);
+		
+		return clone;
+	}                              
+	
+	PathExpression* PathExpression::clone()
+	{
+		return new PathExpression(this->value, this->param);
 	}
 
 	Tag* RouteExpression::getTag(std::string name)

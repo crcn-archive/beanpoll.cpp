@@ -38,7 +38,15 @@ namespace Beanpole
 		}                                    
 		
 		vect->clear();
-	}        
+	}   
+	
+	template <class T> void cloneVector(T* vect, T* target)
+	{                         
+		for(int i = 0, n = vect->size(); i < n; i++)
+		{        
+			target->push_back((*vect)[i]->clone());
+		}                                          
+	}     
 
 
 };   

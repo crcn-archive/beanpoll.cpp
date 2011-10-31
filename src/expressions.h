@@ -20,7 +20,9 @@ namespace Beanpole
 		
 		PathExpression(std::string value, bool param):
 		value(value),
-			param(param) { };
+	    param(param) { };   
+	
+		PathExpression* clone();
 	};
 	                  
 	
@@ -30,7 +32,9 @@ namespace Beanpole
 		std::string value;
 		std::vector<PathExpression*> paths; 
 		
-		~ChannelExpression();     
+		~ChannelExpression(); 
+		
+		ChannelExpression* clone();    
 	};                 
 	
 	

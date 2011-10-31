@@ -21,8 +21,8 @@ namespace Beanpole
 
 	void* dispatch_threaded_request(void* request)
 	{                                                      
-		((Request*)request)->next(); 
-		delete (Request*)request;                        
+		((Request*) request)->next(); 
+		delete (Request*) request;                        
 		return NULL;
 	}                     
 
@@ -37,12 +37,15 @@ namespace Beanpole
 			//TODO: check if request is threaded.
 			RouteListener* listener = (*listeners)[i];
 
-			Request* request = this->request(data, listener);            
+			Request* request = this->request(data->clone(), listener);            
                                                                  
 
 			//async call per listener. Typically one except push requests
 			this->_threadPool.createTask((void*)request, &dispatch_threaded_request);
-		}
+		}                      
+		        
+		//done with the data - requests handle it from here.
+		delete data;
 	}        
 
 	Request* ConcreteDispatcher::request(Data* data, RouteListener* listener)
@@ -56,7 +59,8 @@ namespace Beanpole
 	}          
 
 	Data* Router::request(const char* channel)
-	{          
+	{                                           
+		
 		return new Data(Parser::parseChannel(channel), this);
 	}
 

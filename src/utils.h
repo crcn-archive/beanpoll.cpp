@@ -13,7 +13,9 @@ namespace Beanpole
                                                                                                                   
 	std::vector<std::string> split(const std::string &s, char delim); 
 	   
-	template <class T> void deleteInVector(T* vect);
+	template <class T> void deleteInVector(T* vect);   
+	
+	template <class T> void cloneVector(T* vect, T* target);
 };                                           
 
 #endif  

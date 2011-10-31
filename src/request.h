@@ -6,7 +6,7 @@
 #include "expressions.h"  
 #include "utils.h"
 #include <iostream>
-#include <vector>
+#include <vector>        
 
 namespace Beanpole
 {   
@@ -57,12 +57,9 @@ namespace Beanpole
 		RequestMiddleware* _previousMiddleware;
 		
 		
-		Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher);   
-		
-		bool next();
-		
-		bool hasNext();      
-		
+		Request(Data* data, RouteListener* listener, ConcreteDispatcher* dispatcher);
+		bool next();        
+		bool hasNext();     
 		~Request();
 		
 	private:
@@ -71,15 +68,59 @@ namespace Beanpole
 		
 		void addMiddleware(ChannelExpression* channel, RouteListener* listener);
 		
+	};                  
+	
+	class ConcreteRequestStream
+	{   
+	public:  
+		ConcreteRequestStream(void*(*reader)(void*), void* data);    
+		                        
+		void* read();          
+	
+	private:
+		void*(*_reader)(void*);   
+		void* _data;
 	};
 	
-	class PushRequest: public Request
+	class RequestStream : public ConcreteRequestStream
+	{         
+	public:                                          
+		   
+		RequestStream():ConcreteRequestStream(&RequestStream::readData, NULL) {};
+		RequestStream(void* data):ConcreteRequestStream(&RequestStream::readData, data) {};    
+		
+	private:  
+		
+		
+		
+		/**
+		 */
+		
+		static void* readData(void* data)
+		{
+			return data;
+		}
+	};     
+	
+	
+	             
+	
+	class StreamedRequest: public Request
+	{
+	public:                             
+		void end();           
+		void end(void* chunk);  
+		void end(RequestStream* stream);
+	};
+	
+	
+	class PushRequest: public StreamedRequest
 	{
 		
 	};
 	
 	
-	class PullRequest: public Request
+	class PullRequest: public StreamedRequest
 	{
 		
 	};

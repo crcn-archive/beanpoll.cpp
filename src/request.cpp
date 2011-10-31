@@ -89,6 +89,40 @@ namespace Beanpole
 		}               
 
 		return false; 
+	}   
+	
+	    
+	
+	ConcreteRequestStream::ConcreteRequestStream(void*(*reader)(void*), void* data)
+	{   
+		this->_reader = reader;
+		this->_data = data;   
+	}         
+	
+	void* ConcreteRequestStream::read()
+	{
+		return this->_reader(this->_data);
+	}
+	
+	
+	
+	void StreamedRequest::end(RequestStream* stream)
+	{                
+		this->data->getCallback()(stream); 
+		
+		delete stream;
+	}                        
+	
+	           
+	void StreamedRequest::end(void* data)
+	{
+		this->end(new RequestStream(data));
+	}
+	   
+	
+	void StreamedRequest::end()
+	{                        
+		this->end(new RequestStream());
 	}
 };
 

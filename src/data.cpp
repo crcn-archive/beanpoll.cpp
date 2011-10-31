@@ -12,7 +12,18 @@ namespace Beanpole
 	void* Data::getData()
 	{
 		return this->_data;
-	}                      
+	}           
+	
+	Data* Data::setCallback(StreamCallback* callback)
+	{
+		this->_callback = callback;   
+		return this;
+	}                                  
+	
+	StreamCallback* Data::getCallback()
+	{
+		return this->_callback;
+	}
 
 	Data* Data::push(void* data)
 	{
@@ -24,17 +35,24 @@ namespace Beanpole
 	}                            
 
 
-	Data* Data::pull(PushCallback* callback)
-	{                      
-		this->_pullCallback = callback;      
+	Data* Data::pull(StreamCallback* callback)
+	{                               
+		this->setCallback(callback);    
 		this->router->pull(this);
 		return this;
 	}  
 	
-	Data* Data::pull(void* data, PushCallback* callback)
+	Data* Data::pull(void* data, StreamCallback* callback)
 	{              
 		this->setData(data);                           
 		return this->pull(callback);
+	}       
+	
+	Data* Data::clone()
+	{                   
+		return (new Data(this->channel->clone(), this->router))->
+		setData(this->getData())->
+		setCallback(this->getCallback());
 	}
 }
 

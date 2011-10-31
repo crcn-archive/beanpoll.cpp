@@ -12,7 +12,7 @@ namespace Beanpole
 	{      
 	private:
 		void* _data;                     
-		PushCallback* _pullCallback;
+		StreamCallback* _callback;
 		
 	public:
 		ChannelExpression* channel;                                                           
@@ -21,7 +21,7 @@ namespace Beanpole
 		/**
 		 */
 		
-		Data(ChannelExpression* channel, Router* router):channel(channel), router(router) { };     
+		Data(ChannelExpression* channel, Router* router):channel(channel), router(router), _callback(NULL) { };     
 		
 		/**
 		 */
@@ -36,17 +36,33 @@ namespace Beanpole
 		/**
 		 */
 		
-		Data* pull(PushCallback* callback); 
+		Data* setCallback(StreamCallback* callback);
 		
 		/**
 		 */
 		
-		Data* pull(void* data, PushCallback* callback);
+		StreamCallback* getCallback();
 		
 		/**
 		 */
 		
-		Data* push(void* data);       
+		Data* pull(StreamCallback* callback);      
+		
+		
+		/**
+		 */
+		
+		Data* pull(void* data, StreamCallback* callback);
+		
+		/**
+		 */
+		
+		Data* push(void* data);     
+		
+		/**
+		 */
+		
+		Data* clone();  
 		
 		/**
 		 */
