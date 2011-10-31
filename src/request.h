@@ -84,7 +84,7 @@ namespace Beanpole
 		void end(RequestStream* stream);     
 		
 		void* read();
-		// void end(void*(callback*)(void*), void* data);
+		// void end(void*(callback*)(void*), void* data);   
 	};
 	
 	
