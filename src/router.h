@@ -27,7 +27,7 @@ namespace Beanpole
 		ThreadPool _threadPool;     
 		
 	protected:             
-		Request* request(Message* data, RouteListener* listener);  
+		Request* request(Message* data, RequestMiddleware* middleware);  
 		
 		                
 	};  
