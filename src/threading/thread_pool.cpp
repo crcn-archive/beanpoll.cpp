@@ -29,17 +29,7 @@ namespace Beanpole
 
 
 		this->_waitingTasks.push_back(task);    
-
-
-		//clean up any threads that might have been disposed of
-		/*for(int i = this->_closingWorkers.size(); i--;)
-		{                                       
-			thread = this->_closingWorkers[i];   
-			// delete thread;
-
-		}   
-		this->_closingWorkers.clear(); */
-
+                                               
 
 		//any waiting threads? use 'em
 		if(this->_waitingWorkers.size())
@@ -84,10 +74,7 @@ namespace Beanpole
 		
 		//it should also be a waiting thread - need to remove it.    
 		this->_waitingWorkers.remove(thread);
-		
-		//add for later cleanup. Needs to get to the main thread.
-		// this->_closingWorkers.push_back(thread); 
-		
+		                                                
 		delete thread;
 		                                            
 	    this->_threadMutex.unlock();                      
