@@ -7,6 +7,7 @@
 #include "collection.h"    
 #include "parser.h"   
 #include "request.h"
-#include "data.h"
+#include "data.h"    
+#include "plugin.h"
 
 

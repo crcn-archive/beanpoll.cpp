@@ -7,6 +7,7 @@
 #include "listener.h" 
 #include "parser.h"       
 #include "request.h"      
+#include "plugin.h"
 #include "threading/thread_pool.h"
 
 namespace Beanpole
@@ -83,7 +84,12 @@ namespace Beanpole
 		/**
 		 */
 		
-		void on(std::string route, PushCallback* callback); 
+		void on(std::string route, PushCallback* callback);   
+		
+		/**
+		 */
+		
+		void on(std::vector<Bean*>& beans);
 		
 		
 		/**

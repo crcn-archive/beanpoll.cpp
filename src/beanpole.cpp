@@ -16,9 +16,12 @@
 #include "message.cpp"             
 #include "stream.cpp"
 #include "middleware.cpp"  
-#include "linked_list.cpp"     
+#include "linked_list.cpp"       
+#include "plugin.cpp"
 #include "threading/thread_task.cpp"
 #include "threading/thread_worker.cpp"       
 #include "threading/thread_pool.cpp"
-#include "threading/thread_wrapper.cpp"
+#include "threading/thread_wrapper.cpp"      
+
+
 

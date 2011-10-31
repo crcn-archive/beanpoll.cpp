@@ -75,8 +75,15 @@ namespace Beanpole
 	void Router::on(std::string route, PushCallback* callback)
 	{                                                                   
 		this->on<PushCallback, PushRouteListener, PushDispatcher>(route, callback, this->_pusher);                                 
-
-	};            
+	};     
+	
+	void Router::on(std::vector<Bean*>& beans)
+	{
+		for(int i = beans.size(); i--;)
+		{
+			beans[i](this);
+		}
+	}       
 	
 	/**
 	 */

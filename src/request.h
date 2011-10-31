@@ -67,7 +67,7 @@ namespace Beanpole
 	private:
 		
 		RequestMiddleware* _currentMiddleware;                                                
-		
+		RequestMiddleware* _firstMiddleware;
 	};                  
 	
 	     

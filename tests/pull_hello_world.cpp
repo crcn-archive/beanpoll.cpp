@@ -6,7 +6,9 @@
                                 
 void onSayHello(Beanpole::PullRequest* request)
 {   
-	printf("request: %s\n", (const char*)request->read()); 
+	printf("request: %s\n", (const char*)request->read());  
+	
+	//request->end((void*)request->getParam("name"));
 	                                                                  
 	request->end((void*)"hello world!");     
 }        
@@ -23,13 +25,9 @@ void onAuth2(Beanpole::PullRequest* request)
 void onAuth(Beanpole::PullRequest* request)
 {
 	std::cout << "authenticating..." << std::endl;                
-	                 
-	//hit the database
+	                       
 	usleep(200*1000);  
-	              
-	// request->end((void*)"unauthorized.");       
-	
-	// return;
+	                        
 	
 	if(request->next())
 	{
@@ -54,9 +52,10 @@ int main()
 	                                     
                    
 	// for(int i = 100; i--;) 
+	while(1)
 	{    
 		router->request("hello/craig")->pull((void*)"hello world", &sayHello);  
-		// usleep(25*1000);
+		usleep(25*1000);
 	}
 	
 	int i = 0;

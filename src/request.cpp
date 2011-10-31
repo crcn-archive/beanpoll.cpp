@@ -13,7 +13,8 @@ namespace Beanpole
 
 	Request::Request(Message* message, RequestMiddleware* middleware):
 	message(message),
-	_currentMiddleware(middleware)
+	_currentMiddleware(middleware),
+	_firstMiddleware(middleware)
 	{                                               
 	};        
 
@@ -21,7 +22,18 @@ namespace Beanpole
 	{                                   
 
 		//data's no longer needed.      
-		delete this->message;                                    
+		delete this->message;   
+		                                 
+		RequestMiddleware* currentMiddleware = this->_firstMiddleware;
+		                                           
+		//clean up the middleware
+		while(currentMiddleware->getNextSibling())
+		{                                             
+			delete currentMiddleware->getNextSibling()->remove();
+		}   
+		           
+		//final cleanup
+		delete currentMiddleware;
 	};                                       
 
 	
