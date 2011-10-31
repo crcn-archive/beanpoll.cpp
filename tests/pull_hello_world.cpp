@@ -9,7 +9,16 @@ void onSayHello(Beanpole::PullRequest* request)
 	printf("request: %s\n", (const char*)request->read()); 
 	                                                                  
 	request->end((void*)"hello world!");     
-}          
+}        
+
+void onAuth2(Beanpole::PullRequest* request)
+{
+	std::cout << "trefdsfa" << std::endl;
+	                   
+	usleep(200*1000);
+	request->next();  
+	                    
+}  
 
 void onAuth(Beanpole::PullRequest* request)
 {
@@ -18,9 +27,9 @@ void onAuth(Beanpole::PullRequest* request)
 	//hit the database
 	usleep(200*1000);  
 	              
-	request->end((void*)"unauthorized.");       
+	// request->end((void*)"unauthorized.");       
 	
-	return;
+	// return;
 	
 	if(request->next())
 	{
@@ -39,8 +48,9 @@ int main()
 {       
 	Beanpole::Router* router = new Beanpole::Router();
 	
+	router->on("pull auth2", &onAuth2);
 	router->on("pull auth", &onAuth);                                 
-	router->on("pull auth -> hello/:name", &onSayHello);    
+	router->on("pull auth2 -> auth2 -> auth -> auth -> auth -> auth -> hello/:name", &onSayHello);    
 	                                     
                    
 	// for(int i = 100; i--;) 
