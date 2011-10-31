@@ -20,7 +20,7 @@ namespace Beanpole
 		void dispatch(Message* data); 
 		void dispatch(Message* data, std::vector<RouteListener*>* listeners);   
 		void addRouteListener(RouteListener* listener);   
-		friend class Request; 
+		friend class RequestMiddleware; 
 		
 	private:
 		Collection _collection;	  

@@ -2,11 +2,12 @@
                     
 #include "request.h"
 #include "router.h"  
-#include "listener.h"     
+#include "listener.h"  
+#include "middleware.h"   
 #include "utils.h"
 #include <iostream>                
 #include <vector>   
-#include <pthread.h>   
+#include <pthread.h>     
                   
 
 namespace Beanpole
@@ -35,7 +36,9 @@ namespace Beanpole
 			void* val;
 
 			//TODO: check if request is threaded.
-			RouteListener* listener = (*listeners)[i];
+			RouteListener* listener = (*listeners)[i];     
+			
+			RequestMiddleware* middleware = RequestMiddleware::expand(data->channel, listener, this);          
 
 			Request* request = this->request(data->clone(), listener);            
                                                                  
@@ -59,8 +62,7 @@ namespace Beanpole
 	}          
 
 	Message* Router::request(const char* channel)
-	{                                           
-		
+	{                                                     
 		return new Message(Parser::parseChannel(channel), this);
 	}
 
