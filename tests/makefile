@@ -1,5 +1,5 @@
 CC := g++
-OBJS :=  push_hello_world pull_hello_world threads  
+OBJS :=  push_hello_world pull_hello_world plugin threads  
 
 all: beanpole
 
