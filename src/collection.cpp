@@ -20,8 +20,7 @@ namespace Beanpole
 	}       
 	
 	RouteTree* RouteTree::getChild(std::string path, bool create)		
-	{                                     
-		
+	{                                
 		if(!this->_children[path] && create)
 		{        
 			this->_children[path] = new RouteTree(path);
