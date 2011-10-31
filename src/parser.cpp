@@ -81,28 +81,26 @@ namespace Beanpole
 
 	RouteExpression* parser_parseRouteChannels(RouteExpression* rootExpr, vector<string> tokens, int start = 0)
 	{
-		ThruExpression* currentExpression = rootExpr;
-		ChannelExpression* channel = NULL;
+		ThruExpression* currentExpression = rootExpr;                                
+		
+		int n = tokens.size();
+		ChannelExpression* channel = Parser::parseChannel(tokens[n - 1]);
+		ChannelExpression* lastChannel = channel;
 
-
-
-		for(int i = start, n = tokens.size(); i < n; i++)
-		{                                        
-
-			channel = Parser::parseChannel(tokens[i]);    
-
-
-			//middleware present? (->) e.g:
-			//authenticate -> my/profile
-			if(i < n - 1 && !strcmp(tokens[i + 1].c_str(), "->"))
-			{       
-				currentExpression = currentExpression->thru = new ThruExpression(channel);
-				i++;
-			}
+                                                            
+		for(int i = n - 2; i >= start; i--)                  
+		{                               
+			//middleware flag - skip        
+			if(!strcmp(tokens[i].c_str(), "->"))
+			{           
+				continue;
+			}                                                        
+			
+			currentExpression = currentExpression->thru = new ThruExpression(Parser::parseChannel(tokens[i]));
 		}             
 
 
-		rootExpr->channel = channel; 
+		rootExpr->channel = lastChannel; 
 
 		return rootExpr;
 	}                                                                               
