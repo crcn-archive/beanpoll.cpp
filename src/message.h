@@ -11,20 +11,45 @@ namespace Beanpole
 	
 	class Message
 	{      
-	private:
-		RequestStream* _stream;                     
+	private:                
+		
+		/**              
+		 * stream of data for the message - e.g: files, objects, etc.
+		 */
+		
+		RequestStream* _stream;                                      
+		
+		/**
+		 * the callback function for a given response - used for PULL requests
+		 */
+		
 		StreamCallback* _callback;
 		
-	public:
-		ChannelExpression* channel;                                                           
+	public:                                                                   
+		
+		/**                                     
+		 * the target channel making a request to
+		 */
+		
+		ChannelExpression* channel;   
+		
+		/**
+		 * the router which handles all requests
+		 */
+		                                                        
 		Router* router;   
 		
 		/**
 		 */
 		
-		Message(ChannelExpression* channel, Router* router):channel(channel), router(router), _callback(NULL) { };     
+		Message(ChannelExpression* channel, Router* router):
+		channel(channel), 
+		router(router), 
+		_callback(NULL),
+	    _stream(NULL) { };         
+
 		
-		/**
+		/**     
 		 */
 		
 		Message* setData(void* data); 
@@ -87,10 +112,7 @@ namespace Beanpole
 		/**
 		 */
 		
-		~Message()
-		{                                        
-			delete this->channel;
-		}
+		~Message();
 		
 		
 	};
