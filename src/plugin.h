@@ -13,10 +13,8 @@ typedef void (Bean)(Beanpole::Router*);
 
 
 namespace Beanpole
-{ 
-	
-	void plugin(Bean* bean);   
-	             
+{           
+	void plugin(Bean* bean);        
 	std::vector<Bean*> beans;
 };
 
