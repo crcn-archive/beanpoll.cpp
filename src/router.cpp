@@ -40,7 +40,7 @@ namespace Beanpole
 			
 			RequestMiddleware* middleware = RequestMiddleware::expand(data->channel, listener, this);          
 
-			Request* request = this->request(data->clone(), listener);            
+			Request* request = this->request(data->clone(), middleware);            
                                                                  
 
 			//async call per listener. Typically one except push requests
@@ -51,9 +51,9 @@ namespace Beanpole
 		delete data;
 	}        
 
-	Request* ConcreteDispatcher::request(Message* data, RouteListener* listener)
+	Request* ConcreteDispatcher::request(Message* data, RequestMiddleware* middleware)
 	{                                     
-		return new Request(data, listener, this);
+		return new Request(data, middleware);
 	}
 
 	void ConcreteDispatcher::addRouteListener(RouteListener* listener)
