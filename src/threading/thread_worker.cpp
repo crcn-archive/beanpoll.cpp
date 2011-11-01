@@ -30,7 +30,7 @@ namespace Beanpoll
 		int tries = 0,
 		waitTimeout = 1,
 		sleepTimeout = 500 * 1000,
-		maxTries = 1;
+		maxTries = 2;
 		
 		bool killWait = false; 	
 		                                                         
@@ -53,19 +53,9 @@ namespace Beanpoll
 				//notify the thread pool that a thread is waiting             
 				thread->waiting();                   
 				             
-				//either the thread pool signals *this* thread that there's a job, or it's killed. (Throttling N workers if idling)                                                              
-				/*if(pthread_cond_timedwait(&thread->_hasTask, &thread->_pool->_pthreadMutex, &ts))
-				{                                           
-					//TODO - timeout here? need to enforce the timeout...
-					// std::cout << "TIMEOUT" << std::endl;     
-					// usleep()
-				}*/
-				
 				 thread->hasTask.wait(thread->_pool->_threadMutex, waitTimeout);                     
 				                        
-				
-				if(!thread->_pool->canRemoveWorker()) tries = 0;          
-				// std::cout << tries << std::endl;
+				if(!thread->_pool->canRemoveWorker()) tries = 0;     
 				
 				killWait = ++tries > maxTries;                                                                                                                        
 			}          
@@ -77,7 +67,8 @@ namespace Beanpoll
                                                        
                                                                   
 		    thread->_pool->_threadMutex.unlock();
-			         
+			    
+			
 			//does a task exist? means the condition was met - run it.
 			if(nextTask)
 			{                             
@@ -87,8 +78,9 @@ namespace Beanpoll
 			}                                              
 			
 			//otherwise, the condition timed out. Time to die.
-			else         
-			{                                      
+			else
+			if(killWait)
+			{            
 				break;
 			}              
 		}  

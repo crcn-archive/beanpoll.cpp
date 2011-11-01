@@ -2,12 +2,11 @@
 #include <pthread.h>   
 #include "timer.cpp"           
 
-int start = 100000,
+int start = 1000000,
 steps = start;    
 
 void* sayHelloWorld(void* request)
 {    
-	if(!(--steps)) std::cout << "DONE" << std::endl;
 	//usleep(500*1000);
 }     
 
@@ -31,6 +30,7 @@ int main()
 	for(int i = steps; i--;)    
 	{                                                                          
 		
+		//sayHelloWorld(NULL);
 		//run the new thread
 		pool->createTask((void*)"hello world", &sayHelloWorld);  
 		

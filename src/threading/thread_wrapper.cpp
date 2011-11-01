@@ -69,7 +69,10 @@ namespace Beanpoll
 		_ts.tv_nsec = _tp.tv_usec * 1000;
 	    _ts.tv_sec += ttl;           
 		
-		pthread_cond_timedwait(&this->_condition, &mutex._mutex, &_ts);         
+		if(pthread_cond_timedwait(&this->_condition, &mutex._mutex, &_ts))
+		{
+			//std::cout << "ER" << std::endl;
+		}
 	}    
 	
 	void ThreadCondition::signal()

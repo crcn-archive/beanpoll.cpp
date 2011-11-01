@@ -4,7 +4,7 @@
 namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
-	maxWorkers(4), 
+	maxWorkers(5), 
 	minWorkers(2),
 	boss(boss)
 	{                                                            
@@ -35,11 +35,13 @@ namespace Beanpoll
 			thread->hasTask.signal();    
 		}                                                 
 		else 
+		
 		if(this->_workers.size() < this->maxWorkers)
-		{                                   
+		{              
 			thread = new ThreadWorker(this, this->_workers.size());    
 			this->_workers.push_back(thread);         
-		}    
+		}
+
 		this->_threadMutex.unlock();        
 
 
@@ -56,7 +58,9 @@ namespace Beanpoll
 	}         
 	
 	void ThreadPool::removeWorker(ThreadWorker* thread)
-	{                        	
+	{                
+		//std::cout << "RM" << std::endl;
+		
 		this->_threadMutex.lock();
 		
 		//remove from the running threads                  

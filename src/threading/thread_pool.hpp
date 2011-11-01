@@ -60,7 +60,10 @@ namespace Beanpoll
 		 * the thread worker needs access to some private methods in the thread pool, such as nextTask
 		 */
 		
-		friend class ThreadWorker;   
+		friend class ThreadWorker; 
+		
+		
+		ThreadCondition cond;
 		
 		
 		/**

@@ -197,7 +197,48 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array/>
+	<array>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>5D9D7B30145F9D54000B4C5D</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>push_benchmark.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>5D9D7B31145F9D54000B4C5D</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>push_benchmark.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>5D9D7BAD145F9FF2000B4C5D</string>
+						<key>history</key>
+						<array>
+							<string>5D9D7B26145F9D3C000B4C5D</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1263, 927}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>1695 77 1263 968 1680 0 1680 1050 </string>
+			</dict>
+		</dict>
+	</array>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -274,13 +315,14 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>9</integer>
-									<integer>2</integer>
+									<integer>19</integer>
+									<integer>13</integer>
+									<integer>10</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {430, 910}}</string>
+							<string>{{0, 1}, {430, 910}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -317,7 +359,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>threads_benchmark.cpp</string>
+								<string>thread_worker.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +367,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>threads_benchmark.cpp</string>
+										<string>thread_worker.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5D9D7AFB145F9391000B4C5D</string>
+										<string>5D9D7BAC145F9FF2000B4C5D</string>
 										<key>history</key>
 										<array>
 											<string>5D12CF36145F675C00548EFF</string>
@@ -338,31 +380,32 @@
 											<string>5D9D7896145F6E17000B4C5D</string>
 											<string>5D9D7898145F6E17000B4C5D</string>
 											<string>5D9D78B1145F6F75000B4C5D</string>
-											<string>5D9D796B145F7A35000B4C5D</string>
 											<string>5D9D7A05145F8438000B4C5D</string>
 											<string>5D9D7A06145F8438000B4C5D</string>
 											<string>5D9D7A16145F853F000B4C5D</string>
-											<string>5D9D7A37145F86D6000B4C5D</string>
-											<string>5D9D7A49145F87A6000B4C5D</string>
 											<string>5D9D7A69145F8926000B4C5D</string>
 											<string>5D9D7A6D145F8944000B4C5D</string>
-											<string>5D9D7A77145F8B50000B4C5D</string>
-											<string>5D9D7A78145F8B50000B4C5D</string>
-											<string>5D9D7A79145F8B50000B4C5D</string>
 											<string>5D9D7A7B145F8B50000B4C5D</string>
 											<string>5D9D7A7C145F8B50000B4C5D</string>
 											<string>5D9D7A7E145F8B50000B4C5D</string>
 											<string>5D9D7A81145F8C26000B4C5D</string>
-											<string>5D9D7A86145F8C6B000B4C5D</string>
-											<string>5D9D7AA3145F8D83000B4C5D</string>
-											<string>5D9D7AB2145F8E6E000B4C5D</string>
-											<string>5D9D7ABC145F8EE5000B4C5D</string>
-											<string>5D9D7ACB145F8FB6000B4C5D</string>
-											<string>5D9D7ACD145F8FD0000B4C5D</string>
-											<string>5D9D7AD0145F9098000B4C5D</string>
-											<string>5D9D7AD1145F9098000B4C5D</string>
-											<string>5D9D7AF9145F9391000B4C5D</string>
-											<string>5D9D7AFA145F9391000B4C5D</string>
+											<string>5D9D7AFF145F98EE000B4C5D</string>
+											<string>5D9D7B2A145F9D54000B4C5D</string>
+											<string>5D9D7B68145F9E98000B4C5D</string>
+											<string>5D9D7B69145F9E98000B4C5D</string>
+											<string>5D9D7B6A145F9E98000B4C5D</string>
+											<string>5D9D7B7A145F9EE7000B4C5D</string>
+											<string>5D9D7B7B145F9EE7000B4C5D</string>
+											<string>5D9D7B89145F9F46000B4C5D</string>
+											<string>5D9D7B8C145F9F70000B4C5D</string>
+											<string>5D9D7B96145F9F8D000B4C5D</string>
+											<string>5D9D7B9C145F9FB5000B4C5D</string>
+											<string>5D9D7B9D145F9FB5000B4C5D</string>
+											<string>5D9D7B9E145F9FB5000B4C5D</string>
+											<string>5D9D7BA0145F9FB5000B4C5D</string>
+											<string>5D9D7BA8145F9FDE000B4C5D</string>
+											<string>5D9D7BA9145F9FDE000B4C5D</string>
+											<string>5D9D7BA4145F9FC9000B4C5D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -565,6 +608,7 @@
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>5D12CEE0145F5D8500548EFF</string>
 		<string>1C78EAAD065D492600B07095</string>
+		<string>5D9D7B30145F9D54000B4C5D</string>
 		<string>/Users/craigcondon/Developer/Public/beanpoll/proj/beanpoll.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
