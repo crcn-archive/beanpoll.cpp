@@ -2,32 +2,32 @@
 #include <sched.h>  
 
 
-  
-                                
+
+
 void onSayHello(Beanpoll::PullRequest* request)
 {   
 	printf("request: %s\n", (const char*)request->read());  
 	
 	//request->end((void*)request->getParam("name"));
-	                                                                  
+	
 	request->end((void*)"hello world!");     
 }        
 
 void onAuth2(Beanpoll::PullRequest* request)
 {
 	std::cout << "trefdsfa" << std::endl;
-	                   
+	
 	usleep(200*1000);
 	request->next();  
-	                    
+	
 }  
 
 void onAuth(Beanpoll::PullRequest* request)
 {
 	std::cout << "authenticating..." << std::endl;                
-	                       
+	
 	usleep(200*1000);  
-	                        
+	
 	
 	if(request->next())
 	{
@@ -49,8 +49,8 @@ int main()
 	router->on("pull auth2", &onAuth2);
 	router->on("pull auth", &onAuth);                                 
 	router->on("pull auth2 -> auth2 -> auth -> auth -> auth -> auth -> hello/:name", &onSayHello);    
-	                                     
-                   
+	
+	
 	// for(int i = 100; i--;) 
 	while(1)
 	{    
@@ -61,5 +61,5 @@ int main()
 	int i = 0;
 	
 	std::cin >> i;
-	                                                            
+	
 }

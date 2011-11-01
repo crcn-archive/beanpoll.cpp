@@ -2,7 +2,7 @@
 #include "timer.cpp" 
 #include <sstream>
 
-int start = 100000,
+int start = 10,
 steps = start;      
 Timer timer;
 
@@ -15,7 +15,7 @@ void sayHelloWorld(Beanpoll::PushRequest* request)
 	}
 	
 	
-	//std::cout << steps << std::endl;
+	std::cout << steps << std::endl;
 	
 	//usleep(1000);
 }
