@@ -18,7 +18,7 @@ namespace Beanpoll
 	
 	class RouteTree 
 	{        
-	
+		
 	public: 
 		
 		/**
@@ -39,13 +39,13 @@ namespace Beanpoll
 		
 		/**
 		 */
-		     
+		
 		
 		RouteTree* getChild(std::string path, bool create = true);
 		
 		
 	private:
-		                   
+		
 		
 		std::map<std::string, RouteTree*> _children;
 		
@@ -82,7 +82,7 @@ namespace Beanpoll
 	private:
 		
 		RouteTree* _tree;    
-		                         
+		
 		RouteTree* getTree(ChannelExpression* channel, bool find);
 	    RouteTree* getTree(ChannelExpression* channel)
 		{

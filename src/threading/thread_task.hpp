@@ -10,7 +10,7 @@ namespace Beanpoll
 	class ThreadTask
 	{
 	public:         
-		                        
+		
 		ThreadTask(void* data, ThreadCallback* callback): _data(data), _callback(callback){};    
 		
 		void* run();    

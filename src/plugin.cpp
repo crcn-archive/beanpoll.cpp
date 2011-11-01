@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-    
+
 
 namespace Beanpoll
 {

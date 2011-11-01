@@ -1,6 +1,6 @@
 #ifndef Beanpoll_ROUTER_H_
 #define Beanpoll_ROUTER_H_   
-                   
+
 #include "callbacks.hpp"    
 #include "message.hpp"      
 #include "collection.hpp"     
@@ -16,13 +16,42 @@ namespace Beanpoll
 	class ConcreteDispatcher
 	{
 	public:
-		ConcreteDispatcher(){};
+		
+		/**
+		 */
+		
+		ConcreteDispatcher(Router* router): router(router) {};
+		
+		/**
+		 */
 		
 		void dispatch(Message* data); 
+		
+		/**
+		 */
+		
 		void dispatch(Message* data, std::vector<RouteListener*>* listeners);   
+		
+		
+		/**
+		 */
+		
 		void addRouteListener(RouteListener* listener);   
+		
+		/**
+		 */
+		
 		friend class RequestMiddleware; 
+		
+		/**
+		 */
+		
 		Collection _collection;	
+		
+		/**
+		 */
+		
+		Router* router;
 		
 	private:  
 		ThreadBoss _threadBoss;     
@@ -30,20 +59,20 @@ namespace Beanpoll
 	protected:             
 		Request* request(Message* data, RequestMiddleware* middleware);  
 		
-		                
+		
 	};  
-	               
+	
 	
 	class PullDispatcher : public ConcreteDispatcher 
 	{                         
 	public:
-		PullDispatcher(): ConcreteDispatcher(){};                            
+		PullDispatcher(Router* router): ConcreteDispatcher(router){};                            
 	};
 	
 	class PushDispatcher: public ConcreteDispatcher 
 	{                   
 	public:
-		PushDispatcher(): ConcreteDispatcher(){};
+		PushDispatcher(Router* router): ConcreteDispatcher(router){};
 	};
 	
 	class Router 
@@ -53,13 +82,13 @@ namespace Beanpoll
 		
 		PushDispatcher* _pusher;
 		PullDispatcher* _puller;    
-		   
+		
 	public:        
 		
 		/**
 		 */
 		
-		Router(): _pusher(new PushDispatcher()), _puller(new PullDispatcher()) { };
+		Router(): _pusher(new PushDispatcher(this)), _puller(new PullDispatcher(this)) { };
 		
 		/**
 		 */
@@ -75,7 +104,7 @@ namespace Beanpoll
 		 */
 		
 		void pull(Message* data);
-		                                                         
+		
 		/**
 		 */
 		
@@ -99,7 +128,7 @@ namespace Beanpoll
 		
 		/**
 		 */
-		                  
+		
 	    template<class T, class U, class V>
 		void on(std::string route, T* callback, V* dispatcher);
 	};

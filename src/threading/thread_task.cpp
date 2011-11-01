@@ -5,4 +5,3 @@ void* Beanpoll::ThreadTask::run()
 {               
 	return this->_callback(this->_data);
 }               
-                                                 

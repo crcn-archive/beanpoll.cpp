@@ -3,7 +3,7 @@
 
 #include <pthread.h>  
 #include "thread_callback.hpp"
-    
+
 namespace Beanpoll
 {   
 	class Thread
@@ -35,7 +35,7 @@ namespace Beanpoll
 		
 		void yield();
 		
-	~Thread();
+		~Thread();
 		
 	private:
 		pthread_t _thread; 
@@ -48,13 +48,13 @@ namespace Beanpoll
 	{               
 	public:      
 		
-	   /**
-	 	*/
+		/**
+		 */
 		
 		ThreadMutex();
 		
-	   /**
-	    */
+		/**
+		 */
 		
 		void lock();   
 		
@@ -84,7 +84,7 @@ namespace Beanpoll
 		
 		void wait(ThreadMutex& mutex);
 		
-		  
+		
 		/**
 		 * wait for N seconds before continuing (kill timeout)
 		 */

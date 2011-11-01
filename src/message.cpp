@@ -27,13 +27,13 @@ namespace Beanpoll
 		this->_stream = stream;  
 		return this;
 	}         
-
+	
 	RequestStream* Message::getStream()
 	{
 		return this->_stream;
 	} 
 	
-	          
+	
 	
 	Message* Message::setCallback(StreamCallback* callback)
 	{
@@ -45,7 +45,7 @@ namespace Beanpoll
 	{
 		return this->_callback;
 	}
-
+	
 	Message* Message::push(void* data)
 	{
 		this->setData(data);       
@@ -59,8 +59,8 @@ namespace Beanpoll
 		this->router->push(this);
 		return this;
 	}                   
-
-
+	
+	
 	Message* Message::pull(StreamCallback* callback)
 	{                               
 		this->setCallback(callback);    

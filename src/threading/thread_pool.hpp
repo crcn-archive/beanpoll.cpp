@@ -1,6 +1,6 @@
 #ifndef THREAD_POOL_H_
 #define THREAD_POOL_H_       
-                        
+
 #include "thread_worker.hpp"      
 #include "thread_task.hpp"  
 #include "thread_wrapper.hpp"
@@ -18,7 +18,7 @@ namespace Beanpoll
 	{
 		
 	public:   
-		                                  
+		
 		/**
 		 * workers = threads
 		 */
@@ -79,7 +79,7 @@ namespace Beanpoll
 	    /**
 	     * All the workers registered in the pool including busy & waiting
 	 	 */
-	
+		
 		std::list<ThreadWorker*> _workers;                                
 		
 		/**
@@ -101,7 +101,7 @@ namespace Beanpoll
 		 */
 		
 		std::queue<ThreadTask*> _waitingTasks;      
-		           
+		
 		
 		/**
 		 * the locker which makes sure shared mem is accessed once between workers
@@ -121,7 +121,7 @@ namespace Beanpoll
 		 * notifies the pool that a worker is waiting for new tasks - this happens
 		 * if there isn't stuff in the queue. 
 		 */
-		   
+		
 		void waiting(ThreadWorker*);          
 		
 		/**
@@ -133,12 +133,12 @@ namespace Beanpoll
 		/**   
 		 * returns TRUE if there are tasks in the tasks queue
 		 */
-		 
+		
 		bool hasTask();
-		                      
 		
 		
-	   
+		
+		
 	};
 };
 

@@ -22,12 +22,12 @@ namespace Beanpoll
 		
 		/**
 		 */
-		          
+		
 		virtual void onRequest(Request* request) = 0;    
 		
 		/**
 		 */
-		            
+		
 		RouteExpression* getRoute()
 		{
 			return this->_route;
@@ -53,7 +53,7 @@ namespace Beanpoll
 		PushRouteListener(RouteExpression* route, PushCallback* callback): RouteListener(route), _callback(callback) { };  
 		
 		void onRequest(Request* request);        
-
+		
 	private:
 		PushCallback* _callback;
 	};

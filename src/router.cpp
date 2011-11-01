@@ -1,5 +1,5 @@
-        
-                    
+
+
 #include "request.hpp"
 #include "router.hpp"  
 #include "listener.hpp"  
@@ -8,7 +8,7 @@
 #include <iostream>                
 #include <vector>   
 #include <pthread.h>     
-                  
+
 
 namespace Beanpoll
 {
@@ -65,28 +65,28 @@ namespace Beanpoll
 		
 		//this->dispatch(message, listeners);
 	}                                 
-
+	
 	Request* ConcreteDispatcher::request(Message* data, RequestMiddleware* middleware)
 	{                                     
-		return new Request(data, middleware);
+		return new Request(data, middleware, this->router);
 	}
-
+	
 	void ConcreteDispatcher::addRouteListener(RouteListener* listener)
 	{                    
 		this->_collection.addRouteListener(listener);
 	}          
-
+	
 	Message* Router::request(const char* channel)
 	{                                                     
 		return new Message(Parser::parseChannel(channel), this);
 	}
-
-
+	
+	
 	void Router::on(std::string route, PullCallback* callback)
 	{                                          
 		this->on<PullCallback, PullRouteListener, PullDispatcher>(route, callback, this->_puller);
 	}
-
+	
 	void Router::on(std::string route, PushCallback* callback)
 	{                                                                   
 		this->on<PushCallback, PushRouteListener, PushDispatcher>(route, callback, this->_pusher);                                 
@@ -107,26 +107,26 @@ namespace Beanpoll
 	
 	/**
 	 */
-	                  
+	
     template<class T, class U, class V>
 	void Router::on(std::string route, T* callback, V* dispatcher)
 	{
 		std::vector<RouteExpression*> expressions;
-
+		
 		Parser::parseRoute(route, expressions);
-
-
+		
+		
 		for(int i = expressions.size(); i--;)
 		{                                       
 			dispatcher->addRouteListener(new U(expressions[i], callback));
 		}
 	}   
-
+	
 	void Router::push(Message* data)
 	{
 		this->_pusher->dispatch(data);  
 	}   
-
+	
 	void Router::pull(Message* data)
 	{
 		this->_puller->dispatch(data);

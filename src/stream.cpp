@@ -2,7 +2,7 @@
 
 namespace Beanpoll
 {
-	   
+	
 	
 	ConcreteRequestStream::ConcreteRequestStream(void*(*reader)(void*), void* data)
 	{   

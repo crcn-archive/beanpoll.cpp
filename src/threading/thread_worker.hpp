@@ -33,7 +33,7 @@ namespace Beanpoll
 		 */
 		
 		~ThreadWorker();                
-
+		
 	private:        
 		
 		/**
@@ -44,17 +44,17 @@ namespace Beanpoll
 		
 		/**             
 		 */            
-		                             
+		
 		Thread* _thread;
 		
 		
 		/**
 		 * TRUE if the worker is waiting for more jobs/tasks
 		 */
-		          
+		
 		bool _waiting;        
-		           
-		                    
+		
+		
 		/**
 		 * threaded method 
 		 */

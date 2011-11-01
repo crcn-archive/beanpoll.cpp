@@ -4,12 +4,12 @@
 #include "linked_list.hpp"       
 #include "listener.hpp"   
 #include "expressions.hpp"
-      
+
 namespace Beanpoll
 {               
 	
 	class ConcreteDispatcher;    
-	 
+	
 	class RequestMiddleware: public LinkedList<RequestMiddleware>
 	{
 	public:       

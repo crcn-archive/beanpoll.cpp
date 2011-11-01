@@ -8,8 +8,8 @@ namespace Beanpoll
 	class PullRequest;  
 	class RequestStream;
 };
-                                             
-      
+
+
 typedef void (PushCallback)(Beanpoll::PushRequest*);  
 typedef void (PullCallback)(Beanpoll::PullRequest*);
 typedef void (StreamCallback)(Beanpoll::RequestStream*);

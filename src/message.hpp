@@ -4,7 +4,7 @@
 #include "expressions.hpp"   
 #include "callbacks.hpp"  
 #include "stream.hpp"
-     
+
 namespace Beanpoll
 {   
 	class Router;  
@@ -37,7 +37,7 @@ namespace Beanpoll
 		/**
 		 * the router which handles all requests
 		 */
-		                                                        
+		
 		Router* router; 
 		
 		/**
@@ -53,7 +53,7 @@ namespace Beanpoll
 		router(router), 
 		_callback(NULL),
 	    _stream(NULL) { };         
-
+		
 		
 		/**     
 		 */

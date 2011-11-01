@@ -2,7 +2,7 @@
 #include <sys/time.h>   
 #include <unistd.h>
 #include <sched.h>
-                  
+
 
 
 
@@ -33,7 +33,7 @@ namespace Beanpoll
 		usleep(25*1000); 
 		//sched_yield();
 	}
-	                               
+	
 	
 	Thread::~Thread()
 	{
@@ -57,7 +57,7 @@ namespace Beanpoll
 	}                                       
 	
 	
-	       
+	
 	
 	ThreadCondition::ThreadCondition()
 	{                                      
@@ -93,7 +93,7 @@ namespace Beanpoll
 		pthread_cond_broadcast(&this->_condition);
 	}
 	
-	       
+	
 	
 	
 	

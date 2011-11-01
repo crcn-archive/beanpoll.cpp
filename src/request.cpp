@@ -1,4 +1,4 @@
-     
+
 #include "listener.hpp" 
 #include "request.hpp"
 #include "router.hpp"        
@@ -7,56 +7,58 @@
 namespace Beanpoll
 {
 	/*void RequestMiddleware::onRequest(Request* request)
-	{                                                 
-		this->listener->onRequest(request);  
-	}*/
-
-	Request::Request(Message* message, RequestMiddleware* middleware):
+	 {                                                 
+	 this->listener->onRequest(request);  
+	 }*/
+	
+	Request::Request(Message* message, RequestMiddleware* middleware, Router* router):
 	message(message),
 	_currentMiddleware(middleware),
-	_firstMiddleware(middleware)
-	{                                               
+	_firstMiddleware(middleware),
+	router(router)
+	{    
+		
 	};        
-
+	
 	Request::~Request()
 	{                                   
-
+		
 		//data's no longer needed.      
 		delete this->message;   
-		                                 
+		
 		RequestMiddleware* currentMiddleware = this->_firstMiddleware;
-		                                           
+		
 		//clean up the middleware
 		while(currentMiddleware->getNextSibling())
 		{                                             
 			delete currentMiddleware->getNextSibling()->remove();
 		}   
-		           
+		
 		//final cleanup
 		delete currentMiddleware;
 	};                                       
-
 	
-
+	
+	
 	bool Request::hasNext()
 	{
 		return !!this->_currentMiddleware;
 	}
-
+	
 	bool Request::next()
 	{                                      
 		//no more middleware
 		if(!this->_currentMiddleware) return false;          
-		                                                 
+		
 		RequestMiddleware* current = this->_currentMiddleware; 
 		this->_currentMiddleware = this->_currentMiddleware->getNextSibling();
-		         
+		
 		current->listener->onRequest(this); 
-		         
+		
 		return this->hasNext(); 
 	}   
 	
-	 
+	
 	
 	void StreamedRequest::end(RequestStream* stream)
 	{                
@@ -65,12 +67,12 @@ namespace Beanpoll
 		delete stream;
 	}                        
 	
-	           
+	
 	void StreamedRequest::end(void* data)
 	{
 		this->end(new RequestStream(data));
 	}
-	   
+	
 	
 	void StreamedRequest::end()
 	{                        

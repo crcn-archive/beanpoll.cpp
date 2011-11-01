@@ -7,7 +7,7 @@
 #include <vector>
 #include "tag.hpp"   
 
-      
+
 namespace Beanpoll
 {   
 	class PathExpression
@@ -19,10 +19,10 @@ namespace Beanpoll
 		PathExpression(std::string value, bool param):
 		value(value),
 	    param(param) { };   
-	
+		
 		PathExpression* clone();
 	};
-	                  
+	
 	
 	class ChannelExpression
 	{     
@@ -53,7 +53,7 @@ namespace Beanpoll
 	{
 	public:
 		std::string type;        
-		 
+		
 		RouteExpression(std::string type): 
 		type(type)                                              
 		{                                                                 

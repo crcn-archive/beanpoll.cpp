@@ -8,18 +8,18 @@ namespace Beanpoll
 	{
 		if(this->_prevSibling) this->_prevSibling->_nextSibling = this->_nextSibling;
 		if(this->_nextSibling) this->_nextSibling->_prevSibling = this->_prevSibling;
-		       
+		
 		//delete after remove...
 		return (T*)this;
 	}
-	     
+	
 	
 	template<class T>
 	T* LinkedList<T>::getNextSibling()
 	{
 		return this->_nextSibling;
 	} 
-	     
+	
 	
 	template<class T> 
 	void LinkedList<T>::addNextSibling(T* sibling)
@@ -29,13 +29,13 @@ namespace Beanpoll
 		sibling->_nextSibling = this->_nextSibling;  
 		this->_nextSibling    = sibling;     
 	}
-                       
+	
 	template<class T> 
 	T* LinkedList<T>::getPrevSibling()
 	{                                                      
 		return this->_prevSibling;
 	} 
-	     
+	
 	template<class T> 
 	void LinkedList<T>::addPrevSibling(T* sibling)
 	{
@@ -45,7 +45,7 @@ namespace Beanpoll
 		this->_prevSibling    = sibling; 
 		
 	}
-                      
+	
 	template<class T> 
 	T* LinkedList<T>::getLastSibling()
 	{
@@ -58,8 +58,8 @@ namespace Beanpoll
 		
 		return last; 
 	}
-	  
-                      
+	
+	
 	template<class T> 
 	T* LinkedList<T>::getFirstSibling()
 	{
@@ -72,5 +72,5 @@ namespace Beanpoll
 		
 		return first;
 	}
-	    
+	
 };

@@ -23,18 +23,18 @@ namespace Beanpoll
 	{
 		return new PathExpression(this->value, this->param);
 	}
-
+	
 	Tag* RouteExpression::getTag(std::string name)
 	{                                               
 		return this->_tags[name];
 	}                 
-
-
+	
+	
 	Tag* RouteExpression::addTag(std::string name, Tag* tag)
 	{
 		return this->_tags[name] = tag;
 	}                                
-
+	
 	bool RouteExpression::hasTag(std::string name)
 	{
 		return !!this->getTag(name);

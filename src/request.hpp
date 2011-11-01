@@ -1,6 +1,6 @@
 #ifndef REQUEST_H_
 #define REQUEST_H_   
-  
+
 #include "message.hpp"    
 #include "listener.hpp"
 #include "middleware.hpp"     
@@ -13,6 +13,7 @@
 namespace Beanpoll
 {   
 	class ConcreteDispatcher; 
+	class Router;
 	class Request;     
 	
 	
@@ -29,37 +30,60 @@ namespace Beanpoll
 		Message* message;                 
 		
 		/**
-		 * the dispatcher which owns all the routes ~ dispatched *this* request
-		 */
-		         
-		
-		/**   
-		 * The previous middleware - deleted on each request
+		 * routes all requests. Useful for calling requests within requests
 		 */
 		
+		Router* router;
 		
-		Request(Message* data, RequestMiddleware* middleware);
+		/**
+		 */
+		
+		Request(Message* data, RequestMiddleware* middleware, Router* router);
 		bool next();        
 		bool hasNext();     
 		~Request();
 		
 	private:
 		
-		RequestMiddleware* _currentMiddleware;                                                
+		/**
+		 * the current middleware (listener) in the request chain
+		 */
+		
+		RequestMiddleware* _currentMiddleware;                   
+		
+		/**
+		 * First item in the middleware - used for cleaning up since it's a linked list
+		 */
+		
 		RequestMiddleware* _firstMiddleware;
 	};                  
 	
-	     
 	
 	
-	             
+	
+	
 	
 	class StreamedRequest: public Request
 	{
-	public:                             
+	public:      
+		
+		/**
+		 */
+		
 		void end();           
+		
+		/**
+		 */
+		
 		void end(void* chunk);  
+		
+		/**
+		 */
+		
 		void end(RequestStream* stream);     
+		
+		/**
+		 */
 		
 		void* read(); 
 	};
