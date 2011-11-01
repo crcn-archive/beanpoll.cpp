@@ -12,44 +12,54 @@
 
 namespace Beanpoll
 {
-	void ConcreteDispatcher::dispatch(Message* data)
-	{
-		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
-
-		ConcreteDispatcher::dispatch(data, listeners);
-	}                                 
-
-
 	void* dispatch_threaded_request(void* request)
 	{                                                      
 		((Request*) request)->next(); 
 		delete (Request*) request;                        
 		return NULL;
 	}                     
-
-
+	
+	
 	void ConcreteDispatcher::dispatch(Message* data, std::vector<RouteListener*>* listeners)
 	{                         
-                            
+		
 		for(int i = listeners->size(); i--;)
 		{               
 			void* val;
-
+			
 			//TODO: check if request is threaded.
 			RouteListener* listener = (*listeners)[i];     
 			
 			RequestMiddleware* middleware = RequestMiddleware::expand(data->channel, listener, this);          
-
+			
 			Request* request = this->request(data->clone(), middleware);            
-                                                                 
-
+			
+			
 			//async call per listener. Typically one except push requests
 			this->_threadPool.createTask((void*)request, &dispatch_threaded_request);
 		}                      
-		        
+		
 		//done with the data - requests handle it from here.
 		delete data;
-	}        
+	}
+	
+	
+	/*void* init_thread_request(void* msg)
+	{
+		Message* message = ((Message*)message);
+		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(data->channel);    
+		
+		this->dispatch(data, listeners);
+	}*/
+	
+	void ConcreteDispatcher::dispatch(Message* message)
+	{
+		//async call per listener. Typically one except push requests
+		//this->_threadPool.createTask((void*)request, &init_thread_request);
+		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel);  
+		
+		this->dispatch(message, listeners);
+	}                                 
 
 	Request* ConcreteDispatcher::request(Message* data, RequestMiddleware* middleware)
 	{                                     

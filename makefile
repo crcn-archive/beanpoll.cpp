@@ -4,8 +4,9 @@ CC := g++
 SRC_DIR := src/
 BUILD_DIR := build/
 OBJS := beanpoll.o   
-TESTS := threads push_hello_world pull_hello_world plugin
+TESTS :=  threads_benchmark
 
+#threads push_hello_world pull_hello_world plugin push_benchmark
 all: beanpoll tests
 
 %.o: $(SRC_DIR)%.cpp

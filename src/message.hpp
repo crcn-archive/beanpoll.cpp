@@ -7,7 +7,8 @@
      
 namespace Beanpoll
 {   
-	class Router;          
+	class Router;  
+	class ConcreteDispatcher;
 	
 	class Message
 	{      
@@ -37,7 +38,12 @@ namespace Beanpoll
 		 * the router which handles all requests
 		 */
 		                                                        
-		Router* router;   
+		Router* router; 
+		
+		/**
+		 */
+		
+		ConcreteDispatcher* dispatcher;
 		
 		/**
 		 */

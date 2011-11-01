@@ -1,6 +1,6 @@
 #ifndef THREAD_POOL_H_
 #define THREAD_POOL_H_       
-                        
+                       
 #include "thread_worker.hpp"      
 #include "thread_task.hpp"  
 #include "thread_wrapper.hpp"
@@ -32,7 +32,7 @@ namespace Beanpoll
 		 */
 		
 		
-		ThreadPool(int maxWorkers = 100, int minWorkers = 2);      
+		ThreadPool(int maxWorkers = 3, int minWorkers = 2);      
 		/**
 		 * creates a new task / job to run
 		 */
@@ -45,7 +45,12 @@ namespace Beanpoll
 		 */
 		
 		
-		bool canRemoveWorker();    
+		bool canRemoveWorker();  
+		
+		/**
+		 */
+		
+		static void* execute(void*);
 		
 		
 		/**
@@ -71,12 +76,6 @@ namespace Beanpoll
 		std::list<ThreadWorker*> _waitingWorkers;   
 		
 		/**
-		 * workers who've been sitting around for too long, and aren't needed anymore.
-		 */
-		
-		// std::vector<ThreadWorker*> _closingWorkers;                                   
-		
-		/**
 		 * Queued up tasks waiting to be handled by workers. This gets filled if there are more
 		 * jobs than there are workers to handle them
 		 */
@@ -90,6 +89,22 @@ namespace Beanpoll
 		
 		ThreadMutex _threadMutex;                                                
 		
+		
+		/**
+		 */
+		
+		ThreadMutex _poolMutex;
+		
+		/**
+		 */
+		
+		ThreadCondition _taskCondition;
+		
+		/**
+		 */
+		
+		Thread _poolThread;
+		
 		/**
 		 * removes a given worker once it's been sitting around for too long
 		 */
@@ -102,7 +117,7 @@ namespace Beanpoll
 		 * are currently busy
 		 */
 		
-		void run(ThreadTask*);
+		void run();
 		
 		/**
 		 * notifies the pool that a worker is waiting for new tasks - this happens

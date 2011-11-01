@@ -1,10 +1,6 @@
-#include "Beanpoll.cpp"   
-#include <pthread.h>           
+#include "Beanpoll.cpp"         
 
 int steps;    
-pthread_t thread; 
-pthread_mutex_t mutex;
-pthread_cond_t cond;
                                                    
 void* sayHelloWorld(void* request)
 {                                   

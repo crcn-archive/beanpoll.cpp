@@ -6,34 +6,61 @@ namespace Beanpoll
 	ThreadPool::ThreadPool(int maxWorkers, int minWorkers): 
 	maxWorkers(maxWorkers), 
 	minWorkers(minWorkers)
-	{                                                            
+	{    
+		this->_poolThread.run(this, &ThreadPool::execute);
 	};
 	        
                             
 	ThreadTask* ThreadPool::createTask(void* data,  ThreadCallback* callback )
 	{
-		ThreadTask* task = new ThreadTask(data, callback);  
-		                  
-		this->run(task);
 		
+		ThreadTask* task = new ThreadTask(data, callback);   
+		
+		//this->_poolMutex.lock();
+		this->_threadMutex.lock();
+		this->_waitingTasks.push_back(task); 
+		this->_taskCondition.signal();
+		this->_threadMutex.unlock();
+		//this->_poolMutex.unlock();
+		
+		 
 		return task;
 	}; 
 	
+	void* ThreadPool::execute(void* data)
+	{
+		ThreadPool* pool = (ThreadPool*)data;
+		
+		
+		while(1)
+		{  
+			//pool->_poolMutex.lock();
+			
+			while(!pool->hasTask())
+			{
+				pool->_taskCondition.wait(pool->_poolMutex);
+			}
+			
+			
+			pool->run();
+			
+			//pool->_poolMutex.unlock(); 
+		}
+		
+		
+	}
 	
-	void ThreadPool::run(ThreadTask* task)
+	
+	
+	void ThreadPool::run()
 	{   
 		ThreadWorker* thread = NULL;        
-
-
-		this->_threadMutex.lock();                        
-
-
-		this->_waitingTasks.push_back(task);    
-                                               
+		
 
 		//any waiting threads? use 'em
 		if(this->_waitingWorkers.size())
-		{                             
+		{               
+			
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
 			thread = this->_waitingWorkers.back();               
@@ -51,12 +78,12 @@ namespace Beanpoll
 			this->_workers.push_back(thread);            
 		}        
 
-		this->_threadMutex.unlock();
+		//this->_threadMutex.unlock();
 
 	}      
 	
 	void ThreadPool::waiting(ThreadWorker* thread)
-	{                              	        
+	{                              	         
 		this->_waitingWorkers.push_back(thread);
 	} 
 	

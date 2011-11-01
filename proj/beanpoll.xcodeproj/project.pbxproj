@@ -50,16 +50,19 @@
 		5D12CF3B145F676600548EFF /* push_hello_world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_hello_world.cpp; path = ../tests/push_hello_world.cpp; sourceTree = SOURCE_ROOT; };
 		5D12CF3C145F676600548EFF /* threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads.cpp; path = ../tests/threads.cpp; sourceTree = SOURCE_ROOT; };
 		5D12CF3D145F676600548EFF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../tests/timer.cpp; sourceTree = SOURCE_ROOT; };
+		5D9D7854145F69B0000B4C5D /* push_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_benchmark.cpp; path = ../tests/push_benchmark.cpp; sourceTree = SOURCE_ROOT; };
+		5D9D7855145F69BB000B4C5D /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = ../makefile; sourceTree = SOURCE_ROOT; };
+		5D9D78A9145F6ED1000B4C5D /* threads_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads_benchmark.cpp; path = ../tests/threads_benchmark.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		08FB7794FE84155DC02AAC07 /* beanpoll */ = {
 			isa = PBXGroup;
 			children = (
+				5D9D7855145F69BB000B4C5D /* makefile */,
 				5D12CF35145F675800548EFF /* Tests */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
-				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
 			name = beanpoll;
 			sourceTree = "<group>";
@@ -101,13 +104,6 @@
 			name = Source;
 			sourceTree = "<group>";
 		};
-		1AB674ADFE9D54B511CA2CBB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5D12CF10145F673B00548EFF /* threading */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +129,8 @@
 				5D12CF3B145F676600548EFF /* push_hello_world.cpp */,
 				5D12CF3C145F676600548EFF /* threads.cpp */,
 				5D12CF3D145F676600548EFF /* timer.cpp */,
+				5D9D7854145F69B0000B4C5D /* push_benchmark.cpp */,
+				5D9D78A9145F6ED1000B4C5D /* threads_benchmark.cpp */,
 			);
 			name = Tests;
 			sourceTree = "<group>";

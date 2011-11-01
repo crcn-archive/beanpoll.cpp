@@ -7,9 +7,9 @@
 
 namespace Beanpoll
 {   
-	void Thread::run(void* data)
+	void Thread::run(void* data,ThreadCallback* callback)
 	{
-		pthread_create(&this->_thread, NULL, this->_callback, data);
+		pthread_create(&this->_thread, NULL, callback, data);
 	} 
 	
 	void* Thread::join()
@@ -49,10 +49,6 @@ namespace Beanpoll
 	}                                       
 	
 	
-	Thread::Thread(ThreadCallback* callback):
-	_callback(callback)
-	{                                                           
-	}
 	       
 	
 	ThreadCondition::ThreadCondition()

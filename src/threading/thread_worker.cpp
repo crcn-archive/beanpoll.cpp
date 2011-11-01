@@ -7,10 +7,10 @@ namespace Beanpoll
 	ThreadWorker::ThreadWorker(ThreadPool* pool, int index):
 	_pool(pool),
 	index(index)   
-	{                     
-		this->_thread = new Thread(&ThreadWorker::execute);
+	{               
+		this->_thread = new Thread();
 		
-		this->_thread->run((void*)this);                        
+		this->_thread->run((void*)this,&ThreadWorker::execute);                        
 	}         
 	 
 	

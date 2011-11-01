@@ -22,9 +22,9 @@ namespace Beanpoll
 		void dispatch(Message* data, std::vector<RouteListener*>* listeners);   
 		void addRouteListener(RouteListener* listener);   
 		friend class RequestMiddleware; 
+		Collection _collection;	
 		
-	private:
-		Collection _collection;	  
+	private:  
 		ThreadPool _threadPool;     
 		
 	protected:             

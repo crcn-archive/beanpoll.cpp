@@ -9,12 +9,13 @@ namespace Beanpoll
 	class Thread
 	{   
 	public:      
-		Thread(ThreadCallback* callback);   
+		
+		Thread(){ };
 		
 		/**
 		 */
 		
-		void run(void* data);
+		void run(void* data, ThreadCallback* callback);
 		
 		/**
 		 * joins the result of the thread
@@ -35,7 +36,6 @@ namespace Beanpoll
 		
 	private:
 		pthread_t _thread; 
-		ThreadCallback* _callback;
 	};    
 	
 	class ThreadCondition;    
