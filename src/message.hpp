@@ -83,6 +83,11 @@ namespace Beanpoll
 		/**
 		 */
 		
+		bool hasCallback();
+		
+		/**
+		 */
+		
 		StreamCallback* getCallback();
 		
 		/**

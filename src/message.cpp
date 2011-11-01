@@ -39,7 +39,12 @@ namespace Beanpoll
 	{
 		this->_callback = callback;   
 		return this;
-	}                                  
+	}    
+	
+	bool Message::hasCallback()
+	{
+		return !!this->_callback;
+	}
 	
 	StreamCallback* Message::getCallback()
 	{
