@@ -10,7 +10,8 @@ namespace Beanpoll
 	{               
 		this->_thread = new Thread();
 		
-		this->_thread->run((void*)this,&ThreadWorker::execute);                        
+		this->_thread->run((void*)this,&ThreadWorker::execute);      
+		
 	}         
 	 
 	
@@ -67,6 +68,7 @@ namespace Beanpoll
                                                        
                                                                   
 		    thread->_pool->_threadMutex.unlock();
+			thread->_thread->yield();
 			    
 			
 			//does a task exist? means the condition was met - run it.
@@ -86,6 +88,8 @@ namespace Beanpoll
 		}  
 		
 		thread->_pool->removeWorker(thread);   
+		
+		return NULL;
 	}  
 	           
 	ThreadWorker::~ThreadWorker()

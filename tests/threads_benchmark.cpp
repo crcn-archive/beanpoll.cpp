@@ -1,13 +1,14 @@
 #include "Beanpoll.cpp"   
 #include <pthread.h>   
-#include "timer.cpp"           
+#include "timer.cpp"      
 
-int start = 1000000,
+int start = 100000,
 steps = start;    
+
 
 void* sayHelloWorld(void* request)
 {    
-	//usleep(500*1000);
+	while(1);
 }     
 
 
@@ -27,13 +28,16 @@ int main()
 	
 	timer.start();
 	
+	pthread_t thread;
+	
+	int j = 0;
+	
 	for(int i = steps; i--;)    
 	{                                                                          
 		
 		//sayHelloWorld(NULL);
 		//run the new thread
 		pool->createTask((void*)"hello world", &sayHelloWorld);  
-		
 		//std::cout << i << std::endl;
 		//usleep(25*1000);
 		
@@ -45,9 +49,9 @@ int main()
 	printf("%d tasks in %d ms\n", start, timer.duration());
 	
 	
-	int i;
+	//int i;
 	
-	std::cin >> i;
+	//std::cin >> i;
 	
 	
 }

@@ -8,6 +8,7 @@
  */
 
 #include "thread_boss.hpp"
+#include <sched.h>
 
 namespace Beanpoll
 {
@@ -24,6 +25,8 @@ namespace Beanpoll
 		_tasks.push(task);
 		this->_taskCondition.signal();
 		this->_poolMutex.unlock();
+		
+		return task;
 	}
 	
 	void* ThreadBoss::execute(void* data)
@@ -42,11 +45,13 @@ namespace Beanpoll
 			}
 			
 			ThreadTask* task = boss->_tasks.front();
+			
 			boss->_tasks.pop();
 			boss->_poolMutex.unlock();
-			
+			boss->_poolThread.yield();
 			
 			pool.run(task);
+			
 			
 		}
 		

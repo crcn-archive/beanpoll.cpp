@@ -30,7 +30,10 @@ namespace Beanpoll
 		void detach();    
 		
 		/**
+		 * yields the current thread
 		 */
+		
+		void yield();
 		
 	~Thread();
 		

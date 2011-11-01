@@ -1,6 +1,7 @@
 #include "thread_wrapper.hpp"    
 #include <sys/time.h>   
 #include <unistd.h>
+#include <sched.h>
                   
 
 
@@ -25,6 +26,13 @@ namespace Beanpoll
 	{
 		pthread_detach(this->_thread);
 	}    
+	
+	void Thread::yield()
+	{
+		//technically *not* the same, but the effect is very similar. This is a throttle incase there's some heavy work.
+		usleep(25*1000); 
+		//sched_yield();
+	}
 	                               
 	
 	Thread::~Thread()

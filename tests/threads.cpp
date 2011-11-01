@@ -1,4 +1,4 @@
-#include "Beanpoll.cpp"         
+#include "Beanpoll.cpp" 
 
 int steps;    
                                                    

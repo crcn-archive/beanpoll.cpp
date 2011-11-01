@@ -4,9 +4,9 @@
 namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
-	maxWorkers(5), 
+	maxWorkers(100), 
 	minWorkers(2),
-	boss(boss)
+	boss(boss) 
 	{                                                            
 	};
 	
@@ -32,17 +32,19 @@ namespace Beanpoll
 			this->_waitingWorkers.pop_back();      
 			                               
 			
+			this->_threadMutex.unlock();  
 			thread->hasTask.signal();    
 		}                                                 
 		else 
 		
 		if(this->_workers.size() < this->maxWorkers)
-		{              
+		{     
+			this->_threadMutex.unlock();           
 			thread = new ThreadWorker(this, this->_workers.size());    
 			this->_workers.push_back(thread);         
 		}
-
-		this->_threadMutex.unlock();        
+		
+		this->_threadMutex.unlock();  
 
 
 	}      

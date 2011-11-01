@@ -2,13 +2,11 @@
 #define EXPRESSIONS_H_
 
 #include <iostream>   
-#include <tr1/unordered_map> 
 #include <string>            
 #include <map>     
 #include <vector>
 #include "tag.hpp"   
 
-using namespace std::tr1;
       
 namespace Beanpoll
 {   

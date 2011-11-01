@@ -14,6 +14,7 @@ void sayHelloWorld(Beanpoll::PushRequest* request)
 		exit(0);
 	}
 	
+	
 	//std::cout << steps << std::endl;
 	
 	//usleep(1000);
@@ -29,7 +30,7 @@ int main()
 	
 	
 	
-    for(int i = steps; i--;)
+    for(int i = start; i--;)
 	{
 		char* buffer = new char[50];
 		

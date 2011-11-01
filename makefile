@@ -20,8 +20,8 @@ tests: $(TESTS)
 
 %: tests/%.cpp
 	@echo "Building test $@"  
-	@$(CC) -I$(SRC_DIR) -c  $< -o $(BUILD_DIR)$@.o
-	@$(CC) $(BUILD_DIR)$@.o -o $(BUILD_DIR)$@    
+	$(CC) -I$(SRC_DIR) -O2 -ftree-vectorize -NDEBUG -c  $< -o $(BUILD_DIR)$@.o
+	@$(CC) $(BUILD_DIR)$@.o -O2 -ftree-vectorize -NDEBUG -o $(BUILD_DIR)$@    
 	@rm $(BUILD_DIR)$@.o 
 
   

@@ -99,7 +99,7 @@ namespace Beanpoll
 		/**
 		 */
 		
-		Message* pull(void*(*callback)(void*),void* data, StreamCallback* callback);   
+		Message* pull(void*(*threadCallback)(void*), void* data, StreamCallback* callback);   
 		
 		/**
 		 */

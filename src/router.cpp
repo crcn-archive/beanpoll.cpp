@@ -25,7 +25,7 @@ namespace Beanpoll
 		
 		for(int i = listeners->size(); i--;)
 		{               
-			void* val;
+			//void* val;
 			
 			//TODO: check if request is threaded.
 			RouteListener* listener = (*listeners)[i];     
@@ -52,6 +52,8 @@ namespace Beanpoll
 		std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
 		
 		message->dispatcher->dispatch(message, listeners);
+		
+		return NULL;
 	}
 	
 	void ConcreteDispatcher::dispatch(Message* message)
