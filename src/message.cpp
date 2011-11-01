@@ -87,11 +87,15 @@ namespace Beanpoll
 	
 	Message* Message::clone()
 	{                   
-		return (new Message(this->channel->clone(), this->router))->   
+		Message* clone = (new Message(this->channel->clone(), this->router))->   
 		
 		//TODO - use copied stream 
 		setData(this->getStream()->read())->
 		setCallback(this->getCallback());
+		
+		clone->dispatcher = this->dispatcher;
+		
+		return clone;
 	}
 }
 

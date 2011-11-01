@@ -19,7 +19,7 @@ namespace Beanpoll
 		 * parses a single channel: some/channel
 		 */
 		
-		Beanpoll::ChannelExpression* parseChannel(std::string channel);
+		Beanpoll::ChannelExpression* parseChannel(std::string& channel);
 	};
 	
 	

@@ -66,8 +66,7 @@ namespace Beanpoll
 			nextTask = killWait ? NULL : thread->_pool->nextTask();                                           
 			
 			
-			
-		    thread->_pool->_threadMutex.unlock();
+			thread->_pool->_threadMutex.unlock();
 			thread->_thread->yield();
 			
 			
@@ -77,14 +76,14 @@ namespace Beanpoll
 				//run it.
 				nextTask->run();
 				delete nextTask;
+				
 			}                                              
 			
 			//otherwise, the condition timed out. Time to die.
-			else
-				if(killWait)
-				{            
-					break;
-				}              
+			else if(killWait)
+			{        
+				break;
+			}              
 		}  
 		
 		thread->_pool->removeWorker(thread);   

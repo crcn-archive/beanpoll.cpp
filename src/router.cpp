@@ -26,6 +26,7 @@ namespace Beanpoll
 		for(int i = listeners->size(); i--;)
 		{               
 			//void* val;
+			continue;
 			
 			//TODO: check if request is threaded.
 			RouteListener* listener = (*listeners)[i];
@@ -57,10 +58,11 @@ namespace Beanpoll
 	
 	void* init_thread_request(void* msg)
 	{
-		Message* message = ((Message*)msg);
-		std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
+		//Message* message = ((Message*)msg);
+		//std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
 		
-		message->dispatcher->dispatch(message, listeners);
+		//message->dispatcher->dispatch(message, listeners);
+		
 		
 		return NULL;
 	}
@@ -72,6 +74,7 @@ namespace Beanpoll
 		this->_threadBoss.createTask((void*)message, &init_thread_request);
 		//std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel);  
 		
+		//delete message;
 		//this->dispatch(message, listeners);
 	}                                 
 	
@@ -85,7 +88,7 @@ namespace Beanpoll
 		this->_collection.addRouteListener(listener);
 	}          
 	
-	Message* Router::request(const char* channel)
+	Message* Router::request(std::string channel)
 	{                                                     
 		return new Message(Parser::parseChannel(channel), this);
 	}

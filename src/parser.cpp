@@ -164,7 +164,7 @@ namespace Beanpoll
 	
 	
 	
-	ChannelExpression* Parser::parseChannel(string channel)
+	ChannelExpression* Parser::parseChannel(string& channel)
 	{                                
 		
 		//need to split up the channel which might look like: some/:path                        

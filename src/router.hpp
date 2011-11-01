@@ -92,7 +92,7 @@ namespace Beanpoll
 		/**
 		 */
 		
-		Message* request(const char* route);   
+		Message* request(std::string route);   
 		
 		/**
 		 */

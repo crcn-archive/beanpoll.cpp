@@ -2,7 +2,7 @@
 #include "timer.cpp" 
 #include <sstream>
 
-int start = 100000,
+int start = 10000,
 steps = start;      
 Timer timer;
 
@@ -36,7 +36,6 @@ void onSayHelloWorld(Beanpoll::PushRequest* request)
 		exit(0);
 	}*/
 	
-	//std::cout << --steps << std::endl;
 	
 	
 	//request->router->request("username")->pull(request, &getUsername);
@@ -56,15 +55,15 @@ int main()
 	
 	
 	
-    //for(int i = start; i--;)
-	while(1)
+    for(int i = start; i--;)
+	//while(1)
 	{
 		
 		//std::cout << (const char*)buffer << std::endl;
 		
 		router->request("hello/world")->push((void*)"hello craig");  
 		
-		usleep(1000);
+		//usleep(1000);
 	}
 	
 	
