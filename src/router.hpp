@@ -54,7 +54,10 @@ namespace Beanpoll
 		Router* router;
 		
 	private:  
-		ThreadBoss _threadBoss;     
+		ThreadBoss _threadBoss;  
+		
+		
+		static char cleanupRequest(Request*);
 		
 	protected:             
 		Request* request(Message* data, RequestMiddleware* middleware);  
@@ -77,11 +80,7 @@ namespace Beanpoll
 	
 	class Router 
 	{   
-		
-	private:
-		
-		PushDispatcher* _pusher;
-		PullDispatcher* _puller;    
+		 
 		
 	public:        
 		
@@ -131,6 +130,12 @@ namespace Beanpoll
 		
 	    template<class T, class U, class V>
 		void on(std::string route, T* callback, V* dispatcher);
+		
+		
+	private:
+		
+		PushDispatcher* _pusher;
+		PullDispatcher* _puller;   
 	};
 };
 

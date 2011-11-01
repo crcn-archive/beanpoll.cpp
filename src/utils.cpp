@@ -31,7 +31,7 @@ namespace Beanpoll
 	} 
 	
 	template <class T> void deleteInVector(T* vect)
-	{                                   
+	{                
 		for(int i = vect->size(); i--;)
 		{
 			delete (*vect)[i];

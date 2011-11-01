@@ -12,15 +12,15 @@
 
 namespace Beanpoll
 {
-	void* dispatch_threaded_request(void* request)
+	/*void* dispatch_threaded_request(void* request)
 	{                                                      
 		((Request*) request)->next(); 
 		delete (Request*) request;                        
 		return NULL;
-	}                     
+	}*/                    
 	
 	
-	void ConcreteDispatcher::dispatch(Message* data, std::vector<RouteListener*>* listeners)
+	void ConcreteDispatcher::dispatch(Message* message, std::vector<RouteListener*>* listeners)
 	{                         
 		
 		for(int i = listeners->size(); i--;)
@@ -28,21 +28,30 @@ namespace Beanpoll
 			//void* val;
 			
 			//TODO: check if request is threaded.
-			RouteListener* listener = (*listeners)[i];     
+			RouteListener* listener = (*listeners)[i];
+			Message* clonedMessage = message->clone();
 			
-			RequestMiddleware* middleware = RequestMiddleware::expand(data->channel, listener, this);          
+			RequestMiddleware* middleware = RequestMiddleware::expand(clonedMessage->channel, listener, this);          
 			
-			Request* request = this->request(data->clone(), middleware);            
+			Request* request = this->request(clonedMessage, middleware);            
 			
 			
+			request->onComplete(cleanupRequest);
 			request->next();
-			delete request;
+			
+			
 			//async call per listener. Typically one except push requests
 			//this->_threadBoss.createTask((void*)request, &dispatch_threaded_request);
 		}                      
 		
 		//done with the data - requests handle it from here.
-		delete data;
+		delete message;
+	}
+	
+	char ConcreteDispatcher::cleanupRequest(Request* request)
+	{
+		delete request;
+		return 0;
 	}
 	
 	

@@ -50,6 +50,8 @@
 		5D12CF3B145F676600548EFF /* push_hello_world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_hello_world.cpp; path = ../tests/push_hello_world.cpp; sourceTree = SOURCE_ROOT; };
 		5D12CF3C145F676600548EFF /* threads.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads.cpp; path = ../tests/threads.cpp; sourceTree = SOURCE_ROOT; };
 		5D12CF3D145F676600548EFF /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = ../tests/timer.cpp; sourceTree = SOURCE_ROOT; };
+		5D7CDEAC14607B7400107DB3 /* events.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = events.cpp; path = ../src/events.cpp; sourceTree = SOURCE_ROOT; };
+		5D7CDEAD14607B7400107DB3 /* events.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = events.hpp; path = ../src/events.hpp; sourceTree = SOURCE_ROOT; };
 		5D9D7854145F69B0000B4C5D /* push_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_benchmark.cpp; path = ../tests/push_benchmark.cpp; sourceTree = SOURCE_ROOT; };
 		5D9D7855145F69BB000B4C5D /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = ../makefile; sourceTree = SOURCE_ROOT; };
 		5D9D78A9145F6ED1000B4C5D /* threads_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads_benchmark.cpp; path = ../tests/threads_benchmark.cpp; sourceTree = SOURCE_ROOT; };
@@ -72,6 +74,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5D7CDEAC14607B7400107DB3 /* events.cpp */,
+				5D7CDEAD14607B7400107DB3 /* events.hpp */,
 				5D12CF0E145F673B00548EFF /* utils.hpp */,
 				5D12CF0F145F673B00548EFF /* utils.cpp */,
 				5D12CF10145F673B00548EFF /* threading */,

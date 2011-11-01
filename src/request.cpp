@@ -18,10 +18,15 @@ namespace Beanpoll
 	router(router)
 	{    
 		
-	};        
+	};   
+	
+	void Request::onComplete(RequestCompleteCallback* callback)
+	{
+		this->_completeListeners.add(callback);
+	}
 	
 	Request::~Request()
-	{                                   
+	{                
 		
 		//data's no longer needed.      
 		delete this->message;   
@@ -59,12 +64,14 @@ namespace Beanpoll
 	}   
 	
 	
-	
 	void StreamedRequest::end(RequestStream* stream)
 	{                
-		this->message->getCallback()(stream); 
+		if(this->message->hasCallback())  this->message->getCallback()(stream); 
 		
 		delete stream;
+		
+		this->_completeListeners.notify((Request*)this);
+		//if(this->_onComplete) this->_onComplete(this);
 	}                        
 	
 	
@@ -75,7 +82,7 @@ namespace Beanpoll
 	
 	
 	void StreamedRequest::end()
-	{                        
+	{   
 		this->end(new RequestStream());
 	}            
 	

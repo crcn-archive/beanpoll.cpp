@@ -7,6 +7,7 @@
 #include "expressions.hpp"  
 #include "stream.hpp"
 #include "utils.hpp"
+#include "events.hpp"
 #include <iostream>
 #include <vector>        
 
@@ -39,8 +40,25 @@ namespace Beanpoll
 		 */
 		
 		Request(Message* data, RequestMiddleware* middleware, Router* router);
-		bool next();        
+		
+		/**
+		 */
+		
+		bool next();
+        
+		/**
+		 */
+		
 		bool hasNext();     
+		
+		/**
+		 */
+		
+		void onComplete(RequestCompleteCallback*);
+		
+		/**
+		 */
+		
 		~Request();
 		
 	private:
@@ -56,6 +74,11 @@ namespace Beanpoll
 		 */
 		
 		RequestMiddleware* _firstMiddleware;
+		
+	protected:
+		
+		EventListenerCollection<RequestCompleteCallback*,Request*> _completeListeners;
+		//void(*_onComplete)(Request*);
 	};                  
 	
 	

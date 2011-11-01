@@ -21,8 +21,6 @@ int main()
 	router->on("push hello/world", &sayHelloWorld);
 	
 	
-	
-	
     while(1)
 	{
 		router->request("hello/world")->push((void*)"hello world!");          

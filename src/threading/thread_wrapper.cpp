@@ -30,7 +30,7 @@ namespace Beanpoll
 	void Thread::yield()
 	{
 		//technically *not* the same, but the effect is very similar. This is a throttle incase there's some heavy work.
-		usleep(25*1000); 
+		usleep(1000); 
 		//sched_yield();
 	}
 	

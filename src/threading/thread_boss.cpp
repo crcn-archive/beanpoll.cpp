@@ -48,7 +48,10 @@ namespace Beanpoll
 			
 			boss->_tasks.pop();
 			boss->_poolMutex.unlock();
-			boss->_poolThread.yield();
+			
+			//here for reference. we *don't* want this. Keeps the thread pool
+			//from adding more workers - not good.
+			//boss->_poolThread.yield();
 			
 			pool.run(task);
 			

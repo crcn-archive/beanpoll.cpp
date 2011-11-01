@@ -2,43 +2,69 @@
 #include "timer.cpp" 
 #include <sstream>
 
-int start = 10,
+int start = 100000,
 steps = start;      
 Timer timer;
 
-void sayHelloWorld(Beanpoll::PushRequest* request)
+void onGetUsername(Beanpoll::PullRequest* request)
+{
+	Beanpoll::PushRequest* from = (Beanpoll::PushRequest*)(request->read());
+	
+	//std::cout << (const char*)from->read() << std::endl;
+	
+	
+	request->end((void*)"username");
+	from->end();
+	
+}
+
+void getUsername(Beanpoll::RequestStream* stream)
+{
+	//Beanpoll::PullRequest* request = (Beanpoll::PullRequest*)(username->read());
+	
+	//std::cout << (const char*)stream->read() << std::endl;
+	
+	
+}
+
+
+void onSayHelloWorld(Beanpoll::PushRequest* request)
 {       
-	if(!atoi((char*)request->read()))
+	/*if(!atoi((char*)request->read()))
 	{
 		std::cout << "DONE" << std::endl;
 		exit(0);
-	}
+	}*/
+	
+	//std::cout << --steps << std::endl;
 	
 	
-	std::cout << steps << std::endl;
+	//request->router->request("username")->pull(request, &getUsername);
 	
-	//usleep(1000);
+	request->end();
+	
 }
 
 int main()
 {       
 	Beanpoll::Router* router = new Beanpoll::Router();
 	
-	router->on("push hello/world", &sayHelloWorld);
+	router->on("push hello/world", &onSayHelloWorld);
+	router->on("pull username", &onGetUsername);
 	
 	timer.start();
 	
 	
 	
-    for(int i = start; i--;)
+    //for(int i = start; i--;)
+	while(1)
 	{
-		char* buffer = new char[50];
-		
-		sprintf(buffer,"%d",i);
 		
 		//std::cout << (const char*)buffer << std::endl;
 		
-		router->request("hello/world")->push((void*)buffer);    
+		router->request("hello/world")->push((void*)"hello craig");  
+		
+		usleep(1000);
 	}
 	
 	
