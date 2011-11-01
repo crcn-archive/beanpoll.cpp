@@ -35,8 +35,10 @@ namespace Beanpoll
 			Request* request = this->request(data->clone(), middleware);            
 			
 			
+			request->next();
+			delete request;
 			//async call per listener. Typically one except push requests
-			this->_threadBoss.createTask((void*)request, &dispatch_threaded_request);
+			//this->_threadBoss.createTask((void*)request, &dispatch_threaded_request);
 		}                      
 		
 		//done with the data - requests handle it from here.
@@ -44,22 +46,22 @@ namespace Beanpoll
 	}
 	
 	
-	/*oid* init_thread_request(void* msg)
+	void* init_thread_request(void* msg)
 	{
 		Message* message = ((Message*)msg);
 		std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
 		
 		message->dispatcher->dispatch(message, listeners);
-	}*/
+	}
 	
 	void ConcreteDispatcher::dispatch(Message* message)
 	{
 		//async call per listener. Typically one except push requests
 		message->dispatcher = this;
-		//this->_threadBoss.createTask((void*)message, &init_thread_request);
-		std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel);  
+		this->_threadBoss.createTask((void*)message, &init_thread_request);
+		//std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel);  
 		
-		this->dispatch(message, listeners);
+		//this->dispatch(message, listeners);
 	}                                 
 
 	Request* ConcreteDispatcher::request(Message* data, RequestMiddleware* middleware)

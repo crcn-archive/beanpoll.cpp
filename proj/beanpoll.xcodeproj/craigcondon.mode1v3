@@ -274,7 +274,8 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>30</integer>
+									<integer>24</integer>
+									<integer>13</integer>
 									<integer>10</integer>
 									<integer>0</integer>
 								</array>
@@ -317,7 +318,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>router.cpp</string>
+								<string>thread_boss.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -325,11 +326,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>router.cpp</string>
+										<string>thread_boss.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>5D9D7A7F145F8B50000B4C5D</string>
+										<string>5D9D7A84145F8C34000B4C5D</string>
 										<key>history</key>
 										<array>
 											<string>5D12CF36145F675C00548EFF</string>
@@ -357,12 +358,12 @@
 											<string>5D9D7A77145F8B50000B4C5D</string>
 											<string>5D9D7A78145F8B50000B4C5D</string>
 											<string>5D9D7A79145F8B50000B4C5D</string>
-											<string>5D9D7A7A145F8B50000B4C5D</string>
 											<string>5D9D7A7B145F8B50000B4C5D</string>
 											<string>5D9D7A7C145F8B50000B4C5D</string>
 											<string>5D9D7A7D145F8B50000B4C5D</string>
 											<string>5D9D7A7E145F8B50000B4C5D</string>
-											<string>5D9D7A6C145F8944000B4C5D</string>
+											<string>5D9D7A81145F8C26000B4C5D</string>
+											<string>5D9D7A82145F8C26000B4C5D</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -563,8 +564,8 @@
 		<string>5D9D789D145F6E17000B4C5D</string>
 		<string>5D9D789E145F6E17000B4C5D</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>5D12CEE0145F5D8500548EFF</string>
+		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/craigcondon/Developer/Public/beanpoll/proj/beanpoll.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
@@ -660,7 +661,7 @@
 			<key>WindowToolGUID</key>
 			<string>5D12CEE0145F5D8500548EFF</string>
 			<key>WindowToolIsVisible</key>
-			<true/>
+			<false/>
 		</dict>
 		<dict>
 			<key>FirstTimeWindowDisplayed</key>
