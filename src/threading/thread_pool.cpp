@@ -16,9 +16,12 @@ namespace Beanpoll
 		
 		ThreadTask* task = new ThreadTask(data, callback);   
 		
+		//we maybe okay - there should be the main thread, and the thread pool
 		//this->_poolMutex.lock();
 		this->_threadMutex.lock();
 		this->_waitingTasks.push_back(task); 
+		
+		//signal a new task
 		this->_taskCondition.signal();
 		this->_threadMutex.unlock();
 		//this->_poolMutex.unlock();

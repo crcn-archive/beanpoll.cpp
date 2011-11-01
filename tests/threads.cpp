@@ -7,7 +7,7 @@ void* sayHelloWorld(void* request)
 	std::cout << (const char*)request << " " << steps++ << std::endl;  
 	
 	//simulate busy thread, creating more threads - also variable.   
-	usleep((rand() % 200 + 100)  * 1000);
+	usleep((rand() % 1000 + 100)  * 1000);
 	
 	 
 }     

@@ -33,6 +33,7 @@ int main()
 		pool->createTask((void*)"hello world", &sayHelloWorld);  
 		
 		//std::cout << i << std::endl;
+		//usleep(25*1000);
 		
 		
 	}    
