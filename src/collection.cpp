@@ -5,7 +5,6 @@ namespace Beanpoll
 	void Collection::addRouteListener(RouteListener* listener)
 	{
 		this->getTree(listener->getRoute()->channel)->listeners.push_back(listener);
-
 	}
 
 	void Collection::removeRouteListener(RouteListener* listener)

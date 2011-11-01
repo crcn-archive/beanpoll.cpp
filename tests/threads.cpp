@@ -1,9 +1,11 @@
 #include "Beanpoll.cpp" 
+#include <math.h>
+#include <stdio.h>
 
 int steps;    
                                                    
 void* sayHelloWorld(void* request)
-{                                   
+{                                    
 	std::cout << (const char*)request << " " << steps++ << std::endl;  
 	
 	//simulate busy thread, creating more threads - also variable.   
@@ -32,7 +34,7 @@ int main()
 		                                                
 		                                                     
 		//simulate variable activity. Testing creation & destruction of threads   
-		int timeout = round(abs(sin(inc) * 50)) * 1000; 
+		int timeout = abs((int)round(sin(inc) * 50)) * 1000; 
 		                                                      
 		 
 		//controls speed of sin func

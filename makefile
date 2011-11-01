@@ -1,14 +1,21 @@
 
 
-CC := g++          
+#ifneq ($(which clang++),"")
+#	CC := clang++
+#else
+	CC := g++
+	OPTIONS := -ftree-vectorize -NDEBUG
+#endif
+       
 SRC_DIR := src/
 BUILD_DIR := build/
-OBJS := beanpoll.o   
+OBJS := beanpoll.o    
 TESTS :=threads push_hello_world pull_hello_world plugin push_benchmark threads_benchmark
 
 all: beanpoll tests
 
 %.o: $(SRC_DIR)%.cpp
+	@echo $(wildcard clang++) 
 	@echo "Building $(BUILD_DIR)$@"     
 	@$(CC) -c $< -o $(BUILD_DIR)$@   
 
@@ -20,8 +27,8 @@ tests: $(TESTS)
 
 %: tests/%.cpp
 	@echo "Building test $@"  
-	$(CC) -I$(SRC_DIR) -O2 -ftree-vectorize -NDEBUG -c  $< -o $(BUILD_DIR)$@.o
-	@$(CC) $(BUILD_DIR)$@.o -O2 -ftree-vectorize -NDEBUG -o $(BUILD_DIR)$@    
+	$(CC) -I$(SRC_DIR) -O2 $(OPTIONS) -c  $< -o $(BUILD_DIR)$@.o
+	@$(CC) $(BUILD_DIR)$@.o -O2 $(OPTIONS) -o $(BUILD_DIR)$@    
 	@rm $(BUILD_DIR)$@.o 
 
   
