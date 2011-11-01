@@ -20,11 +20,10 @@ namespace Beanpoll
 	{
 		ThreadTask* task = new ThreadTask(data, callback); 
 		
-		//very slow.
-		//this->_poolMutex.lock();
+		this->_poolMutex.lock();
 		_tasks.push(task);
-		//this->_poolMutex.unlock();
 		this->_taskCondition.signal();
+		this->_poolMutex.unlock();
 	}
 	
 	void* ThreadBoss::execute(void* data)
@@ -42,12 +41,13 @@ namespace Beanpoll
 				boss->_taskCondition.wait(boss->_poolMutex);
 			}
 			
-			
-			pool.run(boss->_tasks.front());
-			
+			ThreadTask* task = boss->_tasks.front();
 			boss->_tasks.pop();
-			
 			boss->_poolMutex.unlock();
+			
+			
+			pool.run(task);
+			
 		}
 		
 		return NULL;

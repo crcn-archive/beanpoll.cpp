@@ -4,21 +4,11 @@
 namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
-	maxWorkers(100), 
+	maxWorkers(4), 
 	minWorkers(2),
 	boss(boss)
 	{                                                            
 	};
-	        
-                            
-	/*ThreadTask* ThreadPool::createTask(void* data,  ThreadCallback* callback )
-	{ 
-		                  
-		this->run(task);
-		
-		return task;
-	};*/ 
-	
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
@@ -40,18 +30,18 @@ namespace Beanpoll
 
 			//remove the thread because it's being used.
 			this->_waitingWorkers.pop_back();      
-                                                         
+			                               
 			
-			thread->hasTask.signal();      
+			thread->hasTask.signal();    
 		}                                                 
 		else 
 		if(this->_workers.size() < this->maxWorkers)
-		{                                      
+		{                                   
 			thread = new ThreadWorker(this, this->_workers.size());    
-			this->_workers.push_back(thread);            
-		}        
+			this->_workers.push_back(thread);         
+		}    
+		this->_threadMutex.unlock();        
 
-		this->_threadMutex.unlock();
 
 	}      
 	
@@ -66,7 +56,7 @@ namespace Beanpoll
 	}         
 	
 	void ThreadPool::removeWorker(ThreadWorker* thread)
-	{                        	                   
+	{                        	
 		this->_threadMutex.lock();
 		
 		//remove from the running threads                  
