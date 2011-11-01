@@ -8,7 +8,7 @@
 #include "parser.hpp"       
 #include "request.hpp"      
 #include "plugin.hpp"
-#include "threading/thread_pool.hpp"
+#include "threading/thread_boss.hpp"
 
 namespace Beanpoll
 {                     
@@ -25,7 +25,7 @@ namespace Beanpoll
 		Collection _collection;	
 		
 	private:  
-		ThreadPool _threadPool;     
+		ThreadBoss _threadBoss;     
 		
 	protected:             
 		Request* request(Message* data, RequestMiddleware* middleware);  

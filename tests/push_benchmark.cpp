@@ -1,7 +1,8 @@
 #include "Beanpoll.cpp"  
 #include "timer.cpp"    
 
-int steps = 1000;     
+int start = 100000,
+steps = start;      
 Timer timer;
 
 void sayHelloWorld(Beanpoll::PushRequest* request)
@@ -10,6 +11,8 @@ void sayHelloWorld(Beanpoll::PushRequest* request)
 	{
 		std::cout << "DONE" << std::endl;
 	}
+	
+	usleep(1000);
 }
 
 int main()
@@ -27,9 +30,11 @@ int main()
 		router->request("hello/world")->push((void*)"hello world!");    
 	}
 	
+	
 	timer.stop();
 	
-	std::cout << "duration: " << timer.duration() << std::endl;
+	
+	printf("%d tasks in %d ms\n", start, timer.duration());
 	
 	int i;
 	

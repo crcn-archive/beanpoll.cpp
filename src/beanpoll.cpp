@@ -21,7 +21,8 @@
 #include "threading/thread_task.cpp"
 #include "threading/thread_worker.cpp" 
 #include "threading/thread_wrapper.cpp"       
-#include "threading/thread_pool.cpp"     
+#include "threading/thread_pool.cpp"    
+#include "threading/thread_boss.cpp"
 
 
 

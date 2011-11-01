@@ -21,15 +21,11 @@ namespace Beanpoll
 			
 			for(int j = 0, jn = middleware->size(); j < jn; j++)
 			{      
-				// std::cout << currentMiddleware->channel->value << std::endl;
 				current = RequestMiddleware::expand(currentMiddleware->channel, (*middleware)[j], dispatcher);  
 				               
 				last->addPrevSibling(current->getLastSibling());
 				
-				last = current->getFirstSibling();
-				                                                                                       
-				// last->addNextSibling(current);                       
-				// last = current->getLastSibling();
+				last = current->getFirstSibling();     
 			}      
 			
 			currentMiddleware = currentMiddleware->thru;

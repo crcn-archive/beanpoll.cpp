@@ -17,7 +17,7 @@ int main()
 {                                   
 	                                                                            
 	
-	Beanpoll::ThreadPool* pool = new Beanpoll::ThreadPool(100, 2);  
+	Beanpoll::ThreadBoss* pool = new Beanpoll::ThreadBoss();  
 	
 	int acc = 1;        
 	

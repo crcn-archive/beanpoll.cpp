@@ -1,16 +1,19 @@
 #ifndef THREAD_POOL_H_
 #define THREAD_POOL_H_       
-                       
+                        
 #include "thread_worker.hpp"      
 #include "thread_task.hpp"  
 #include "thread_wrapper.hpp"
 #include <iostream>
 #include <list>  
 #include <pthread.h>
+#include <queue>
 
 
 namespace Beanpoll
 {
+	class ThreadBoss;
+	
 	class ThreadPool
 	{
 		
@@ -31,13 +34,18 @@ namespace Beanpoll
 		/**
 		 */
 		
+		ThreadBoss* boss;
 		
-		ThreadPool(int maxWorkers = 3, int minWorkers = 2);      
+		/**
+		 */
+		
+		
+		ThreadPool(ThreadBoss*);      
 		/**
 		 * creates a new task / job to run
 		 */
 		
-		ThreadTask* createTask(void* data,  ThreadCallback* callback );                               
+		//ThreadTask* createTask(void* data,  ThreadCallback* callback );                               
 		
 		
 		/**
@@ -45,12 +53,7 @@ namespace Beanpoll
 		 */
 		
 		
-		bool canRemoveWorker();  
-		
-		/**
-		 */
-		
-		static void* execute(void*);
+		bool canRemoveWorker();    
 		
 		
 		/**
@@ -58,6 +61,14 @@ namespace Beanpoll
 		 */
 		
 		friend class ThreadWorker;   
+		
+		
+		/**
+		 * runs the given task, or throws the task in a queue if the workers
+		 * are currently busy
+		 */
+		
+		void run(ThreadTask*);
 		
 		
 	private:                 
@@ -76,11 +87,17 @@ namespace Beanpoll
 		std::list<ThreadWorker*> _waitingWorkers;   
 		
 		/**
+		 * workers who've been sitting around for too long, and aren't needed anymore.
+		 */
+		
+		// std::vector<ThreadWorker*> _closingWorkers;                                   
+		
+		/**
 		 * Queued up tasks waiting to be handled by workers. This gets filled if there are more
 		 * jobs than there are workers to handle them
 		 */
 		
-		std::vector<ThreadTask*> _waitingTasks;      
+		std::queue<ThreadTask*> _waitingTasks;      
 		           
 		
 		/**
@@ -89,22 +106,6 @@ namespace Beanpoll
 		
 		ThreadMutex _threadMutex;                                                
 		
-		
-		/**
-		 */
-		
-		ThreadMutex _poolMutex;
-		
-		/**
-		 */
-		
-		ThreadCondition _taskCondition;
-		
-		/**
-		 */
-		
-		Thread _poolThread;
-		
 		/**
 		 * removes a given worker once it's been sitting around for too long
 		 */
@@ -112,12 +113,6 @@ namespace Beanpoll
 		void removeWorker(ThreadWorker*);                                   
 		
 		
-		/**
-		 * runs the given task, or throws the task in a queue if the workers
-		 * are currently busy
-		 */
-		
-		void run();
 		
 		/**
 		 * notifies the pool that a worker is waiting for new tasks - this happens

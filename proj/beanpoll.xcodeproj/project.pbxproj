@@ -53,6 +53,8 @@
 		5D9D7854145F69B0000B4C5D /* push_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = push_benchmark.cpp; path = ../tests/push_benchmark.cpp; sourceTree = SOURCE_ROOT; };
 		5D9D7855145F69BB000B4C5D /* makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = makefile; path = ../makefile; sourceTree = SOURCE_ROOT; };
 		5D9D78A9145F6ED1000B4C5D /* threads_benchmark.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = threads_benchmark.cpp; path = ../tests/threads_benchmark.cpp; sourceTree = SOURCE_ROOT; };
+		5D9D79D5145F80E0000B4C5D /* thread_boss.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = thread_boss.hpp; sourceTree = "<group>"; };
+		5D9D79D6145F80E0000B4C5D /* thread_boss.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = thread_boss.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -116,6 +118,8 @@
 				5D12CF17145F673B00548EFF /* thread_worker.hpp */,
 				5D12CF18145F673B00548EFF /* thread_wrapper.cpp */,
 				5D12CF19145F673B00548EFF /* thread_wrapper.hpp */,
+				5D9D79D5145F80E0000B4C5D /* thread_boss.hpp */,
+				5D9D79D6145F80E0000B4C5D /* thread_boss.cpp */,
 			);
 			name = threading;
 			path = ../src/threading;
