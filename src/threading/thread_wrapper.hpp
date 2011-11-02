@@ -1,7 +1,8 @@
 #ifndef THREAD_WRAPPER_H_
 #define THREAD_WRAPPER_H_    
 
-#include <pthread.h>  
+#include <pthread.h>    
+#include <sys/time.h>  
 #include "thread_callback.hpp"
 
 namespace Beanpoll
