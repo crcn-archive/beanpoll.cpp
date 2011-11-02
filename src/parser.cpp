@@ -5,6 +5,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
+#include <cstring>
 #include <vector>     
 #include "utils.hpp"  
 #include "expressions.hpp"
