@@ -3,7 +3,7 @@
 
 #include "thread_task.hpp"   
 #include "thread_wrapper.hpp"
-#include "linked_list.hpp"
+#include "../linked_list.hpp"
 #include <pthread.h>
 
 namespace Beanpoll

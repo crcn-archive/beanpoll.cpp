@@ -42,7 +42,7 @@ int main()
 		
 		//Beanpoll::LinkedQueue<Beanpoll::ThreadTask> queue;
 		//std::vector<std::string*>* _tasks = new std::vector<std::string*>();
-		
+		 
 		int* b = new int[k];
 		for(int i = k; i--;)    
 		{     
