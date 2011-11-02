@@ -2,12 +2,13 @@
 #define THREAD_TASK_H_  
 
 #include "thread_callback.hpp"
+#include "linked_list.hpp"
 
 namespace Beanpoll
 {   
 	class Thread;              
 	
-	class ThreadTask
+	class ThreadTask: public LinkedList<ThreadTask>
 	{
 	public:         
 		

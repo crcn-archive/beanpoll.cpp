@@ -29,7 +29,8 @@ namespace Beanpoll
 		Thread _poolThread;
 		ThreadMutex _poolMutex;
 		ThreadCondition _taskCondition;
-		std::queue<ThreadTask*> _tasks;
+		//std::queue<ThreadTask*> _tasks;
+		LinkedQueue<ThreadTask> _tasks;
 		
 		static void* execute(void*);
 	};

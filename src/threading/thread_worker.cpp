@@ -10,8 +10,7 @@ namespace Beanpoll
 	{               
 		this->_thread = new Thread();
 		
-		this->_thread->run((void*)this,&ThreadWorker::execute);      
-		
+		this->_thread->run((void*)this , &ThreadWorker::execute);      
 	}         
 	
 	
@@ -27,32 +26,33 @@ namespace Beanpoll
 		ThreadTask* nextTask = NULL;
 		
 		
+		
+		
 		//lovely magic numbers. TODO: put in constructor
 		int tries = 0,
 		waitTimeout = 1,
 		sleepTimeout = 500 * 1000,
 		maxTries = 2;
 		
-		bool killWait = false; 	
-		
+		bool killWait = false,
+		flaggedWaiting = false;
 		
 		while(1)
 		{           
 			tries = 0;    
-			nextTask = NULL;
-			
+			nextTask = NULL,
+			flaggedWaiting = false;
 			
 			thread->_pool->_threadMutex.lock();                        	                               
-			
-			
-			
 			
 			//no more tasks? wait until there is one
 			while(!killWait && !thread->_pool->hasTask())
 			{               
 				
 				//notify the thread pool that a thread is waiting             
-				thread->waiting();                   
+				if(!flaggedWaiting) thread->waiting();                   
+				
+				flaggedWaiting = true;
 				
 				thread->hasTask.wait(thread->_pool->_threadMutex, waitTimeout);                     
 				

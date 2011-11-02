@@ -25,6 +25,7 @@ namespace Beanpoll
 	void Thread::detach()
 	{
 		pthread_detach(this->_thread);
+		//pthread_exit(this->_thread);
 	}    
 	
 	void Thread::yield()

@@ -22,7 +22,9 @@ namespace Beanpoll
 		ThreadTask* task = new ThreadTask(data, callback); 
 		
 		this->_poolMutex.lock();
-		_tasks.push(task);
+		
+		this->_tasks.push(task);
+
 		this->_taskCondition.signal();
 		this->_poolMutex.unlock();
 		
@@ -33,8 +35,7 @@ namespace Beanpoll
 	{
 		ThreadBoss* boss = (ThreadBoss*)data;
 		ThreadPool pool(boss);
-		
-		
+
 		while(1)
 		{
 			boss->_poolMutex.lock();
@@ -44,9 +45,11 @@ namespace Beanpoll
 				boss->_taskCondition.wait(boss->_poolMutex);
 			}
 			
-			ThreadTask* task = boss->_tasks.front();
 			
-			boss->_tasks.pop();
+			ThreadTask* task = boss->_tasks.pop();
+			
+			
+			//boss->_tasks.pop();
 			boss->_poolMutex.unlock();
 			
 			//here for reference. we *don't* want this. Keeps the thread pool

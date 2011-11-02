@@ -4,21 +4,34 @@
 namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
-	maxWorkers(5), 
+	maxWorkers(3), 
 	minWorkers(2),
-	boss(boss) 
+	boss(boss),
+	_nextTask(NULL)
 	{                                                            
 	};
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
+		
+		
 		ThreadWorker* thread = NULL;        
 		
 		
 		this->_threadMutex.lock();                        
 		
+		if(!_nextTask)
+		{
+			_nextTask = task;
+		}
+		else 
+		{
+			_nextTask->getLastSibling()->addNextSibling(task);
+		}
 		
-		this->_waitingTasks.push(task);    
+
+		
+		//this->_waitingTasks.push(task);   
 		
 		
 		//any waiting threads? use 'em
@@ -32,19 +45,15 @@ namespace Beanpoll
 			this->_waitingWorkers.pop_back();      
 			
 			
-			thread->hasTask.signal();   
-			//this->_threadMutex.unlock();  
+			thread->hasTask.signal();    
 		}                                                 
 		else if(this->_workers.size() < this->maxWorkers)
-		{     
-			//this->_threadMutex.unlock();           
+		{              
 			thread = new ThreadWorker(this, this->_workers.size());    
 			this->_workers.push_back(thread);         
 		}
 		
 		this->_threadMutex.unlock();  
-		
-		
 	}      
 	
 	void ThreadPool::waiting(ThreadWorker* thread)
@@ -57,18 +66,17 @@ namespace Beanpoll
 		return this->_workers.size() > this->minWorkers;
 	}         
 	
-	void ThreadPool::removeWorker(ThreadWorker* thread)
-	{                
-		
+	void ThreadPool::removeWorker(ThreadWorker* worker)
+	{            
 		this->_threadMutex.lock();
 		
 		//remove from the running threads                  
-		this->_workers.remove(thread);       
+		this->_workers.remove(worker);     
 		
 		//it should also be a waiting thread - need to remove it.    
-		this->_waitingWorkers.remove(thread);
+		this->_waitingWorkers.remove(worker);
 		
-		delete thread;
+		delete worker;
 		
 	    this->_threadMutex.unlock();                      
 	}
@@ -78,14 +86,15 @@ namespace Beanpoll
 	{   
 		if(!this->hasTask()) return NULL;                                
 		
-		ThreadTask* task = this->_waitingTasks.front(); 
-		this->_waitingTasks.pop();
+		ThreadTask* task = this->_nextTask;//this->_waitingTasks.front(); 
+		//this->_waitingTasks.pop();
+		this->_nextTask = this->_nextTask->getNextSibling();
 		return task;
 	}             
 	
 	bool ThreadPool::hasTask()
 	{                
-		return !!this->_waitingTasks.size();
+		return !!this->_nextTask;//!!this->_waitingTasks.size();
 	}
 }
 

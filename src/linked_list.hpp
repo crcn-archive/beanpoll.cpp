@@ -28,6 +28,37 @@ namespace Beanpoll
 		T* _nextSibling;
 		T* _prevSibling;
 	};
+	
+	
+	template<class T>
+	class LinkedQueue
+	{
+	public:
+		
+		/**
+		 */
+		LinkedQueue():_next(NULL),_last(NULL) {
+		};
+		
+		/**
+		 */
+		
+		void push(T* item);
+		
+		/**
+		 */
+		
+		T* pop();
+		
+		/**
+		 */
+		
+		bool empty();
+	private:
+		
+		T* _next;
+		T* _last;
+	};
 };
 
 

@@ -73,4 +73,39 @@ namespace Beanpoll
 		return first;
 	}
 	
+	
+	
+	template<class T>
+	void LinkedQueue<T>::push(T* item)
+	{
+		if(!_next)
+		{
+			_next = item;
+		}
+		else 
+		{
+			_last->addNextSibling(item);
+		}
+		
+		_last = item;
+	}
+	
+	template<class T>
+	T* LinkedQueue<T>::pop()
+	{
+		if(!_next) return NULL;
+		
+		T* current = _next;
+		_next = current->getNextSibling();
+		current->remove();
+		
+		return current;
+	}
+	
+	template<class T>
+	bool LinkedQueue<T>::empty()
+	{
+		return !!_next;
+	}
+	
 };

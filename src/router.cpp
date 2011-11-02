@@ -10,14 +10,17 @@
 #include <pthread.h>     
 
 
+
 namespace Beanpoll
 {
+	std::vector<Message*> purgeMessages;
 	/*void* dispatch_threaded_request(void* request)
 	{                                                      
 		((Request*) request)->next(); 
 		delete (Request*) request;                        
 		return NULL;
 	}*/                    
+	
 	
 	
 	void ConcreteDispatcher::dispatch(Message* message, std::vector<RouteListener*>* listeners)
@@ -45,8 +48,9 @@ namespace Beanpoll
 			//this->_threadBoss.createTask((void*)request, &dispatch_threaded_request);
 		}                      
 		
+		
 		//done with the data - requests handle it from here.
-		delete message;
+		//delete message;
 	}
 	
 	char ConcreteDispatcher::cleanupRequest(Request* request)
@@ -58,7 +62,7 @@ namespace Beanpoll
 	
 	void* init_thread_request(void* msg)
 	{
-		//Message* message = ((Message*)msg);
+		Message* message = ((Message*)msg);
 		//std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
 		
 		//message->dispatcher->dispatch(message, listeners);
@@ -71,10 +75,12 @@ namespace Beanpoll
 	{
 		//async call per listener. Typically one except push requests
 		message->dispatcher = this;
-		this->_threadBoss.createTask((void*)message, &init_thread_request);
-		//std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel);  
+		this->_threadBoss.createTask(NULL, &init_thread_request);
 		
-		//delete message;
+		delete message;
+		//std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel); 
+		//std::cout << purgeMessages.size() << std::endl; 
+		
 		//this->dispatch(message, listeners);
 	}                                 
 	
