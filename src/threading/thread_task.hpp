@@ -14,12 +14,14 @@ namespace Beanpoll
 		
 		ThreadTask(void* data, ThreadCallback* callback): _data(data), _callback(callback){};    
 		
-		void* run();    
+		void* run(); 
+		
+		~ThreadTask();
+		void* _data;
 		
 	private:                                
 		
 		ThreadCallback* _callback;
-		void* _data;
 		
 	};
 };      

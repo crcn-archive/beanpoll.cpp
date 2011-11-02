@@ -9,8 +9,17 @@ namespace Beanpoll
 		if(this->_prevSibling) this->_prevSibling->_nextSibling = this->_nextSibling;
 		if(this->_nextSibling) this->_nextSibling->_prevSibling = this->_prevSibling;
 		
+		this->_nextSibling = NULL;
+		this->_prevSibling = NULL;
+		
 		//delete after remove...
 		return (T*)this;
+	}
+	
+	template<class T>
+	LinkedList<T>::~LinkedList()
+	{
+		this->remove();
 	}
 	
 	
@@ -78,34 +87,93 @@ namespace Beanpoll
 	template<class T>
 	void LinkedQueue<T>::push(T* item)
 	{
-		if(!_next)
+		
+		if(!this->_next)
 		{
-			_next = item;
+			this->_next = item;
 		}
 		else 
 		{
 			_last->addNextSibling(item);
 		}
 		
+		this->_size++;
 		_last = item;
+	}
+	
+	template<class T>
+	void LinkedQueue<T>::unshift(T* item)
+	{
+		if(!this->_next)
+		{
+			this->_next = item;
+		}
+		else 
+		{
+			T* oldNext = this->_next;
+			this->_next = item;
+			this->_next->addNextSibling(oldNext);
+		}
+		
+		this->_size++;
 	}
 	
 	template<class T>
 	T* LinkedQueue<T>::pop()
 	{
-		if(!_next) return NULL;
 		
-		T* current = _next;
-		_next = current->getNextSibling();
+		if(!this->_last) return NULL;
+		
+		this->_size--;
+		T* current = this->_last;
+		this->_last = current->getPrevSibling();
 		current->remove();
+		
+		if(!this->_last) this->_next = NULL;
 		
 		return current;
 	}
 	
 	template<class T>
+	T* LinkedQueue<T>::shift()
+	{
+		if(!this->_next) return NULL;
+			
+		this->_size--;
+		T* current = this->_next;
+		this->_next = current->getNextSibling();
+		current->remove();
+		
+		
+		if(!this->_next) this->_last = NULL;
+		
+		return current;
+	}
+	
+	template<class T>
+	void LinkedQueue<T>::remove(T* item)
+	{
+		T* current = this->_next;
+		
+		while(current != NULL && current != item)
+		{
+			current = current->getNextSibling();
+		}
+		
+		if(current) current->remove();
+		
+	}
+	
+	template<class T>
 	bool LinkedQueue<T>::empty()
 	{
-		return !!_next;
+		return this->_next == NULL;
+	}
+	
+	template<class T>
+	int LinkedQueue<T>::size()
+	{
+		return this->_size;
 	}
 	
 };

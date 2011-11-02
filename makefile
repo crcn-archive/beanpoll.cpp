@@ -4,7 +4,8 @@
 #	CC := clang++
 #else
 	CC := g++
-	OPTIONS := -ftree-vectorize -NDEBUG
+	#OPTIONS := -O2 -ftree-vectorize -NDEBUG
+	#OPTIONS := -Wl
 #endif
        
 SRC_DIR := src/
@@ -27,8 +28,8 @@ tests: $(TESTS)
 
 %: tests/%.cpp
 	@echo "Building test $@"  
-	$(CC) -I$(SRC_DIR) -O2 $(OPTIONS) -c  $< -o $(BUILD_DIR)$@.o
-	@$(CC) $(BUILD_DIR)$@.o -O2 $(OPTIONS) -o $(BUILD_DIR)$@    
+	$(CC) -I$(SRC_DIR)  $(OPTIONS) -c  $< -o $(BUILD_DIR)$@.o
+	@$(CC) $(BUILD_DIR)$@.o $(OPTIONS) -o $(BUILD_DIR)$@    
 	@rm $(BUILD_DIR)$@.o 
 
   

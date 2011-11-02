@@ -50,7 +50,7 @@ namespace Beanpoll
 		
 		
 		//done with the data - requests handle it from here.
-		//delete message;
+		delete message;
 	}
 	
 	char ConcreteDispatcher::cleanupRequest(Request* request)
@@ -63,9 +63,10 @@ namespace Beanpoll
 	void* init_thread_request(void* msg)
 	{
 		Message* message = ((Message*)msg);
-		//std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
 		
-		//message->dispatcher->dispatch(message, listeners);
+		std::vector<RouteListener*>* listeners = message->dispatcher->_collection.getRouteListeners(message->channel);    
+		
+		message->dispatcher->dispatch(message, listeners);
 		
 		
 		return NULL;
@@ -75,9 +76,8 @@ namespace Beanpoll
 	{
 		//async call per listener. Typically one except push requests
 		message->dispatcher = this;
-		this->_threadBoss.createTask(NULL, &init_thread_request);
+		this->_threadBoss.createTask(message, &init_thread_request);
 		
-		delete message;
 		//std::vector<RouteListener*>* listeners = this->_collection.getRouteListeners(message->channel); 
 		//std::cout << purgeMessages.size() << std::endl; 
 		

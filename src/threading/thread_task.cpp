@@ -1,7 +1,16 @@
 #include "thread_task.hpp"
 
 
-void* Beanpoll::ThreadTask::run()
-{               
-	return this->_callback(this->_data);
-}               
+namespace Beanpoll 
+{
+	void* ThreadTask::run()
+	{               
+		return this->_callback(this->_data);
+	}
+	
+	ThreadTask::~ThreadTask()
+	{        
+	}
+}
+               
+

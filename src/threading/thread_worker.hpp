@@ -3,13 +3,14 @@
 
 #include "thread_task.hpp"   
 #include "thread_wrapper.hpp"
+#include "linked_list.hpp"
 #include <pthread.h>
 
 namespace Beanpoll
 {   
 	class ThreadPool;    
 	
-	class ThreadWorker
+	class ThreadWorker : public LinkedList<ThreadWorker>
 	{
 	public:         
 		

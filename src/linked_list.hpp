@@ -22,6 +22,8 @@ namespace Beanpoll
 		T* remove(); 
 		T* replace(T* list);
 		
+		~LinkedList();
+		
 		
 	private:
 		
@@ -37,8 +39,16 @@ namespace Beanpoll
 		
 		/**
 		 */
-		LinkedQueue():_next(NULL),_last(NULL) {
+		LinkedQueue():
+		_next(NULL),
+		_last(NULL) 
+		{
 		};
+		
+		/**
+		 */
+		
+		void unshift(T* item);
 		
 		/**
 		 */
@@ -53,11 +63,28 @@ namespace Beanpoll
 		/**
 		 */
 		
+		T* shift();
+		
+		/**
+		 */
+		
+		void remove(T* item);
+		
+		/**
+		 */
+		
 		bool empty();
+		
+		/**
+		 */
+		
+		int size();
+		
 	private:
 		
 		T* _next;
 		T* _last;
+		int _size;
 	};
 };
 

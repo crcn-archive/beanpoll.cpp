@@ -87,7 +87,8 @@ namespace Beanpoll
 		 * when tasks are added, and workers finish.
 		 */
 		
-		std::list<ThreadWorker*> _waitingWorkers;   
+		//std::list<ThreadWorker*> _waitingWorkers;   
+		LinkedQueue<ThreadWorker> _waitingWorkers;
 		
 		/**
 		 * workers who've been sitting around for too long, and aren't needed anymore.

@@ -26,8 +26,6 @@ namespace Beanpoll
 		ThreadTask* nextTask = NULL;
 		
 		
-		
-		
 		//lovely magic numbers. TODO: put in constructor
 		int tries = 0,
 		waitTimeout = 1,
@@ -54,7 +52,7 @@ namespace Beanpoll
 				
 				flaggedWaiting = true;
 				
-				thread->hasTask.wait(thread->_pool->_threadMutex, waitTimeout);                     
+				thread->hasTask.wait(thread->_pool->_threadMutex);                     
 				
 				if(!thread->_pool->canRemoveWorker()) tries = 0;     
 				
@@ -76,7 +74,6 @@ namespace Beanpoll
 				//run it.
 				nextTask->run();
 				delete nextTask;
-				
 			}                                              
 			
 			//otherwise, the condition timed out. Time to die.

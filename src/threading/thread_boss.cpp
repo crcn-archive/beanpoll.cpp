@@ -46,7 +46,7 @@ namespace Beanpoll
 			}
 			
 			
-			ThreadTask* task = boss->_tasks.pop();
+			ThreadTask* task = boss->_tasks.shift();
 			
 			
 			//boss->_tasks.pop();
@@ -57,6 +57,7 @@ namespace Beanpoll
 			//boss->_poolThread.yield();
 			
 			pool.run(task);
+			
 			
 			
 		}

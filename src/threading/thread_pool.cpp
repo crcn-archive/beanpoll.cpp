@@ -15,24 +15,20 @@ namespace Beanpoll
 		
 		ThreadWorker* thread = NULL;        
 		
-		
 		this->_threadMutex.lock();                        
 		
 		this->_tasks.push(task);
 
 		
-		//this->_waitingTasks.push(task);   
-		
-		
 		//any waiting threads? use 'em
-		if(this->_waitingWorkers.size())
+		if(!this->_waitingWorkers.empty())
 		{                             
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
-			thread = this->_waitingWorkers.back();               
+			thread = this->_waitingWorkers.pop();               
 			
 			//remove the thread because it's being used.
-			this->_waitingWorkers.pop_back();      
+			//this->_waitingWorkers.pop_back();      
 			
 			
 			thread->hasTask.signal();    
@@ -48,7 +44,7 @@ namespace Beanpoll
 	
 	void ThreadPool::waiting(ThreadWorker* thread)
 	{                              	        
-		this->_waitingWorkers.push_back(thread);
+		this->_waitingWorkers.push(thread);
 	} 
 	
 	bool ThreadPool::canRemoveWorker() 
@@ -76,7 +72,7 @@ namespace Beanpoll
 	{   
 		if(!this->hasTask()) return NULL;                                
 		
-		return this->_tasks.pop();
+		return this->_tasks.shift();
 	}             
 	
 	bool ThreadPool::hasTask()
