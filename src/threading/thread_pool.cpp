@@ -6,29 +6,19 @@ namespace Beanpoll
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
 	maxWorkers(3), 
 	minWorkers(2),
-	boss(boss),
-	_nextTask(NULL)
+	boss(boss)	
 	{                                                            
 	};
 	
 	void ThreadPool::run(ThreadTask* task)
 	{   
 		
-		
 		ThreadWorker* thread = NULL;        
 		
 		
 		this->_threadMutex.lock();                        
 		
-		if(!_nextTask)
-		{
-			_nextTask = task;
-		}
-		else 
-		{
-			_nextTask->getLastSibling()->addNextSibling(task);
-		}
-		
+		this->_tasks.push(task);
 
 		
 		//this->_waitingTasks.push(task);   
@@ -86,15 +76,12 @@ namespace Beanpoll
 	{   
 		if(!this->hasTask()) return NULL;                                
 		
-		ThreadTask* task = this->_nextTask;//this->_waitingTasks.front(); 
-		//this->_waitingTasks.pop();
-		this->_nextTask = this->_nextTask->getNextSibling();
-		return task;
+		return this->_tasks.pop();
 	}             
 	
 	bool ThreadPool::hasTask()
 	{                
-		return !!this->_nextTask;//!!this->_waitingTasks.size();
+		return !this->_tasks.empty();
 	}
 }
 

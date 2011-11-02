@@ -102,7 +102,7 @@ namespace Beanpoll
 		
 		//std::queue<ThreadTask*> _waitingTasks;      
 		
-		ThreadTask* _nextTask;
+		LinkedQueue<ThreadTask> _tasks;
 		
 		
 		/**
