@@ -8,7 +8,7 @@ namespace Beanpoll
 	
 	std::string strToLowerCase(std::string s)
 	{
-		std::transform(s.begin(), s.end(), s.begin(),std::ptr_fun<int,int>(std::tolower));   
+		//std::transform(s.begin(), s.end(), s.begin(),std::ptr_fun<int,int>(std::tolower));   
 		
 		return s;
 	}    

@@ -1,5 +1,4 @@
-#include "thread_wrapper.hpp"    
-#include <sys/time.h>   
+#include "thread_wrapper.hpp"   
 #include <unistd.h>
 #include <sched.h>
 
