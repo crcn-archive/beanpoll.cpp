@@ -1,5 +1,6 @@
 #include "beanpoll.cpp"   
 #include <pthread.h>   
+#include <stdio.h>
 #include "timer.cpp"  
 #include <deque>
 
