@@ -1,4 +1,4 @@
-#include "Beanpoll.cpp" 
+#include "beanpoll.cpp" 
 #include <math.h>
 #include <stdio.h>
 

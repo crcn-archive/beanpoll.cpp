@@ -1,4 +1,4 @@
-#include "Beanpoll.cpp"  
+#include "beanpoll.cpp"  
 // #include "timer.cpp"    
 
 int steps = 0;     

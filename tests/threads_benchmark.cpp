@@ -1,4 +1,4 @@
-#include "Beanpoll.cpp"   
+#include "beanpoll.cpp"   
 #include <pthread.h>   
 #include "timer.cpp"  
 #include <deque>
