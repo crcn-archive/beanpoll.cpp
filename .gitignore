@@ -1,3 +1,5 @@
 beanpole
 *.o
 build
+node_modules
+node_modulesn
