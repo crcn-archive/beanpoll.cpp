@@ -2,7 +2,7 @@
 #include "timer.cpp" 
 #include <sstream>
 
-int start = 10000,
+int start = 100000,
 steps = start;      
 Timer timer;
 
@@ -56,14 +56,8 @@ int main()
 	
 	
     for(int i = start; i--;)
-	//while(1)
 	{
-		
-		//std::cout << (const char*)buffer << std::endl;
-		
 		router->request("hello/world")->push((void*)"hello craig");  
-		
-		//usleep(1000);
 	}
 	
 	

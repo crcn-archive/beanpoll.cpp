@@ -92,7 +92,8 @@ namespace Beanpoll
 	void ConcreteDispatcher::addRouteListener(RouteListener* listener)
 	{                    
 		this->_collection.addRouteListener(listener);
-	}          
+	}   
+	
 	
 	Message* Router::request(std::string channel)
 	{                                                     

@@ -17,7 +17,7 @@ namespace Beanpoll
 		this->_poolThread.run(this,&ThreadBoss::execute);
 	}
 	
-	ThreadTask* ThreadBoss::createTask(void* data, ThreadCallback* callback)
+	void ThreadBoss::createTask(void* data, ThreadCallback* callback)
 	{
 		ThreadTask* task = new ThreadTask(data, callback); 
 		
@@ -27,8 +27,6 @@ namespace Beanpoll
 
 		this->_taskCondition.signal();
 		this->_poolMutex.unlock();
-		
-		return task;
 	}
 	
 	void* ThreadBoss::execute(void* data)
@@ -49,12 +47,8 @@ namespace Beanpoll
 			ThreadTask* task = boss->_tasks.shift();
 			
 			
-			//boss->_tasks.pop();
 			boss->_poolMutex.unlock();
-			
-			//here for reference. we *don't* want this. Keeps the thread pool
-			//from adding more workers - not good.
-			//boss->_poolThread.yield();
+			boss->_poolThread.yield();
 			
 			pool.run(task);
 			

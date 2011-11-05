@@ -3,6 +3,7 @@
 
 #include "thread_callback.hpp"
 #include "../linked_list.hpp"
+#include "../garbage/object_pool.hpp"
 
 namespace Beanpoll
 {   
@@ -10,19 +11,35 @@ namespace Beanpoll
 	
 	class ThreadTask: public LinkedList<ThreadTask>
 	{
-	public:         
+	public:    
+		
+		/**
+		 */
+		
+		void* _data;
+		
+		/**
+		 */
 		
 		ThreadTask(void* data, ThreadCallback* callback): _data(data), _callback(callback){};    
 		
+		/**
+		 */
+		
 		void* run(); 
 		
+		
+		
+		
+		
+		/**
+		 */
+		
 		~ThreadTask();
-		void* _data;
 		
 	private:                                
 		
 		ThreadCallback* _callback;
-		
 	};
 };      
 

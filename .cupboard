@@ -1,7 +1,5 @@
 [project]
 name = beanpoll.cpp
 [commands]
-publish = npm publish --force, git add ., git commit -m "$@", git push origin master
-rm = git rm -r $@
+publish = git add -A, git commit -m "$@", git push origin master
 ignore = echo $@ >> .gitignore
- = true

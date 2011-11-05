@@ -19,7 +19,7 @@ namespace Beanpoll
 	{
 	public:
 		ThreadBoss();
-		ThreadTask* createTask(void* data,  ThreadCallback* callback);
+		void createTask(void* data,  ThreadCallback* callback);
 		
 		friend class ThreadPool;
 		
@@ -29,7 +29,6 @@ namespace Beanpoll
 		Thread _poolThread;
 		ThreadMutex _poolMutex;
 		ThreadCondition _taskCondition;
-		//std::queue<ThreadTask*> _tasks;
 		LinkedQueue<ThreadTask> _tasks;
 		
 		static void* execute(void*);

@@ -4,7 +4,7 @@
 namespace Beanpoll
 {        
 	ThreadPool::ThreadPool(ThreadBoss* boss): 
-	maxWorkers(3), 
+	maxWorkers(100), 
 	minWorkers(2),
 	boss(boss)	
 	{                                                            
@@ -26,10 +26,6 @@ namespace Beanpoll
 			//the last thread to finish will be the first to begin. Over time if there's less 
 			//work to be done, we want threads to timeout - this does it. 
 			thread = this->_waitingWorkers.pop();               
-			
-			//remove the thread because it's being used.
-			//this->_waitingWorkers.pop_back();      
-			
 			
 			thread->hasTask.signal();    
 		}                                                 

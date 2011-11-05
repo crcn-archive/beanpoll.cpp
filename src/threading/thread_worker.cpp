@@ -70,10 +70,12 @@ namespace Beanpoll
 			
 			//does a task exist? means the condition was met - run it.
 			if(nextTask)
-			{                             
+			{                
+				
 				//run it.
 				nextTask->run();
 				delete nextTask;
+				
 			}                                              
 			
 			//otherwise, the condition timed out. Time to die.
