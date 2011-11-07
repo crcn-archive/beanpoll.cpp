@@ -3,3 +3,4 @@ name = beanpoll.cpp
 [commands]
 publish = git add -A, git commit -m "$@", git push origin master
 ignore = echo $@ >> .gitignore
+proj = open proj/beanpoll.xcodeproj
