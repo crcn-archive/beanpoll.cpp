@@ -4,4 +4,4 @@ name = beanpoll.cpp
 publish = git add -A, git commit -m "$@", git push origin master
 ignore = echo $@ >> .gitignore
 proj = open proj/beanpoll.xcodeproj
-github = https://github.com/spiceapps/beanpoll
+github = open https://github.com/spiceapps/beanpoll
